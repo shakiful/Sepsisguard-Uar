@@ -1,0 +1,10 @@
+project: SepsisGuard-UAR
+source: PhysioNet/CinC Challenge 2019 v1.0.0
+seed: 42
+development_source: A
+reserved_test_source: B
+train_fraction_of_A: 0.70
+validation_fraction_of_A: 0.15
+calibration_fraction_of_A: 0.15
+label: SepsisLabel
+notes: Original challenge label is already shifted for approximately 6-hour early prediction.

@@ -1,0 +1,5 @@
+source,split,patients,positive_patients,hours
+A,calibration,3051,269,119051
+A,train,14235,1253,552665
+A,validation,3050,268,118499
+B,test_B,20000,1142,761995

@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "window_hours": 12,
+  "min_observed_fraction": 0.0,
+  "feature_selection": "A/train only: remove all-missing and constant predictors",
+  "imputation": "per-patient forward fill, then A/train raw median",
+  "scaling": "hour-weighted A/train population mean and std after imputation",
+  "label_policy": "original SepsisLabel at endpoint, no additional shift",
+  "allow_test_B": false,
+  "runtime": "CPU"
+}

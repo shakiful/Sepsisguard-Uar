@@ -1,0 +1,90 @@
+{
+  "status": "preprocessing_and_dataset_checks_passed",
+  "window_hours": 12,
+  "input_channels": 78,
+  "selected_features": [
+    "HR",
+    "O2Sat",
+    "Temp",
+    "SBP",
+    "MAP",
+    "DBP",
+    "Resp",
+    "BaseExcess",
+    "HCO3",
+    "FiO2",
+    "pH",
+    "PaCO2",
+    "SaO2",
+    "AST",
+    "BUN",
+    "Alkalinephos",
+    "Calcium",
+    "Chloride",
+    "Creatinine",
+    "Bilirubin_direct",
+    "Glucose",
+    "Lactate",
+    "Magnesium",
+    "Phosphate",
+    "Potassium",
+    "Bilirubin_total",
+    "TroponinI",
+    "Hct",
+    "Hgb",
+    "PTT",
+    "WBC",
+    "Fibrinogen",
+    "Platelets",
+    "Age",
+    "Gender",
+    "Unit1",
+    "Unit2",
+    "HospAdmTime",
+    "ICULOS"
+  ],
+  "splits": {
+    "train": {
+      "patients": 14235,
+      "hourly_windows": 552665,
+      "windows_checked": 128,
+      "batch_shape": [
+        8,
+        12,
+        78
+      ]
+    },
+    "validation": {
+      "patients": 3050,
+      "hourly_windows": 118499,
+      "windows_checked": 128,
+      "batch_shape": [
+        8,
+        12,
+        78
+      ]
+    },
+    "calibration": {
+      "patients": 3051,
+      "hourly_windows": 119051,
+      "windows_checked": 128,
+      "batch_shape": [
+        8,
+        12,
+        78
+      ]
+    }
+  },
+  "test_B_opened": false,
+  "torch_version": "2.14.1+cpu",
+  "git_commit": "28f1aef005338af437ea565660213aed83b0ac66",
+  "fit_scope": {
+    "source": "A",
+    "split": "train",
+    "patients": 14235,
+    "hours": 552665,
+    "removed_features": {
+      "EtCO2": "unobserved_or_below_fixed_threshold"
+    }
+  }
+}

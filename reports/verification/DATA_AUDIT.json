@@ -1,0 +1,14 @@
+{
+  "patient_counts": {
+    "A": 20336,
+    "B": 20000
+  },
+  "patients": 40336,
+  "hours": 1552210,
+  "all_schema_valid": true,
+  "contiguous_hourly_rows": true,
+  "duplicate_full_files": 0,
+  "cohort_sha256": "e7d81a6326a49965e5bba9e4415c33251fd8122051795654e058bd76adcaeee1",
+  "manifest_matches_data": true,
+  "scope": "Exact-byte duplicates and ID disjointness; cannot establish undocumented subject linkage"
+}

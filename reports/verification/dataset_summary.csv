@@ -1,0 +1,3 @@
+source,patients,sepsis_patients,hours,positive_hours,sepsis_patient_fraction,positive_hour_fraction
+A,20336,1790,790215,17136,0.08802124311565697,0.02168523756192935
+B,20000,1142,761995,10780,0.0571,0.014147074455869133
