@@ -4,9 +4,9 @@ Solo retrospective PhysioNet/CinC 2019 research. Week 1 ingestion, EDA, splits, 
 
 [![Week 1 in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/shakiful/Sepsisguard-Uar/blob/main/notebooks/01_week1_colab.ipynb)
 
-See [PROJECT_STATUS.md](PROJECT_STATUS.md) for measured results, execution evidence, and remaining cloud access blockers. See [WORK_START_HERE.md](WORK_START_HERE.md) for the research handoff.
+See [PROJECT_STATUS.md](PROJECT_STATUS.md) for measured results, execution evidence, and the next Colab step. See [WORK_START_HERE.md](WORK_START_HERE.md) for the research handoff.
 
-## Measured local results (2026-10-18)
+## Measured results (local 2026-10-18; Colab verified 2026-10-21)
 
 | Source | Patients | Hours | Patients with positive labels | Positive hours |
 |---|---:|---:|---:|---:|
@@ -33,9 +33,9 @@ For a CPU-only local PyTorch install, install PyTorch from its official CPU whee
 1. Open `notebooks/01_week1_colab.ipynb` in Colab; select a CPU runtime.
 2. Run the first cell to clone this repository and record its commit. Mount your private Drive when Colab requests access; no starter ZIP upload is needed.
 3. Run cells in order. `/content` holds working data; Drive holds cached archives, reports, models, and runs.
-4. Continue with `notebooks/02_week2_colab.ipynb`. After a runtime reset, specify the exact previous Week 1 run ID to restore its manifest.
+4. Week 1 is complete: run `20261021T183143Z-82ed151a`, all 25 tests passing. Continue with `notebooks/02_week2_colab.ipynb`; its default restores that exact private Drive checkpoint. Use the same Google account/Drive.
 
-If Drive mounting is unavailable, outputs must be explicitly staged, downloaded, and uploaded to private Drive using the browser. A staging path is not proof of a Drive save. The existing cloud notebook was imported successfully, but its data pipeline has not run successfully in Colab yet.
+If Drive mounting is unavailable, outputs must be explicitly staged, downloaded, and uploaded to private Drive using the browser. A staging path is not proof of a Drive save. The user-supplied executed Week 1 notebook confirms a completed Colab pipeline and completed Drive copy calls. Separate Drive readback is pending; Week 2 will read back its key saved files before printing success.
 
 ## Data and Week 1
 
