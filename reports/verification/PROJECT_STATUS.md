@@ -20,7 +20,9 @@
 
 ## Cloud and version-control status
 
-- GitHub app repository access was verified on 2026-10-21; the source import targets the canonical repository main branch.
+- Source import completed on 2026-10-21: commit 4755ee5c26f231e0520808ae34b3fedcb3fe9d9d, 47 project files. Remote tree inspection found no protected patient-level files.
+- GitHub Actions run 39648233169 succeeded: 25 tests passed in 42.99 seconds on the CPU runner.
+- The updated Week 1 notebook opened from GitHub in the connected local browser. Browser control then failed with Cannot attach to this target; no new Colab execution or Drive write was performed. The notebook remains open for continuation.
 - Canonical repository: https://github.com/shakiful/Sepsisguard-Uar, supplied by the user on 2026-10-21. The repository is public. Source, tests, notebooks, and aggregate verification reports are suitable for this remote; protected derivatives remain private.
 - The original 2026-10-18 CPU Colab attempt did not complete the data pipeline or confirm Drive report persistence. Its old imported notebook is not evidence of successful cloud computation.
 - Both notebooks now clone the canonical GitHub repository directly, record its actual commit, and save milestones to private Drive. A starter ZIP upload is no longer required.
