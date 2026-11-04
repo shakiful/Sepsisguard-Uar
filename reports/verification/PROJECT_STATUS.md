@@ -1,6 +1,6 @@
 # SepsisGuard-UAR progress — 2026-11-04
 
-Current status: the unified data/preprocessing workflow passed in the user's Colab run `pipeline-20261104T190221Z-22906fa2`, with all 30 tests passing and checkpoint readback confirmed in the supplied output. Actual allocation: A100-SXM4-80GB and 167.05 GiB system RAM. Logistic/LSTM training is now implemented; an actual A100 training result remains unverified.
+Current status: predictive training completed in the user's Colab run `training-05ed8fa8a5f01f4f92a8`. All 37 tests passed. The selected LSTM has A/validation AP 0.098821 and AUROC 0.772333; its best weights are from epoch 1. CUDA bfloat16 training and Drive readback are confirmed in the supplied output. Scores are uncalibrated and B remains reserved.
 
 ## Completed and observed locally
 
@@ -85,14 +85,29 @@ Verified from the user-supplied console output, with source fingerprint matching
 - Validation: all 37 local tests passed in 87.77 s. The seven new training tests verify actual weight updates, padding invariance, equality with uninterrupted CPU training after resume, model-checkpoint corruption rejection, matching original causal windows and successful training after calibration/B files are removed. Notebook format and code-cell syntax checks also passed.
 - Browser control was retried against the user's current Colab tab; both DOM methods still returned `Cannot attach to this target`. No actual A100 training job has been started by the assistant and no predictive research metrics are claimed.
 
+## Completed predictive Colab training (2026-11-04)
+
+- Run `training-05ed8fa8a5f01f4f92a8`, source `7df0a07e2e2e2a489245164081aae293d887acb4`; restored preparation `pipeline-20261104T190221Z-22906fa2` with matching cohort and manifest.
+- All 37 tests passed in 74.55 s. Both models trained on CUDA bfloat16 on A100-SXM4-40GB / 83.47 GiB system RAM.
+- Logistic: best epoch 6 of 8, validation AP 0.087473, AUROC 0.775901.
+- LSTM: best epoch 1, early-stopped after epoch 5, validation AP 0.098821, AUROC 0.772333. LSTM was correctly selected by the predeclared average-precision criterion; its later declining AP suggests overfitting.
+- LSTM precision/recall at the predeclared 0.5 threshold: 5.90% / 64.34%. Scores remain uncalibrated and performance is not an independent test result.
+- The output reports verified artifacts under `MyDrive/SepsisGuard-UAR/training/training-05ed8fa8a5f01f4f92a8`. Best LSTM weights hash: `266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc`. No separate connected-Drive readback or private-prediction metric recomputation was performed by the reviewer.
+- Calibration and B raw files were not opened during training. Independent calibration, final B evaluation and retrieval experiments remain pending.
+- Evidence: [TRAINING_COLAB_EVIDENCE.json](reports/verification/TRAINING_COLAB_EVIDENCE.json); interpretation: [TRAINING_RESULTS.md](reports/verification/TRAINING_RESULTS.md).
+
 ## Continue from this checkpoint
 
-1. Reopen the same canonical notebook from GitHub in the existing A100/Drive account and select Run all. It restores `pipeline-20261104T190221Z-22906fa2` and proceeds directly to predictive training.
-2. Review the actual `TRAINING_RESULT.json`, best checkpoints and epoch histories under `MyDrive/SepsisGuard-UAR/training/<training-id>`. Preserve B and calibration for their independent uses.
-3. Record actual A100 training outputs before claiming real predictive performance. Later add calibration and the planned additional model/retrieval comparisons in the same workflow.
+1. Preserve the completed training run and selected `lstm_best.pt` hash above. A routine training rerun is unnecessary; the same unchanged configuration resumes this completed result.
+2. Use the reserved A/calibration data for probability-calibration work and examine operating thresholds on development data. Keep B locked until the model and evaluation protocol are frozen.
+3. If comparing revised training settings, fit on A/train, select on A/validation, preserve this baseline and record the new run separately. Do not infer that more epochs will improve the selected LSTM.
 
 ## Deliverables
 
 The source ZIP contains shareable source, two Colab notebooks, tests, aggregate verification reports, and a Git history bundle. A separate private checkpoint ZIP contains protected patient summaries, split manifest, per-file hashes, fitted preprocessing state, notebook execution outputs, environment snapshots, and logs. It excludes raw patient files. Original data can be downloaded again from the documented official S3 mirror.
 
-Real-cohort predictive training and clinical validation have not been observed. Synthetic CPU optimization tests passed. The completed user-run Colab preparation session allocated an A100 and used CPU preprocessing.
+Real-cohort predictive training is verified from the supplied A100 output. Independent test performance and clinical validity have not been established.
+
+## Proposed agent extension (2026-11-04)
+
+The user requested agentic AI with Qwen 3.5/latest at about 27B and permitted consideration of alternatives. Official source checks identify Qwen3.8-27B as a newer verified candidate; it is proposed as the primary local backbone, with Qwen3.5-27B and Gemma 4 31B as comparisons. The user-reported future allocation is 80GB VRAM / 160GB RAM, so BF16, one shared instance and an initial 8k context cap are proposed. Actual agent memory use, compatibility and explanation quality have not been measured. The design and profile are saved under `docs/AGENTIC_DESIGN.md` and `configs/agent_profile.json`; no LLM download, agent execution or model fine-tuning has occurred.

@@ -1,0 +1,36 @@
+{
+  "status": "proposed_not_implemented",
+  "model_id": "Qwen/Qwen3.8-27B",
+  "revision": null,
+  "pin_revision_after_compatibility_test": true,
+  "dtype": "bfloat16",
+  "quantization": null,
+  "batch_size": 1,
+  "context_cap_tokens": 8192,
+  "max_answer_tokens": 512,
+  "max_tool_decisions": 6,
+  "max_retrieval_attempts": 2,
+  "one_shared_model_instance": true,
+  "requested_hardware_user_report": {
+    "gpu_vram_gb": 80,
+    "system_ram_gb": 160,
+    "allocation_observed_for_agent_run": false
+  },
+  "last_observed_predictor_training_hardware": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "reported_vram_gib": 39.49,
+    "reported_system_ram_gib": 83.47
+  },
+  "frozen_predictor": {
+    "run_id": "training-05ed8fa8a5f01f4f92a8",
+    "architecture": "lstm",
+    "weights_file": "lstm_best.pt",
+    "weights_sha256": "266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc",
+    "calibration_fitted": false
+  },
+  "hosted_inference_or_external_tracing_configured": false,
+  "agent_inference_executed": false,
+  "test_B_unlocked": false,
+  "max_generated_tokens_per_call": 1024,
+  "initial_reasoning_mode": "non_thinking"
+}

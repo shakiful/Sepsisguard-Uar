@@ -1,0 +1,371 @@
+{
+  "review_date": "2026-11-04",
+  "evidence_type": "user_uploaded_colab_training_console_output",
+  "uploaded_output_sha256": "f649388fc223e47ae76464037a8a8d152ea289626d81e7540260b532d50b9c05",
+  "result": {
+    "status": "training_complete",
+    "mode": "real",
+    "run_id": "training-05ed8fa8a5f01f4f92a8",
+    "prepared_run_id": "pipeline-20261104T190221Z-22906fa2",
+    "input": {
+      "prepared_run": "pipeline-20261104T190221Z-22906fa2",
+      "cohort": "e7d81a6326a49965e5bba9e4415c33251fd8122051795654e058bd76adcaeee1",
+      "manifest": "9cff1efb61496519205620836df527a23e9ba24a0dad3c763f3b6d023f154ca7",
+      "preprocessor_sha256": "1563c22c8df41e8d7bf2b1e470b5e776e5b4e0a5eb7e18fb054d3aafa2cd0f50",
+      "training_source_fingerprint": "3570aefc70135cd4eec1598750dc7ea5a956035829b5205d98ae6485109096b5",
+      "config": {
+        "seed": 42,
+        "batch_size": 1024,
+        "hidden_size": 64,
+        "baseline_epochs": 8,
+        "lstm_epochs": 12,
+        "patience": 4,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "workers": 2,
+        "precision": "auto",
+        "max_minutes": 90.0
+      },
+      "device": "cuda",
+      "torch_version": "2.11.0+cu130",
+      "demo": false
+    },
+    "models": {
+      "logistic": {
+        "architecture": "logistic",
+        "best_epoch": 6,
+        "epochs_completed": 8,
+        "validation": {
+          "average_precision": 0.0874727045900163,
+          "roc_auc": 0.7759006199984513,
+          "brier": 0.18077944145426583,
+          "log_loss": 0.558834602455099,
+          "precision_at_0_5": 0.05979949166902005,
+          "recall_at_0_5": 0.6609442060085837,
+          "f1_at_0_5": 0.10967595739859506,
+          "positive_fraction": 0.021628874505270086,
+          "hours": 118499,
+          "positive_hours": 2563
+        },
+        "history": [
+          {
+            "epoch": 1,
+            "weighted_train_loss": 1.2089680875542552,
+            "validation": {
+              "average_precision": 0.08271403962687274,
+              "roc_auc": 0.7635435678775078,
+              "brier": 0.19003682035442615,
+              "log_loss": 0.5735968251583881,
+              "precision_at_0_5": 0.0562278070810494,
+              "recall_at_0_5": 0.6363636363636364,
+              "f1_at_0_5": 0.1033259423503326,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 6.332443378999983
+          },
+          {
+            "epoch": 2,
+            "weighted_train_loss": 1.1389470836100364,
+            "validation": {
+              "average_precision": 0.08537861704843164,
+              "roc_auc": 0.7701192473811214,
+              "brier": 0.18221761267195324,
+              "log_loss": 0.5599260704129015,
+              "precision_at_0_5": 0.05829933433540906,
+              "recall_at_0_5": 0.6355833008193523,
+              "f1_at_0_5": 0.10680216357974102,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.6133022409999285
+          },
+          {
+            "epoch": 3,
+            "weighted_train_loss": 1.1317952141621532,
+            "validation": {
+              "average_precision": 0.08646654722373844,
+              "roc_auc": 0.7728643325514184,
+              "brier": 0.18816514039621582,
+              "log_loss": 0.5750044283926513,
+              "precision_at_0_5": 0.057438446810654666,
+              "recall_at_0_5": 0.667186890362856,
+              "f1_at_0_5": 0.10577101503061792,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.5264635040000485
+          },
+          {
+            "epoch": 4,
+            "weighted_train_loss": 1.1294260916493295,
+            "validation": {
+              "average_precision": 0.08632854985302636,
+              "roc_auc": 0.7737802623003271,
+              "brier": 0.19030396138177444,
+              "log_loss": 0.5798287280793575,
+              "precision_at_0_5": 0.05694462625998167,
+              "recall_at_0_5": 0.6788919235271167,
+              "f1_at_0_5": 0.10507563634167698,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.574540436999996
+          },
+          {
+            "epoch": 5,
+            "weighted_train_loss": 1.1281890219124129,
+            "validation": {
+              "average_precision": 0.08672842659010632,
+              "roc_auc": 0.7754185742044072,
+              "brier": 0.18780330016648666,
+              "log_loss": 0.5747792316755247,
+              "precision_at_0_5": 0.05796762108643297,
+              "recall_at_0_5": 0.6761607491221225,
+              "f1_at_0_5": 0.10678086201053637,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.688253861999897
+          },
+          {
+            "epoch": 6,
+            "weighted_train_loss": 1.1272951549722847,
+            "validation": {
+              "average_precision": 0.0874727045900163,
+              "roc_auc": 0.7759006199984513,
+              "brier": 0.18077944145426583,
+              "log_loss": 0.558834602455099,
+              "precision_at_0_5": 0.05979949166902005,
+              "recall_at_0_5": 0.6609442060085837,
+              "f1_at_0_5": 0.10967595739859506,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.8199847280000085
+          },
+          {
+            "epoch": 7,
+            "weighted_train_loss": 1.1266810857020073,
+            "validation": {
+              "average_precision": 0.0866601608985426,
+              "roc_auc": 0.7750538402314125,
+              "brier": 0.1856635118028528,
+              "log_loss": 0.5690694302929848,
+              "precision_at_0_5": 0.058367855579131725,
+              "recall_at_0_5": 0.6761607491221225,
+              "f1_at_0_5": 0.10745953990202765,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.597851952000042
+          },
+          {
+            "epoch": 8,
+            "weighted_train_loss": 1.126237234030641,
+            "validation": {
+              "average_precision": 0.08708655971932283,
+              "roc_auc": 0.7768298042651164,
+              "brier": 0.1832477188667468,
+              "log_loss": 0.5632131893010055,
+              "precision_at_0_5": 0.059185082872928174,
+              "recall_at_0_5": 0.6687475614514241,
+              "f1_at_0_5": 0.1087459949877867,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.463461357000028
+          }
+        ],
+        "positive_weight_from_train": 45.05925493791149,
+        "precision": "bf16",
+        "amp_fallback_reason": null,
+        "device": "cuda",
+        "best_weights_sha256": "41c6a8002d87a2bb75ce9afa7d26374a27364847383b8c34221badce33649c3f",
+        "checkpoint_signature": "14dabec2cf1d89cbe8e4c790f2c2bfe47cacfd48671be2589ff8923280632740",
+        "probability_calibration": "not fitted; scores are uncalibrated",
+        "threshold": 0.5,
+        "threshold_origin": "fixed before training"
+      },
+      "lstm": {
+        "architecture": "lstm",
+        "best_epoch": 1,
+        "epochs_completed": 5,
+        "validation": {
+          "average_precision": 0.09882080484143826,
+          "roc_auc": 0.772333093431666,
+          "brier": 0.15756565947935433,
+          "log_loss": 0.47099714318008457,
+          "precision_at_0_5": 0.05904891498961541,
+          "recall_at_0_5": 0.6433866562621927,
+          "f1_at_0_5": 0.10817015972973859,
+          "positive_fraction": 0.021628874505270086,
+          "hours": 118499,
+          "positive_hours": 2563
+        },
+        "history": [
+          {
+            "epoch": 1,
+            "weighted_train_loss": 1.0108279574445096,
+            "validation": {
+              "average_precision": 0.09882080484143826,
+              "roc_auc": 0.772333093431666,
+              "brier": 0.15756565947935433,
+              "log_loss": 0.47099714318008457,
+              "precision_at_0_5": 0.05904891498961541,
+              "recall_at_0_5": 0.6433866562621927,
+              "f1_at_0_5": 0.10817015972973859,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.789832766000018
+          },
+          {
+            "epoch": 2,
+            "weighted_train_loss": 0.7790179308349271,
+            "validation": {
+              "average_precision": 0.09868326078995351,
+              "roc_auc": 0.7516466109115161,
+              "brier": 0.13597132765532863,
+              "log_loss": 0.40969371456802933,
+              "precision_at_0_5": 0.06285178236397748,
+              "recall_at_0_5": 0.575107296137339,
+              "f1_at_0_5": 0.11331923890063425,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.795398963000025
+          },
+          {
+            "epoch": 3,
+            "weighted_train_loss": 0.6312476721556514,
+            "validation": {
+              "average_precision": 0.0938017009388542,
+              "roc_auc": 0.75056401111262,
+              "brier": 0.10389806299416886,
+              "log_loss": 0.32781348996313087,
+              "precision_at_0_5": 0.07550742647493934,
+              "recall_at_0_5": 0.4978540772532189,
+              "f1_at_0_5": 0.13112732504367486,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.840702883000063
+          },
+          {
+            "epoch": 4,
+            "weighted_train_loss": 0.52196667641284,
+            "validation": {
+              "average_precision": 0.0864583110815037,
+              "roc_auc": 0.7301014335246407,
+              "brier": 0.10140803215857616,
+              "log_loss": 0.334930049050113,
+              "precision_at_0_5": 0.0752817525642649,
+              "recall_at_0_5": 0.46390948107686303,
+              "f1_at_0_5": 0.12954186413902052,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.876493443000072
+          },
+          {
+            "epoch": 5,
+            "weighted_train_loss": 0.43644274971174596,
+            "validation": {
+              "average_precision": 0.0735267311457666,
+              "roc_auc": 0.7256120423753647,
+              "brier": 0.088306176521932,
+              "log_loss": 0.3079378783319029,
+              "precision_at_0_5": 0.07766045083501835,
+              "recall_at_0_5": 0.4046039797112759,
+              "f1_at_0_5": 0.1303091228951998,
+              "positive_fraction": 0.021628874505270086,
+              "hours": 118499,
+              "positive_hours": 2563
+            },
+            "seconds": 5.924652063000053
+          }
+        ],
+        "positive_weight_from_train": 45.05925493791149,
+        "precision": "bf16",
+        "amp_fallback_reason": null,
+        "device": "cuda",
+        "best_weights_sha256": "266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc",
+        "checkpoint_signature": "1598e663cecae3c654850e9c001fc85ae62be7fc54586dae4e3c5c2d8b91ad92",
+        "probability_calibration": "not fitted; scores are uncalibrated",
+        "threshold": 0.5,
+        "threshold_origin": "fixed before training"
+      }
+    },
+    "selected_model": "lstm",
+    "selection_metric": "A/validation hourly average precision (not trapezoidal PR area)",
+    "model_fit_split": "A/train",
+    "model_selection_split": "A/validation",
+    "calibration_raw_files_opened": false,
+    "test_B_raw_files_opened": false,
+    "independent_holdout_evaluated": false,
+    "probability_calibration_fitted": false,
+    "evaluation_scope": "Validation used for epoch and architecture selection; these metrics are not independent test performance or official challenge utility",
+    "persistent_checkpoint": "/content/drive/MyDrive/SepsisGuard-UAR/training/training-05ed8fa8a5f01f4f92a8",
+    "source_commit": "7df0a07e2e2e2a489245164081aae293d887acb4",
+    "compute": {
+      "python": "3.13.16",
+      "os": "Linux-6.6.159+-x86_64-with-glibc2.39",
+      "processor": "x86_64",
+      "runtime": "colab",
+      "cpu_count": 12,
+      "local_disk_free_gb": 234.76,
+      "cuda_available": true,
+      "gpus": [
+        {
+          "name": "NVIDIA A100-SXM4-40GB",
+          "vram_gb": 39.49,
+          "compute_capability": "8.0"
+        }
+      ],
+      "memory_total_gb": 83.47,
+      "memory_available_gb": 79.7,
+      "torch_version": "2.11.0+cu130"
+    },
+    "completed_at": "2026-11-04T19:55:02.557406+00:00"
+  },
+  "tests": {
+    "passed": 37,
+    "seconds": 74.55
+  },
+  "verified_consistency": [
+    "Source fingerprint matches reviewed code",
+    "Training ID matches configuration/input hash",
+    "Cohort and manifest match verified preparation",
+    "Selected model maximizes declared validation metric",
+    "Returned metrics match each model best-epoch history",
+    "LSTM stopped after four unimproved epochs",
+    "Supplied output reports verified model/metadata readback"
+  ],
+  "comparison": {
+    "lstm_minus_logistic_average_precision": 0.011348100251421966,
+    "relative_average_precision_improvement": 0.1297330442063087,
+    "lstm_minus_logistic_roc_auc": -0.003567526566785273,
+    "validation_positive_fraction": 0.021628874505270086
+  },
+  "limits": [
+    "Evidence is the supplied console output; reviewer did not directly operate this Colab session.",
+    "Metrics were checked for internal consistency but not independently recomputed from private prediction arrays.",
+    "Checkpoint hashes and readback success are reported by the run; no separate connected-Drive readback was performed by the reviewer.",
+    "A/validation was used for epoch and architecture selection; performance is not an independent test estimate.",
+    "Scores remain uncalibrated; calibration and B raw files were not opened by training.",
+    "Lower training loss alongside falling LSTM validation AP suggests overfitting; it does not establish the sole cause of the decline."
+  ]
+}

@@ -10,11 +10,11 @@ The runner automatically imports the completed data milestone `20261021T183143Z-
 
 All private outputs are under `MyDrive/SepsisGuard-UAR/runs/<run-id>`. The checkpoint marker identifies an immutable snapshot containing `PIPELINE_RESULT.json`, `PIPELINE_REPORT.md`, EDA, the exact patient manifest, fitted preprocessing, source/runtime records and logs. Each snapshot is read back before its completion pointer is replaced, so an interrupted save preserves the previous checkpoint. Cached data archives live in `dataset-archives`; working raw data stays on `/content`. After a Colab reset, open the same notebook and select Run all again.
 
-Predictive training is implemented; an actual A100 training result has not yet been observed. Calibration, independent B evaluation and uncertainty-conditioned retrieval experiments remain pending. Validation metrics are used for selection and are not independent test performance or clinical validation.
+Predictive training completed on an actual A100: LSTM validation AP 0.098821 / AUROC 0.772333, selected by average precision over the logistic baseline (AP 0.087473 / AUROC 0.775901). See [training results](reports/verification/TRAINING_RESULTS.md). Calibration, independent B evaluation and uncertainty-conditioned retrieval experiments remain pending. Validation metrics are used for selection and are not independent test performance or clinical validation.
 
 ## Measured results
 
-The unified Colab pipeline completed on 2026-11-04: **30 tests passed**, preprocessing and Dataset checks passed, and the private checkpoint passed readback. The recorded allocation was **A100-SXM4-80GB / 167.05 GiB system RAM**. Run ID: `pipeline-20261104T190221Z-22906fa2`. See [execution evidence](reports/verification/UNIFIED_COLAB_EVIDENCE.json). The supplied output covers preparation only; A100 model training is now implemented and awaiting its own execution evidence.
+The unified Colab pipeline completed on 2026-11-04: **30 tests passed**, preprocessing and Dataset checks passed, and the private checkpoint passed readback. The recorded allocation was **A100-SXM4-80GB / 167.05 GiB system RAM**. Run ID: `pipeline-20261104T190221Z-22906fa2`. See [execution evidence](reports/verification/UNIFIED_COLAB_EVIDENCE.json). The later supplied training output separately confirms successful CUDA bfloat16 optimization; see the training result above.
 
 The completed data notebook was verified on 2026-10-21: 40,336 patients, 1,552,210 hours, 2,932 patients with positive labels and 27,916 positive hours. All 25 existing tests passed before and after the data audit. The cohort fingerprint matches independent local validation.
 
@@ -79,3 +79,7 @@ Official source: https://physionet.org/content/challenge-2019/1.0.0/ (DOI 10.130
 The public repository contains source, tests and aggregate reports. Raw PSV records, patient summaries, patient manifests, per-file hashes, fitted artifacts and runtime snapshots remain private and excluded by `.gitignore`. Original dated notebooks remain as historical execution records; use the single notebook linked above for ongoing work.
 
 See [PROJECT_STATUS.md](PROJECT_STATUS.md), [WORK_START_HERE.md](WORK_START_HERE.md) and [completed Colab evidence](reports/verification/WEEK1_COLAB_EVIDENCE.json). This is retrospective benchmark research, not a diagnostic or treatment system.
+
+## Agentic research extension
+
+The proposed local agent backbone is Qwen3.8-27B, with Qwen3.5-27B as a same-size comparison and Gemma 4 31B as an alternative to evaluate. The user reports an available 80GB VRAM / 160GB RAM configuration; BF16 inference is proposed with one shared model instance and an initial 8k context cap. The [agent design](docs/AGENTIC_DESIGN.md) and [proposed profile](configs/agent_profile.json) preserve the trained predictor and specify retrieval, verification and abstention. They are design artifacts; the agent layer has not been implemented or run.

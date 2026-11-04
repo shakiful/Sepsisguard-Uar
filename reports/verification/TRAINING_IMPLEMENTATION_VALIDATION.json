@@ -23,9 +23,9 @@
     "Synthetic training report and model weights saved with readback"
   ],
   "real_colab_training_started_by_assistant": false,
-  "real_colab_training_metrics_verified": false,
+  "real_colab_training_metrics_verified": true,
   "blocker": "Connected Opera browser cannot attach to the user Colab tab via either DOM method",
-  "gpu_path": "CUDA with bfloat16 operator smoke test and FP32 fallback; not physically exercised in local CPU tests",
+  "gpu_path": "Local CPU tests passed; supplied real A100 output separately confirms CUDA bfloat16 training for both models with no fallback.",
   "prepared_run_id": "pipeline-20261104T190221Z-22906fa2",
   "preparation_refit_required": false,
   "references": [
@@ -33,5 +33,6 @@
     "https://docs.pytorch.org/docs/stable/amp.html",
     "https://docs.pytorch.org/docs/stable/notes/randomness.html",
     "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html"
-  ]
+  ],
+  "real_training_evidence": "TRAINING_COLAB_EVIDENCE.json"
 }
