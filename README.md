@@ -4,7 +4,7 @@ Run the implemented research data pipeline in one Colab session: download/restor
 
 [![Run in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/shakiful/Sepsisguard-Uar/blob/main/notebooks/SepsisGuard_UAR.ipynb)
 
-Select a **CPU runtime**, then **Runtime → Run all**. Authorize your private Drive mount when prompted. There is no calendar schedule or notebook handoff. The notebook updates a clean dedicated source checkout and reuses earlier downloaded records when available.
+Select your available **A100 / high-RAM runtime** (or CPU-only), then **Runtime → Run all**. Authorize your private Drive mount when prompted. There is no calendar schedule or notebook handoff. The notebook updates a clean dedicated source checkout and reuses earlier downloaded records when available. GPU-attached runtimes are accepted. Every run records the actual GPU model, VRAM and system RAM; current data processing executes on CPU. The GPU becomes useful when predictive model training is implemented.
 
 The runner automatically imports the completed data milestone `20261021T183143Z-82ed151a` if it is present in the same Drive. Otherwise it builds the data reports and deterministic partitions itself. Subsequent runs resume the latest checkpoint matching the current source and configuration. Every run re-audits raw files and runs the regression/leakage tests; previously validated EDA and preprocessing are reused only when their hashes and inputs match. An incomplete or changed checkpoint stops with an error instead of silently changing the experiment.
 

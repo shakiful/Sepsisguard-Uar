@@ -103,3 +103,20 @@ def test_import_previous_milestone_preserves_manifest_and_checks_evidence(tmp_pa
     result.write_text(json.dumps({'run_id': 'previous', 'status': 'week1_data_pipeline_passed', 'audit': {}}))
     with pytest.raises(ValueError, match='disagree'):
         pipeline.import_legacy(storage, 'previous', tmp_path / 'bad')
+
+
+def test_gpu_attached_runtime_is_accepted_and_recorded(dataset, pipeline_workspace, monkeypatch):
+    project, run_id, storage = pipeline_workspace
+    # A simulated report verifies control flow; this test does not claim GPU execution.
+    observed = {'runtime': 'colab', 'cuda_available': True,
+                'gpus': [{'name': 'NVIDIA A100 (simulated)', 'vram_gb': 80.0}],
+                'memory_total_gb': 83.0}
+    monkeypatch.setattr(pipeline, 'inspect_compute', lambda: observed)
+    result = pipeline.run_pipeline(project, dataset, storage, run_id=run_id, mode='synthetic', run_checks=False)
+    assert result['compute'] == observed
+    assert result['preprocessing_device'] == 'cpu'
+    assert result['model_training_device'] is None
+    assert result['predictive_models_trained'] is False
+    pointer = json.loads((storage / 'runs' / run_id / 'checkpoint.json').read_text())
+    snapshot = pipeline.snapshot_root(storage / 'runs' / run_id, pointer)
+    assert json.loads((snapshot / 'compute.json').read_text()) == observed

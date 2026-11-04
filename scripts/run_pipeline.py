@@ -21,7 +21,7 @@ from sepsisguard.preprocessing import TrainOnlyPreprocessor, manifest_digest
 from sepsisguard.schema import EXPECTED_PATIENT_COUNTS
 from sepsisguard.splits import check_split_integrity, make_splits
 from sepsisguard.synthetic import make_demo
-from scripts.compute_check import detect_runtime
+from scripts.compute_check import inspect_compute
 from scripts.run_week2 import run as run_preprocessing
 
 LEGACY_RUN = "20261021T183143Z-82ed151a"
@@ -212,14 +212,14 @@ def run_pipeline(project, data_root, storage_root=None, *, run_id="auto",
         verify_checkpoint(run_dir, state)
     data_out, pre_out = run_dir / "data", run_dir / "preprocessing"
     data_out.mkdir(exist_ok=True)
-    compute = json.loads(subprocess.check_output([sys.executable, str(project / "scripts/compute_check.py")], text=True))
+    compute = inspect_compute()
     write_json(run_dir / "compute.json", compute)
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=project, text=True).strip()
     write_json(run_dir / "source.json", {"commit": commit, "fingerprint": config["source_fingerprint"],
-                                         "mode": mode, "runtime": detect_runtime()})
+                                         "mode": mode, "runtime": compute["runtime"]})
     print(f"Run: {run_id}; runtime: {compute['runtime']}; mode: {mode}", flush=True)
-    if compute["cuda_available"]:
-        raise ValueError("Select a CPU runtime for data preparation")
+    print("Observed hardware:", json.dumps(compute), flush=True)
+    print("Data preprocessing device: CPU; predictive model training is not part of this run.", flush=True)
     if run_checks:
         print("Running regression and leakage checks", flush=True)
         command_log([sys.executable, "-m", "pytest", "-q"], run_dir / "tests.log", project)
@@ -279,6 +279,7 @@ def run_pipeline(project, data_root, storage_root=None, *, run_id="auto",
     summary = {
         "status": "data_pipeline_passed" if mode == "real" else "synthetic_pipeline_passed",
         "run_id": run_id, "mode": mode, "runtime": compute["runtime"], "source_commit": commit,
+        "compute": compute, "preprocessing_device": "cpu", "model_training_device": None,
         "source_fingerprint": config["source_fingerprint"], "tests": "passed" if run_checks else "not_run",
         "audit": audit, "input": input_key, "imported_checkpoint": imported,
         "preprocessing": result, "preprocessing_reused": reuse_pre,

@@ -53,9 +53,15 @@ The user requested one Run-all workflow instead of week-by-week handoffs. The ca
 - Local validation: all 29 tests passed in 44.72 s. The four added integration tests cover runtime-loss restoration, interrupted fitting, saved-artifact corruption, changed raw data, interrupted snapshot publication and exact legacy-manifest import. The unified notebook passes schema and code-cell syntax checks.
 - No new unified Colab run, predictive model or retrieval experiment is claimed from this source change.
 
+## Hardware preference update (2026-11-04)
+
+- The user reports access to an A100 and high-RAM Colab Pro runtime. The unified notebook and runner accept GPU-attached runtimes and record the observed GPU/VRAM/system RAM rather than requiring CPU-only mode.
+- The data pipeline still performs causal preprocessing on CPU. No CUDA training, model speedup, A100 allocation or high-RAM execution has been observed from this source change.
+- Hardware-compatibility validation: all 30 local tests passed in 38.50 s, including a simulated A100/high-RAM report that confirms the runtime is accepted and its hardware metadata reaches the verified snapshot.
+
 ## Continue from this checkpoint
 
-1. Use the single notebook above with CPU and Run all. Approve the Drive mount if needed.
+1. Use the single notebook above with the available A100/high-RAM runtime (or CPU-only) and Run all. Approve the Drive mount if needed.
 2. Review actual execution output before marking the unified pipeline complete in Colab. Record the final run ID and verified private snapshot location.
 3. Preserve B for frozen final evaluation. Extend the same runner with planned models/calibration/retrieval; these remain unimplemented.
 

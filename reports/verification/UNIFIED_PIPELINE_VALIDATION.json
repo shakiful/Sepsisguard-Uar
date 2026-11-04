@@ -3,11 +3,11 @@
   "workflow": "notebooks/SepsisGuard_UAR.ipynb",
   "runner": "scripts/run_pipeline.py",
   "validation_environment": "local_or_server",
-  "source_fingerprint": "d14b735a4303317f526a4856c8fe4a0ca1a47e76cbce0fe1fdef8d85a0714545",
+  "source_fingerprint": "ef6a73fab50c5fd0a63fbbebc4a890f7d7bf9de9609313871de0239bdbbabdbc",
   "tests": {
-    "passed": 29,
-    "seconds": 44.72,
-    "new_integration_tests": 4
+    "passed": 30,
+    "seconds": 38.5,
+    "new_integration_tests": 5
   },
   "notebook_schema_valid": true,
   "all_code_cells_compile": true,
@@ -20,6 +20,8 @@
     "Reject changed raw bytes",
     "Reject corrupted fitted-state snapshot",
     "Retain previous generation after interrupted copy",
-    "Import exact previous manifest with matching milestone audit"
-  ]
+    "Import exact previous manifest with matching milestone audit",
+    "Accept a simulated GPU-attached runtime and preserve its observed hardware report"
+  ],
+  "gpu_attached_runtime_compatibility": "Passed with a simulated A100/high-RAM hardware report on a CPU test host; actual A100 execution is unverified."
 }
