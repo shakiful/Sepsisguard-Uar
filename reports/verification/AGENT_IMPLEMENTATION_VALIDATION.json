@@ -111,5 +111,19 @@
     "Same-model entailment is not independent factual ground truth",
     "B evaluation and controlled agent comparisons are pending",
     "Qwen GPU memory, operators, generated output quality and real latency remain unmeasured"
-  ]
+  ],
+  "ci_initial_attempt": {
+    "run_id": 41911297019,
+    "commit": "939750e281a1c75afbfa4224dfdf32cf5a99c095",
+    "result": "54 passed, 1 failed",
+    "failure": "Integration test assumed ignored runs directory existed on a clean checkout",
+    "fix": "Create runs directory in test setup; application source unchanged"
+  },
+  "clean_checkout_regression": {
+    "test": "test_agent_runner_persists_resumes_and_rejects_changed_case",
+    "result": "passed",
+    "seconds": 18.06,
+    "initial_runs_directory_present": false,
+    "scope": "Source/config/tests copied into clean temporary Git root; no prior run artifacts"
+  }
 }

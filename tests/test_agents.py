@@ -143,6 +143,7 @@ def test_calibration_reads_only_reserved_split_and_case_ignores_future(dataset,t
 def test_agent_runner_persists_resumes_and_rejects_changed_case(tmp_path):
     from scripts.run_agents import create_demo,run_agent_cases,ScriptedDemo
     project=Path(__file__).resolve().parents[1]
+    (project/'runs').mkdir(exist_ok=True)
     before=set((project/'runs').iterdir())
     try:
         data,profile=create_demo(project,tmp_path/'private')
