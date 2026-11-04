@@ -87,7 +87,7 @@ def run_eda(data_root: str | Path, output_dir: str | Path, max_per_source: int |
     completeness = all(source_counts.get(s) == expected for s, expected in EXPECTED_PATIENT_COUNTS.items())
     synthetic = (Path(data_root) / "SYNTHETIC_DATA.txt").exists()
     banner = "SYNTHETIC SMOKE TEST ONLY — no scientific results." if synthetic else "Real PhysioNet records; cohort completeness is reported below."
-    report = f"""# Week 1 Exploratory Data Analysis
+    report = f"""# Exploratory Data Analysis
 
 **{banner}**
 
@@ -128,7 +128,7 @@ Dataset: PhysioNet/CinC Challenge 2019 v1.0.0. Data are retrospective and the ta
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Week 1 streaming PhysioNet EDA")
+    p = argparse.ArgumentParser(description="Streaming PhysioNet EDA")
     p.add_argument("--data-root", default="data/raw")
     p.add_argument("--output-dir", default="reports/week1")
     p.add_argument("--max-per-source", type=int, default=None,

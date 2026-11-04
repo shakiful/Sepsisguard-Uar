@@ -7,7 +7,7 @@ __pycache__/
 .vscode/
 # Never version medical records or patient-level derivatives
 data/raw/
-data/synthetic/
+data/synthetic*/
 data/downloads/
 data/processed/
 *.psv

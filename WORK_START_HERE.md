@@ -1,46 +1,25 @@
-# SepsisGuard-UAR — ChatGPT Work handoff
+# SepsisGuard-UAR — Working handoff
 
-**Project type:** Solo research project; course milestone followed by publication-quality research extension.
-**Compute preference:** Google Colab Pro is the **main compute environment**. Windows RTX 4060 and an Ubuntu server are fallbacks. Store durable outputs on Google Drive. Do not assume any GPU model is guaranteed, and don't waste Colab GPU compute units on the Week 1 CPU-only EDA.
-**Safety and validity:** Public retrospective PhysioNet 2019 sepsis data, not a medical device, and not suitable for individual care decisions. Never provide clinical treatment instructions or upload identifiable data to external AI services.
+User preference: one runnable workflow, without a week-by-week schedule or manual notebook handoffs. Use `notebooks/SepsisGuard_UAR.ipynb` and the single runner `python -m scripts.run_pipeline` for ongoing work.
 
-## User intent
+Google Colab Pro is the main compute environment, private Google Drive holds durable data/checkpoints, and https://github.com/shakiful/Sepsisguard-Uar is the canonical version-controlled source. The current data/preprocessing pipeline uses CPU. Use GPU resources when later neural training benefits; first inspect the allocated runtime and expected cost, and checkpoint regularly. A subscription does not guarantee any GPU or runtime duration.
 
-Take ownership of practical implementation in ChatGPT Work. Work through the implementation steps, interact with signed-in Google Colab/Drive and GitHub through available authorized UI/connectors, and leave artifacts plus concise progress summaries. Do not claim a Colab job or cloud execution succeeded unless observed. Never silently use paid cloud resources for lengthy runs without checking the session/runtime and expected costs.
+## Current implementation
 
-## Current checkpoint (2026-10-21)
+The unified workflow downloads/restores official PhysioNet 2019 A/B data, runs EDA, preserves deterministic patient partitions, audits the complete cohort, runs regression and leakage tests, fits causal train-only preprocessing, verifies the development Dataset and saves one final result plus a private snapshot. It imports the existing completed data run `20261021T183143Z-82ed151a` when present. Otherwise it performs the same data pipeline from scratch. Matching pipeline checkpoints resume automatically, with all raw files re-audited before fitted state can be reused.
 
-Canonical repository: https://github.com/shakiful/Sepsisguard-Uar (user-supplied public source repository). See PROJECT_STATUS.md for measured results and the remaining Week 2 cloud verification. Week 1 is verified from the user-supplied completed Colab notebook (run `20261021T183143Z-82ed151a`). Week 2 train-only preprocessing is implemented and locally validated; its Colab execution is next. The notebooks now clone this repository directly and record the actual source commit; no starter ZIP is required.
+The earlier data run was verified from the user's uploaded executed notebook: 40,336 patients, 1,552,210 hours, all 25 original tests passing, and completed Drive copy calls. Local preprocessing validation retained 39 features and produced 12 x 78 development windows. The unified entrypoint requires its own execution evidence before claiming a new Colab result.
 
-## Immediate Work sequence (do in order)
+## Continue the work
 
-1. Review `PROJECT_STATUS.md` and `reports/verification/WEEK1_COLAB_EVIDENCE.json`. Week 1 is complete; preserve its exact run `20261021T183143Z-82ed151a` and private split manifest.
-2. Use the existing user-identified repository `shakiful/Sepsisguard-Uar`. Preserve its history and unrelated edits. Source import is complete; push only source and aggregate results, never raw records or patient-level derivatives.
-3. Check authorized connected Colab, Drive and GitHub access. If the browser cannot attach, keep progressing on source/review work and use executed notebook uploads as evidence. Do not claim direct cloud operation or independent Drive verification without observing it.
-4. Open `notebooks/02_week2_colab.ipynb` in Colab with the same Google account/Drive. Use CPU. Its default restores the completed Week 1 run above, including the exact private manifest; a fresh runtime can restore or download the same official A/B files.
-5. Validate the restored manifest and full-cohort fingerprint against the saved Week 1 audit. Run the regression tests before fitting. Preserve A=train 70% / validation 15% / calibration 15% and all B=test_B.
-6. Execute train-only imputation/scaling, causal 12-hour windows, unsupervised training-only feature filtering and reproducible PyTorch Dataset checks. B must remain unopened for fit and development window checks.
-7. Save fitted state, reports and provenance privately to Drive. The final cell reads back key saved files before reporting success. Review the actual output before marking Week 2 cloud execution complete.
-8. Later compare the planned predictive baselines on A only; activate a Colab Pro GPU when neural-network training benefits, with frequent Drive checkpoints. Calibrate independently and unlock B only for frozen final evaluation.
+1. Read `PROJECT_STATUS.md` and the aggregate verification evidence. Preserve the original patient partition and dataset fingerprints.
+2. Open the single notebook in CPU Colab with the same Google account/Drive; use Run all. Source, setup and all implemented processing are handled in one notebook. A Drive mount authorization may require the user.
+3. Record actual results and blockers. Browser control previously returned `Cannot attach to this target`; do not claim cloud execution from source creation or local tests. If direct operation remains blocked, review the executed notebook supplied by the user.
+4. Preserve all protected outputs privately. The pipeline writes immutable snapshots under `MyDrive/SepsisGuard-UAR/runs/<run-id>` and read-verifies files before atomically replacing the checkpoint pointer. Never commit raw records, split manifests, patient summaries, per-file hashes or fitted artifacts.
+5. Extend the same workflow with the planned predictive baselines (logistic regression, MLP, LSTM and TCN), independent calibration and retrieval experiments. These components are not implemented or trained yet. Do not represent successful data preparation as a completed predictive system.
 
-## Colab Pro execution policy
+## Research invariants
 
-- On each runtime, run `python scripts/compute_check.py --output runs/compute.json` and record the observed GPU, available memory, Python/PyTorch versions.
-- Process large datasets on `/content` local runtime storage where practical; avoid training directly against mounted Drive files because repeated Drive I/O is slow. Copy checkpoint/report artifacts to Drive at milestones.
-- If a GPU is available for weeks 3+, prefer batched PyTorch training, pinned-memory DataLoaders where beneficial, `torch.autocast(device_type='cuda')`/mixed precision only when tested, and checkpoint/resume support. Do not assume mixed precision improves all tasks; benchmark and retain FP32 fallback.
-- Preserve seeds, dataset split IDs, configs, commit SHA, feature schema, model metrics, and calibration details.
-- Colab compute availability and runtime length are dynamic and not guaranteed even with Pro.
-- GPU use should maximize **research productivity**, not merely GPU hours. Week 1 is CPU-oriented.
+A/train alone determines preprocessing and model fitting; A/validation supports model selection; A/calibration is independent; B remains locked until frozen final evaluation. Original PhysioNet challenge labels are already shifted and must not be shifted again. Causal filling and window creation reset at patient boundaries. Fixed preprocessing rules must not be selected using B's descriptive EDA. Future supervised feature selection belongs inside patient-level training folds.
 
-## Acceptance criteria for Week 1
-
-- Real patient counts A=20,336 / B=20,000 observed in Colab.
-- `pytest` succeeds in the Colab environment.
-- EDA report and figures saved to Drive.
-- `split_manifest.csv` saved privately to Drive; source B exclusively `test_B`.
-- No patient or future-hour leakage.
-- GitHub repository contains only shareable source, configs, documentation, tests, and aggregate reports.
-
-## Research scope
-
-After Week 1, compare logistic regression, MLP, LSTM, and TCN. Calibrate the best predictor on an independent calibration subset. Main novel research question: whether uncertainty-conditioned retrieval, evidence verification, and selective abstention reduce unsupported explanations relative to budget-matched standard RAG. Implement LangChain retrieval and LangGraph routing in a later stage. Do not claim medical validity or publication readiness before experimentation and independent review.
+Main research question: whether uncertainty-conditioned retrieval, evidence verification and selective abstention reduce unsupported explanations relative to budget-matched standard RAG. Compare controlled baselines before making novelty or publication-readiness claims. This retrospective public-data study is not a medical device and must not produce individual treatment instructions or send identifiable data to external AI services.

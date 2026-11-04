@@ -1,0 +1,25 @@
+{
+  "review_date": "2026-11-04",
+  "workflow": "notebooks/SepsisGuard_UAR.ipynb",
+  "runner": "scripts/run_pipeline.py",
+  "validation_environment": "local_or_server",
+  "source_fingerprint": "d14b735a4303317f526a4856c8fe4a0ca1a47e76cbce0fe1fdef8d85a0714545",
+  "tests": {
+    "passed": 29,
+    "seconds": 44.72,
+    "new_integration_tests": 4
+  },
+  "notebook_schema_valid": true,
+  "all_code_cells_compile": true,
+  "new_colab_execution_verified": false,
+  "predictive_models_trained": false,
+  "scope": "Implemented data download/restore, EDA, fixed patient splits, audit, leakage regression tests, train-only preprocessing, Dataset checks and verified private snapshots",
+  "resume_checks": [
+    "Restore after runtime working-directory loss",
+    "Resume after interrupted fitting",
+    "Reject changed raw bytes",
+    "Reject corrupted fitted-state snapshot",
+    "Retain previous generation after interrupted copy",
+    "Import exact previous manifest with matching milestone audit"
+  ]
+}

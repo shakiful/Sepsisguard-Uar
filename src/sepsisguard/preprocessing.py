@@ -38,7 +38,7 @@ def validate_hourly(patient: pd.DataFrame) -> None:
     if not np.isfinite(times).all() or not np.allclose(times, np.round(times), atol=1e-8, rtol=0):
         raise ValueError("Expected integer ICU hours")
     if len(times) > 1 and not np.allclose(np.diff(times), 1, atol=1e-8, rtol=0):
-        raise ValueError("Week 2 requires contiguous hourly rows; irregular gaps must be resolved explicitly")
+        raise ValueError("Preprocessing requires contiguous hourly rows; irregular gaps must be resolved explicitly")
 
 
 @dataclass

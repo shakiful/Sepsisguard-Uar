@@ -1,4 +1,4 @@
-# SepsisGuard-UAR progress — 2026-10-21
+# SepsisGuard-UAR progress — 2026-11-04
 
 ## Completed and observed locally
 
@@ -41,13 +41,23 @@
 - The download cell reused already extracted complete datasets; the original transfer and Drive cached archives are not separately verified by this notebook.
 - Evidence summary: [WEEK1_COLAB_EVIDENCE.json](reports/verification/WEEK1_COLAB_EVIDENCE.json). The full uploaded notebook remains private; only aggregate evidence is committed.
 
+## Single-workflow entrypoint (2026-11-04)
+
+The user requested one Run-all workflow instead of week-by-week handoffs. The canonical entrypoint is now `notebooks/SepsisGuard_UAR.ipynb`, backed by `scripts/run_pipeline.py`.
+
+- One execution covers source setup, data download/restoration, EDA, the existing fixed partition, complete audit, regression/leakage tests, causal preprocessing and development Dataset checks.
+- The completed data run `20261021T183143Z-82ed151a` is imported automatically when present in Drive. Missing old checkpoints lead to a fresh full data pipeline; an existing incomplete or inconsistent checkpoint is rejected.
+- Source/configuration-matched snapshots resume automatically. Every run revalidates raw data; EDA and preprocessing reuse require matching input and artifact hashes. Immutable generations preserve the previous Drive checkpoint if a new save is interrupted.
+- Results, protected artifacts and logs are kept together under the private Drive run folder with one `PIPELINE_RESULT.json` and `PIPELINE_REPORT.md`.
+- Original dated notebooks and results are retained as historical evidence. Future predictive training, calibration and retrieval components should extend the same workflow rather than add calendar-based handoffs.
+- Local validation: all 29 tests passed in 44.72 s. The four added integration tests cover runtime-loss restoration, interrupted fitting, saved-artifact corruption, changed raw data, interrupted snapshot publication and exact legacy-manifest import. The unified notebook passes schema and code-cell syntax checks.
+- No new unified Colab run, predictive model or retrieval experiment is claimed from this source change.
+
 ## Continue from this checkpoint
 
-1. Week 1 is complete; do not rerun it merely to recover its run ID.
-2. Open notebooks/02_week2_colab.ipynb in CPU Colab using the same Google account/Drive. Its default WEEK1_RUN_ID is `20261021T183143Z-82ed151a`. It restores the exact manifest, checks the cohort fingerprint, then fits preprocessing using A/train only.
-3. Preserve the Week 2 fitted state, provenance, reports and run logs privately in Drive. The final cell reads back the saved key files before reporting success.
-4. Review the executed Week 2 result before marking cloud preprocessing complete. Browser control remains blocked; the user may run the prepared notebook and supply its executed outputs.
-5. Later train and compare the planned baselines on A only, calibrate independently, and unlock B only for frozen final evaluation.
+1. Use the single notebook above with CPU and Run all. Approve the Drive mount if needed.
+2. Review actual execution output before marking the unified pipeline complete in Colab. Record the final run ID and verified private snapshot location.
+3. Preserve B for frozen final evaluation. Extend the same runner with planned models/calibration/retrieval; these remain unimplemented.
 
 ## Deliverables
 
