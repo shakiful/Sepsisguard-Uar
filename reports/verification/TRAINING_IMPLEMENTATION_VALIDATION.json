@@ -1,0 +1,37 @@
+{
+  "review_date": "2026-11-04",
+  "source_fingerprint": "3570aefc70135cd4eec1598750dc7ea5a956035829b5205d98ae6485109096b5",
+  "validation_environment": "local CPU; synthetic data only",
+  "tests": {
+    "passed": 37,
+    "seconds": 87.77,
+    "training_tests": 7
+  },
+  "architectures": [
+    "logistic",
+    "lstm"
+  ],
+  "notebook_schema_valid": true,
+  "code_cells_compile": true,
+  "checks": [
+    "Actual optimizer weight updates",
+    "Right-padded windows match the original causal Dataset",
+    "Padding cannot affect logits",
+    "Epoch-boundary CPU resume matches uninterrupted training",
+    "Corrupt persisted model checkpoint rejected",
+    "End-to-end training works after calibration and B patient files are deleted",
+    "Synthetic training report and model weights saved with readback"
+  ],
+  "real_colab_training_started_by_assistant": false,
+  "real_colab_training_metrics_verified": false,
+  "blocker": "Connected Opera browser cannot attach to the user Colab tab via either DOM method",
+  "gpu_path": "CUDA with bfloat16 operator smoke test and FP32 fallback; not physically exercised in local CPU tests",
+  "prepared_run_id": "pipeline-20261104T190221Z-22906fa2",
+  "preparation_refit_required": false,
+  "references": [
+    "https://docs.pytorch.org/docs/stable/generated/torch.nn.utils.rnn.pack_padded_sequence.html",
+    "https://docs.pytorch.org/docs/stable/amp.html",
+    "https://docs.pytorch.org/docs/stable/notes/randomness.html",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html"
+  ]
+}

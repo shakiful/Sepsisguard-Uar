@@ -1,20 +1,20 @@
 # SepsisGuard-UAR
 
-Run the implemented research data pipeline in one Colab session: download/restore → EDA → patient partitions → data and leakage checks → causal preprocessing → PyTorch Dataset checks → verified private Drive checkpoint.
+Run preparation and predictive training in one Colab notebook: restore the verified data/preprocessing checkpoint → train a logistic baseline and a 12-hour LSTM → select using A/validation → save verified model checkpoints to private Drive. When preparation is absent, the same workflow performs it first.
 
 [![Run in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/shakiful/Sepsisguard-Uar/blob/main/notebooks/SepsisGuard_UAR.ipynb)
 
-Select your available **A100 / high-RAM runtime** (or CPU-only), then **Runtime → Run all**. Authorize your private Drive mount when prompted. There is no calendar schedule or notebook handoff. The notebook updates a clean dedicated source checkout and reuses earlier downloaded records when available. GPU-attached runtimes are accepted. Every run records the actual GPU model, VRAM and system RAM; current data processing executes on CPU. The GPU becomes useful when predictive model training is implemented.
+Select your available **A100 / high-RAM runtime**, then **Runtime → Run all**. Authorize your private Drive mount when prompted. There is no calendar schedule or notebook handoff. The notebook updates a clean dedicated source checkout and reuses earlier downloaded records when available. Every run records the actual GPU, VRAM and system RAM. Data preparation uses CPU; predictive training selects CUDA and tests bfloat16 support before choosing AMP or an FP32 fallback.
 
-The runner automatically imports the completed data milestone `20261021T183143Z-82ed151a` if it is present in the same Drive. Otherwise it builds the data reports and deterministic partitions itself. Subsequent runs resume the latest checkpoint matching the current source and configuration. Every run re-audits raw files and runs the regression/leakage tests; previously validated EDA and preprocessing are reused only when their hashes and inputs match. An incomplete or changed checkpoint stops with an error instead of silently changing the experiment.
+The runner automatically imports the completed data milestone `20261021T183143Z-82ed151a` if it is present in the same Drive. Otherwise the preparation runner builds the data reports and deterministic partitions itself. The training entrypoint directly restores completed run `pipeline-20261104T190221Z-22906fa2`, including its exact fitted preprocessing, and does not refit it after a training-source change. Subsequent preparation runs resume a source/configuration-matched checkpoint. Every run re-audits raw files and runs the regression/leakage tests; previously validated EDA and preprocessing are reused only when their hashes and inputs match. An incomplete or changed checkpoint stops with an error instead of silently changing the experiment.
 
 All private outputs are under `MyDrive/SepsisGuard-UAR/runs/<run-id>`. The checkpoint marker identifies an immutable snapshot containing `PIPELINE_RESULT.json`, `PIPELINE_REPORT.md`, EDA, the exact patient manifest, fitted preprocessing, source/runtime records and logs. Each snapshot is read back before its completion pointer is replaced, so an interrupted save preserves the previous checkpoint. Cached data archives live in `dataset-archives`; working raw data stays on `/content`. After a Colab reset, open the same notebook and select Run all again.
 
-This implementation prepares and verifies data. Predictive model training, calibration and uncertainty-conditioned retrieval experiments are not implemented yet. Their eventual execution belongs in this same workflow. No predictive accuracy or clinical validation is claimed.
+Predictive training is implemented; an actual A100 training result has not yet been observed. Calibration, independent B evaluation and uncertainty-conditioned retrieval experiments remain pending. Validation metrics are used for selection and are not independent test performance or clinical validation.
 
 ## Measured results
 
-The unified Colab pipeline completed on 2026-11-04: **30 tests passed**, preprocessing and Dataset checks passed, and the private checkpoint passed readback. The recorded allocation was **A100-SXM4-80GB / 167.05 GiB system RAM**. Run ID: `pipeline-20261104T190221Z-22906fa2`. See [execution evidence](reports/verification/UNIFIED_COLAB_EVIDENCE.json). GPU model training has not occurred.
+The unified Colab pipeline completed on 2026-11-04: **30 tests passed**, preprocessing and Dataset checks passed, and the private checkpoint passed readback. The recorded allocation was **A100-SXM4-80GB / 167.05 GiB system RAM**. Run ID: `pipeline-20261104T190221Z-22906fa2`. See [execution evidence](reports/verification/UNIFIED_COLAB_EVIDENCE.json). The supplied output covers preparation only; A100 model training is now implemented and awaiting its own execution evidence.
 
 The completed data notebook was verified on 2026-10-21: 40,336 patients, 1,552,210 hours, 2,932 patients with positive labels and 27,916 positive hours. All 25 existing tests passed before and after the data audit. The cohort fingerprint matches independent local validation.
 
@@ -26,7 +26,28 @@ The completed data notebook was verified on 2026-10-21: 40,336 patients, 1,552,2
 
 A is partitioned into 14,235 train / 3,050 validation / 3,051 calibration patients (seed 42). All 20,000 B patients are reserved for frozen final evaluation. Descriptive B EDA must not guide model, feature or threshold selection. Audit checks cover the schema, binary labels, contiguous hours, patient IDs, manifest correspondence and exact-file duplicates; they cannot establish undocumented subject linkage.
 
-## Local command
+## Predictive training
+
+The notebook defaults to:
+
+- A logistic classifier of the current 78 value/mask channels, optimized with AdamW for at most 8 epochs, plus a one-layer 64-unit LSTM over trailing 12-hour windows for at most 12 epochs.
+- A/train-only class weighting, AdamW (learning rate 0.001, weight decay 0.0001), batch size 1,024 and gradient clipping. A/validation average precision chooses the best epoch and architecture; early stopping uses patience 4. The 0.5 reporting threshold is fixed before training.
+- Calibration and B raw files are not opened by training. Scores are uncalibrated. Calibration and final holdout evaluation require subsequent, separately recorded results.
+- Compact local NumPy caches transform each A/train and A/validation patient once. Windows are formed without rereading CSVs each batch, respect patient boundaries and use packed right-padded LSTM inputs. Input bytes are checked against the frozen patient inventory before reuse.
+- CUDA bfloat16 is tested on the actual model's forward/backward operators; unsupported operators fall back to FP32. Checkpoints contain current/best weights, optimizer state and Torch RNG state. Model selection and class weighting never use calibration or B.
+- Every completed epoch publishes an immutable, hash-verified private weight file and replaces its resume pointer only after copy verification. Run all again resumes at the last completed epoch with the same source/configuration/runtime. Seeds are fixed; reproducibility across different PyTorch versions or devices is not claimed.
+- A 90-minute training budget per invocation bounds the initial run. If reached, the result says `training_paused` and a rerun resumes completed epochs. No model or performance is invented if the GPU job has not run.
+
+```bash
+python -m scripts.run_training --storage-root /path/to/private/storage \
+  --prepared-run-id pipeline-20261104T190221Z-22906fa2 --data-root data/raw --device cuda
+```
+
+Results, selected `.pt` weights, epoch histories and private validation predictions live under `MyDrive/SepsisGuard-UAR/training/<training-id>`. `TRAINING_RESULT.json` identifies the selected architecture and reports validation AP, AUROC, Brier score, log loss and fixed-threshold precision/recall/F1. To train explicitly on a local CPU, use `--device cpu --workers 0 --precision fp32`. Training resume identities include source, frozen inputs, configuration, device type and PyTorch version.
+
+The metric uses scikit-learn's non-trapezoidal average precision; this is not the official PhysioNet challenge utility. Design references: [PyTorch packed sequences](https://docs.pytorch.org/docs/stable/generated/torch.nn.utils.rnn.pack_padded_sequence.html), [AMP](https://docs.pytorch.org/docs/stable/amp.html), [reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html), [average precision](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html).
+
+## Preparation-only command
 
 ```bash
 python -m pip install -e '.[dev,download,torch]'

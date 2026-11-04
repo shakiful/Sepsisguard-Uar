@@ -1,6 +1,6 @@
 # SepsisGuard-UAR progress — 2026-11-04
 
-Current status: the unified data/preprocessing workflow passed in the user's Colab run `pipeline-20261104T190221Z-22906fa2`, with all 30 tests passing and checkpoint readback confirmed in the supplied output. Actual allocation: A100-SXM4-80GB and 167.05 GiB system RAM. Predictive training is the next unimplemented component.
+Current status: the unified data/preprocessing workflow passed in the user's Colab run `pipeline-20261104T190221Z-22906fa2`, with all 30 tests passing and checkpoint readback confirmed in the supplied output. Actual allocation: A100-SXM4-80GB and 167.05 GiB system RAM. Logistic/LSTM training is now implemented; an actual A100 training result remains unverified.
 
 ## Completed and observed locally
 
@@ -75,14 +75,24 @@ Verified from the user-supplied console output, with source fingerprint matching
 - The output confirms checkpoint publication and readback at `MyDrive/SepsisGuard-UAR/runs/pipeline-20261104T190221Z-22906fa2`. A separate connected-Drive readback by the reviewer has not been performed.
 - Aggregate evidence: [UNIFIED_COLAB_EVIDENCE.json](reports/verification/UNIFIED_COLAB_EVIDENCE.json). Predictive models, independent final holdout evaluation, calibration and retrieval experiments remain unimplemented.
 
+## Predictive training implementation (2026-11-04)
+
+- Added current-hour logistic and packed 12-hour LSTM classifiers. Their scores remain uncalibrated.
+- A/train alone supplies optimization and positive-class weight. A/validation average precision selects the best epoch and architecture. Calibration and B raw files stay unopened by training.
+- The same notebook now calls `scripts.run_training` and restores the exact completed preparation run above. Compact local caches avoid repeated per-window CSV reads; no preprocessing refit is required.
+- CUDA training tests bfloat16 forward/backward and uses FP32 when unsupported. Defaults: 1,024-hour batches, 64 LSTM hidden units, 8 logistic / 12 LSTM maximum epochs, patience 4, AdamW lr=0.001, weight_decay=0.0001 and a 90-minute per-invocation budget.
+- Epoch checkpoints preserve optimizer/current/best weights and Torch RNG state. Immutable private weight files and hash-verified resume pointers allow epoch-boundary continuation after runtime loss. Predictions and weights remain private.
+- Validation: all 37 local tests passed in 87.77 s. The seven new training tests verify actual weight updates, padding invariance, equality with uninterrupted CPU training after resume, model-checkpoint corruption rejection, matching original causal windows and successful training after calibration/B files are removed. Notebook format and code-cell syntax checks also passed.
+- Browser control was retried against the user's current Colab tab; both DOM methods still returned `Cannot attach to this target`. No actual A100 training job has been started by the assistant and no predictive research metrics are claimed.
+
 ## Continue from this checkpoint
 
-1. Data preparation and preprocessing are complete in the unified Colab workflow. Preserve the completed private checkpoint above; a routine rerun is not needed to prove this result.
-2. Keep the same manifest, fitted preprocessing and locked B holdout when adding model training to this same notebook/runner. The observed A100 allocation supports planning the next GPU implementation but is not evidence of training.
-3. Implement the planned predictive baselines, validation-based selection, independent calibration and later retrieval experiments. Record their actual outputs before claiming predictive performance.
+1. Reopen the same canonical notebook from GitHub in the existing A100/Drive account and select Run all. It restores `pipeline-20261104T190221Z-22906fa2` and proceeds directly to predictive training.
+2. Review the actual `TRAINING_RESULT.json`, best checkpoints and epoch histories under `MyDrive/SepsisGuard-UAR/training/<training-id>`. Preserve B and calibration for their independent uses.
+3. Record actual A100 training outputs before claiming real predictive performance. Later add calibration and the planned additional model/retrieval comparisons in the same workflow.
 
 ## Deliverables
 
 The source ZIP contains shareable source, two Colab notebooks, tests, aggregate verification reports, and a Git history bundle. A separate private checkpoint ZIP contains protected patient summaries, split manifest, per-file hashes, fitted preprocessing state, notebook execution outputs, environment snapshots, and logs. It excludes raw patient files. Original data can be downloaded again from the documented official S3 mirror.
 
-No model training or clinical validation has been performed. A user-run Colab session allocated an A100; the completed pipeline used CPU preprocessing.
+Real-cohort predictive training and clinical validation have not been observed. Synthetic CPU optimization tests passed. The completed user-run Colab preparation session allocated an A100 and used CPU preprocessing.
