@@ -1,5 +1,7 @@
 # SepsisGuard-UAR progress — 2026-11-04
 
+Current status: the unified data/preprocessing workflow passed in the user's Colab run `pipeline-20261104T190221Z-22906fa2`, with all 30 tests passing and checkpoint readback confirmed in the supplied output. Actual allocation: A100-SXM4-80GB and 167.05 GiB system RAM. Predictive training is the next unimplemented component.
+
 ## Completed and observed locally
 
 - Repository imported into local Git; implementation and execution history retained.
@@ -56,17 +58,31 @@ The user requested one Run-all workflow instead of week-by-week handoffs. The ca
 ## Hardware preference update (2026-11-04)
 
 - The user reports access to an A100 and high-RAM Colab Pro runtime. The unified notebook and runner accept GPU-attached runtimes and record the observed GPU/VRAM/system RAM rather than requiring CPU-only mode.
-- The data pipeline still performs causal preprocessing on CPU. No CUDA training, model speedup, A100 allocation or high-RAM execution has been observed from this source change.
+- At source-change validation time the A100 compatibility check used a simulated hardware report. Actual A100/high-RAM allocation is subsequently confirmed by the completed Colab run below. Preprocessing remains on CPU and no CUDA model training or model speedup is claimed.
 - Hardware-compatibility validation: all 30 local tests passed in 38.50 s, including a simulated A100/high-RAM report that confirms the runtime is accepted and its hardware metadata reaches the verified snapshot.
+
+## Completed unified Colab run (2026-11-04)
+
+Verified from the user-supplied console output, with source fingerprint matching the reviewed code:
+
+- Run: `pipeline-20261104T190221Z-22906fa2`; source commit: `c7230fe49ccda9a1a6498cb7ef8fc64bd6e256a1`.
+- Status: `data_pipeline_passed`; 30 tests passed in 66.66 s.
+- Observed allocation: NVIDIA A100-SXM4-80GB, 79.25 GiB reported VRAM, 167.05 GiB system RAM, 12 CPUs; Python 3.13.16 and PyTorch 2.11.0+cu130. Preprocessing executed on CPU; no CUDA model was trained.
+- Cohort: 40,336 patients, 1,552,210 hours, all schema/time/manifest checks passing, zero exact-file duplicates. Cohort fingerprint matches the original local and earlier Colab results.
+- Imported the exact original audited patient manifest from `20261021T183143Z-82ed151a`. Manifest digest: `9cff1efb61496519205620836df527a23e9ba24a0dad3c763f3b6d023f154ca7`.
+- Fitted on A/train only: 14,235 patients and 552,665 hours. Retained 39 predictors; EtCO2 was unobserved in A/train and dropped. Input shape: 12 hours x 78 value/mask channels.
+- Development windows: train 552,665 / validation 118,499 / calibration 119,051. Checked 128 spread-out windows per split and 8 x 12 x 78 batches. B was not used for fitting or development Dataset checks; B was included in descriptive full-cohort auditing.
+- The output confirms checkpoint publication and readback at `MyDrive/SepsisGuard-UAR/runs/pipeline-20261104T190221Z-22906fa2`. A separate connected-Drive readback by the reviewer has not been performed.
+- Aggregate evidence: [UNIFIED_COLAB_EVIDENCE.json](reports/verification/UNIFIED_COLAB_EVIDENCE.json). Predictive models, independent final holdout evaluation, calibration and retrieval experiments remain unimplemented.
 
 ## Continue from this checkpoint
 
-1. Use the single notebook above with the available A100/high-RAM runtime (or CPU-only) and Run all. Approve the Drive mount if needed.
-2. Review actual execution output before marking the unified pipeline complete in Colab. Record the final run ID and verified private snapshot location.
-3. Preserve B for frozen final evaluation. Extend the same runner with planned models/calibration/retrieval; these remain unimplemented.
+1. Data preparation and preprocessing are complete in the unified Colab workflow. Preserve the completed private checkpoint above; a routine rerun is not needed to prove this result.
+2. Keep the same manifest, fitted preprocessing and locked B holdout when adding model training to this same notebook/runner. The observed A100 allocation supports planning the next GPU implementation but is not evidence of training.
+3. Implement the planned predictive baselines, validation-based selection, independent calibration and later retrieval experiments. Record their actual outputs before claiming predictive performance.
 
 ## Deliverables
 
 The source ZIP contains shareable source, two Colab notebooks, tests, aggregate verification reports, and a Git history bundle. A separate private checkpoint ZIP contains protected patient summaries, split manifest, per-file hashes, fitted preprocessing state, notebook execution outputs, environment snapshots, and logs. It excludes raw patient files. Original data can be downloaded again from the documented official S3 mirror.
 
-No model training or clinical validation has been performed. No Colab GPU compute was requested.
+No model training or clinical validation has been performed. A user-run Colab session allocated an A100; the completed pipeline used CPU preprocessing.

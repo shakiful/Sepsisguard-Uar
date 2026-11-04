@@ -11,7 +11,7 @@
   },
   "notebook_schema_valid": true,
   "all_code_cells_compile": true,
-  "new_colab_execution_verified": false,
+  "new_colab_execution_verified": true,
   "predictive_models_trained": false,
   "scope": "Implemented data download/restore, EDA, fixed patient splits, audit, leakage regression tests, train-only preprocessing, Dataset checks and verified private snapshots",
   "resume_checks": [
@@ -23,5 +23,6 @@
     "Import exact previous manifest with matching milestone audit",
     "Accept a simulated GPU-attached runtime and preserve its observed hardware report"
   ],
-  "gpu_attached_runtime_compatibility": "Passed with a simulated A100/high-RAM hardware report on a CPU test host; actual A100 execution is unverified."
+  "gpu_attached_runtime_compatibility": "Local simulated-report test passed; subsequent supplied Colab output confirms actual A100-SXM4-80GB allocation and successful CPU preprocessing. CUDA model training remains unimplemented.",
+  "cloud_execution_evidence": "UNIFIED_COLAB_EVIDENCE.json"
 }

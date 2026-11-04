@@ -1,0 +1,156 @@
+{
+  "review_date": "2026-11-04",
+  "evidence_type": "user_uploaded_colab_console_output",
+  "uploaded_output_sha256": "dd96e409625fe98c94b2ce2896fc3e543807df4513293cf37b9446e0add6d9e8",
+  "run_id": "pipeline-20261104T190221Z-22906fa2",
+  "status": "data_pipeline_passed",
+  "execution_environment": "colab",
+  "source_commit": "c7230fe49ccda9a1a6498cb7ef8fc64bd6e256a1",
+  "source_fingerprint": "ef6a73fab50c5fd0a63fbbebc4a890f7d7bf9de9609313871de0239bdbbabdbc",
+  "source_fingerprint_matches_reviewed_code": true,
+  "tests": {
+    "passed": 30,
+    "seconds": 66.66
+  },
+  "compute": {
+    "python": "3.13.16",
+    "os": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "runtime": "colab",
+    "cpu_count": 12,
+    "local_disk_free_gb": 235.39,
+    "cuda_available": true,
+    "gpus": [
+      {
+        "name": "NVIDIA A100-SXM4-80GB",
+        "vram_gb": 79.25,
+        "compute_capability": "8.0"
+      }
+    ],
+    "memory_total_gb": 167.05,
+    "memory_available_gb": 164.01,
+    "torch_version": "2.11.0+cu130"
+  },
+  "audit": {
+    "patient_counts": {
+      "A": 20336,
+      "B": 20000
+    },
+    "patients": 40336,
+    "hours": 1552210,
+    "all_schema_valid": true,
+    "contiguous_hourly_rows": true,
+    "duplicate_full_files": 0,
+    "cohort_sha256": "e7d81a6326a49965e5bba9e4415c33251fd8122051795654e058bd76adcaeee1",
+    "manifest_matches_data": true,
+    "scope": "Exact-byte duplicates and ID disjointness; cannot establish undocumented subject linkage"
+  },
+  "input": {
+    "cohort_sha256": "e7d81a6326a49965e5bba9e4415c33251fd8122051795654e058bd76adcaeee1",
+    "manifest_sha256": "9cff1efb61496519205620836df527a23e9ba24a0dad3c763f3b6d023f154ca7"
+  },
+  "imported_checkpoint": {
+    "run_id": "20261021T183143Z-82ed151a",
+    "cohort_sha256": "e7d81a6326a49965e5bba9e4415c33251fd8122051795654e058bd76adcaeee1",
+    "manifest_file_sha256": "96fb2183f12e6508e6a8307d442f0aec013b27b2c9e41e65fda48a4eb24705da"
+  },
+  "preprocessing": {
+    "status": "preprocessing_and_dataset_checks_passed",
+    "selected_features": [
+      "HR",
+      "O2Sat",
+      "Temp",
+      "SBP",
+      "MAP",
+      "DBP",
+      "Resp",
+      "BaseExcess",
+      "HCO3",
+      "FiO2",
+      "pH",
+      "PaCO2",
+      "SaO2",
+      "AST",
+      "BUN",
+      "Alkalinephos",
+      "Calcium",
+      "Chloride",
+      "Creatinine",
+      "Bilirubin_direct",
+      "Glucose",
+      "Lactate",
+      "Magnesium",
+      "Phosphate",
+      "Potassium",
+      "Bilirubin_total",
+      "TroponinI",
+      "Hct",
+      "Hgb",
+      "PTT",
+      "WBC",
+      "Fibrinogen",
+      "Platelets",
+      "Age",
+      "Gender",
+      "Unit1",
+      "Unit2",
+      "HospAdmTime",
+      "ICULOS"
+    ],
+    "input_channels": 78,
+    "window_hours": 12,
+    "fit_source": "A",
+    "fit_split": "train",
+    "train_patients": 14235,
+    "train_hours": 552665,
+    "dropped_features": {
+      "EtCO2": "unobserved_or_below_fixed_threshold"
+    },
+    "splits": {
+      "train": {
+        "patients": 14235,
+        "hourly_windows": 552665,
+        "windows_checked": 128,
+        "batch_shape": [
+          8,
+          12,
+          78
+        ]
+      },
+      "validation": {
+        "patients": 3050,
+        "hourly_windows": 118499,
+        "windows_checked": 128,
+        "batch_shape": [
+          8,
+          12,
+          78
+        ]
+      },
+      "calibration": {
+        "patients": 3051,
+        "hourly_windows": 119051,
+        "windows_checked": 128,
+        "batch_shape": [
+          8,
+          12,
+          78
+        ]
+      }
+    },
+    "preprocessing_device": "cpu",
+    "preprocessing_reused": false,
+    "B_used_for_fit_or_development_checks": false
+  },
+  "persistent_checkpoint": "/content/drive/MyDrive/SepsisGuard-UAR/runs/pipeline-20261104T190221Z-22906fa2",
+  "checkpoint_readback_passed_in_supplied_output": true,
+  "independent_connected_drive_readback_performed_by_reviewer": false,
+  "predictive_models_trained": false,
+  "independent_holdout_evaluated": false,
+  "limits": [
+    "Evidence is the supplied console output; reviewer did not directly control this Colab session.",
+    "GPU allocation is observed in the report, while this execution used CPU preprocessing and did not train a CUDA model.",
+    "B is included in the full-cohort descriptive audit; it was not used for preprocessing fitting or development Dataset checks.",
+    "Exact-file and ID audits cannot establish undocumented subject linkage."
+  ]
+}

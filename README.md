@@ -14,6 +14,8 @@ This implementation prepares and verifies data. Predictive model training, calib
 
 ## Measured results
 
+The unified Colab pipeline completed on 2026-11-04: **30 tests passed**, preprocessing and Dataset checks passed, and the private checkpoint passed readback. The recorded allocation was **A100-SXM4-80GB / 167.05 GiB system RAM**. Run ID: `pipeline-20261104T190221Z-22906fa2`. See [execution evidence](reports/verification/UNIFIED_COLAB_EVIDENCE.json). GPU model training has not occurred.
+
 The completed data notebook was verified on 2026-10-21: 40,336 patients, 1,552,210 hours, 2,932 patients with positive labels and 27,916 positive hours. All 25 existing tests passed before and after the data audit. The cohort fingerprint matches independent local validation.
 
 | Source | Patients | Hours | Patients with positive labels | Positive hours |
