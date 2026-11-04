@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-04T20:55:36.837359+00:00",
+  "recorded_at": "2026-11-04T21:02:48.694024+00:00",
   "status": "implementation_validated_real_qwen_execution_blocked",
   "base_commit": "a3b49bad7a65bcca5df074dc44b0074176ed3bbe",
   "source_fingerprint": "cb9b970047ff219b1d5201233b467e7984d3669afb52a5eda30a58dfa107b3a8",
@@ -125,5 +125,15 @@
     "seconds": 18.06,
     "initial_runs_directory_present": false,
     "scope": "Source/config/tests copied into clean temporary Git root; no prior run artifacts"
+  },
+  "ci_verification": {
+    "status": "success",
+    "source_and_tests_commit": "e09e2664312ecf6016b39745fe4487abb2dfd49d",
+    "run_id": 41911796043,
+    "job_id": 126861010179,
+    "tests_passed": 55,
+    "seconds": 66.7,
+    "url": "https://github.com/shakiful/Sepsisguard-Uar/actions/runs/41911796043",
+    "runtime": "GitHub Actions clean CPU runner; no Qwen generation"
   }
 }
