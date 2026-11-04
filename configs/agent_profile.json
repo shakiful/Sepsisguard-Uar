@@ -1,8 +1,8 @@
 {
-  "status": "proposed_not_implemented",
+  "status": "implemented_pending_real_qwen_run",
   "model_id": "Qwen/Qwen3.8-27B",
-  "revision": null,
-  "pin_revision_after_compatibility_test": true,
+  "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "pin_revision_after_compatibility_test": false,
   "dtype": "bfloat16",
   "quantization": null,
   "batch_size": 1,
@@ -32,5 +32,8 @@
   "agent_inference_executed": false,
   "test_B_unlocked": false,
   "max_generated_tokens_per_call": 1024,
-  "initial_reasoning_mode": "non_thinking"
+  "initial_reasoning_mode": "non_thinking",
+  "revision_source": "Official Hugging Face model-info API queried 2026-11-04; native qwen3_5 architecture verified",
+  "minimum_gpu_total_gib": 70,
+  "minimum_free_gpu_gib": 64
 }

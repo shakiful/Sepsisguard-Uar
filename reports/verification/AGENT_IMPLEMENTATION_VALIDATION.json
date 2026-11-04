@@ -1,0 +1,115 @@
+{
+  "recorded_at": "2026-11-04T20:55:36.837359+00:00",
+  "status": "implementation_validated_real_qwen_execution_blocked",
+  "base_commit": "a3b49bad7a65bcca5df074dc44b0074176ed3bbe",
+  "source_fingerprint": "cb9b970047ff219b1d5201233b467e7984d3669afb52a5eda30a58dfa107b3a8",
+  "frozen_predictor": {
+    "run_id": "training-05ed8fa8a5f01f4f92a8",
+    "architecture": "lstm",
+    "weights_file": "lstm_best.pt",
+    "weights_sha256": "266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc",
+    "calibration_fitted": false
+  },
+  "regression_tests": {
+    "command": "python -m pytest -q",
+    "passed": 55,
+    "failed": 0,
+    "seconds": 128.53,
+    "scope": "37 existing and 18 agent/calibration/integrity tests",
+    "junit_sha256": "9c659131b048a5fe331d5fd9bd4edf033a6aa344663e298cd874cb2ead347fdf"
+  },
+  "static_validation": {
+    "notebook_schema": "passed",
+    "python_cells": "passed",
+    "source_json_syntax": "passed",
+    "git_diff_check": "passed"
+  },
+  "scripted_end_to_end": {
+    "status": "agent_workflow_completed",
+    "mode": "scripted_demo",
+    "run_id": "agents-cd15b72e45c4aa1867dd",
+    "backend": "scripted_fixture_not_qwen",
+    "cases": 2,
+    "new_backend_calls": 6,
+    "supported_context_cases": 2,
+    "abstained_cases": 0,
+    "calibration_fitted": true,
+    "calibration_flat": true,
+    "real_qwen_inference_executed_this_invocation": false,
+    "test_B_raw_files_opened": false
+  },
+  "scripted_demo_scope": "Tiny synthetic predictor with scripted role responses; calibration fit and outputs are software checks, not real-cohort or Qwen results. Flat synthetic calibration was reported explicitly.",
+  "persistence_validation": "Copied artifacts readback passed; integration test resumed matching cases with zero new backend calls and rejected altered immutable case bytes.",
+  "live_reference_fetch": {
+    "sources": [
+      {
+        "source_id": "cdc",
+        "url": "https://www.cdc.gov/sepsis/about/index.html",
+        "title": "CDC: About Sepsis",
+        "text_file": "cdc.txt",
+        "sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f",
+        "retrieved_at": "2026-11-04T20:42:46.722315+00:00",
+        "scope": "Agency-authored public educational reference; not patient-specific guidance"
+      },
+      {
+        "source_id": "nigms",
+        "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+        "title": "NIH NIGMS: Sepsis",
+        "text_file": "nigms.txt",
+        "sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb",
+        "retrieved_at": "2026-11-04T20:43:00.004328+00:00",
+        "scope": "Agency-authored public educational reference; not patient-specific guidance"
+      }
+    ],
+    "passages": 19,
+    "retrieved_passages": [
+      "cdc:0:43aa71b4",
+      "cdc:2:43aa71b4",
+      "nigms:0:7b7b3a09"
+    ]
+  },
+  "qwen_compatibility": {
+    "native_class": "Qwen3_5ForConditionalGeneration",
+    "native_class_import": "passed",
+    "transformers": "5.22.1",
+    "tokenizer_smoke": {
+      "tokenizer_class": "Qwen3_5Tokenizer",
+      "input_keys": [
+        "input_ids",
+        "attention_mask"
+      ],
+      "tokens": 21,
+      "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+      "weights_loaded": false,
+      "real_model_generation": false
+    },
+    "text_only_loader": true
+  },
+  "actual_local_hardware": {
+    "cuda_available": false,
+    "gpu": null,
+    "memory_gib": 9.73,
+    "torch": "2.15.0+cpu"
+  },
+  "real_qwen_weights_loaded": false,
+  "real_qwen_generation_executed": false,
+  "real_cohort_calibrator_fitted": false,
+  "execution_blockers": [
+    {
+      "surface": "local",
+      "result": "80GB GPU preflight rejected CPU-only host before any model-weight download"
+    },
+    {
+      "surface": "connected Colab browser",
+      "result": "Existing tab attempts returned Cannot attach to this target; final connection check returned No connected browser was found for the originating browser instance. No Colab job started."
+    }
+  ],
+  "colab_entrypoint": "https://colab.research.google.com/github/shakiful/Sepsisguard-Uar/blob/main/notebooks/SepsisGuard_UAR.ipynb",
+  "next_execution": "Open the current GitHub notebook on A100 80GB/high RAM; Run all with the same private Drive. Review actual AGENT_RESULT, AGENT_REPORT and case traces.",
+  "limitations": [
+    "Three-endpoint initial real run is functional, not a clinical benchmark",
+    "Same-model entailment is not independent factual ground truth",
+    "B evaluation and controlled agent comparisons are pending",
+    "Qwen GPU memory, operators, generated output quality and real latency remain unmeasured"
+  ]
+}

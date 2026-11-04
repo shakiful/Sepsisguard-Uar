@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sepsisguard-uar"
-version = "0.4.0"
+version = "0.5.0"
 description = "Reproducible causal data engineering for retrospective PhysioNet 2019 sepsis prediction research"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -13,12 +13,14 @@ dependencies = [
   "pandas>=2.0,<3",
   "scikit-learn>=1.3,<2",
   "matplotlib>=3.7,<4",
+  "scipy>=1.10,<2",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=7,<10"]
 download = ["awscli>=1.32,<2"]
 torch = ["torch>=2.2,<3"]
+agents = ["torch>=2.7,<3", "transformers==5.22.1", "accelerate>=1,<2", "huggingface-hub>=1.31,<3", "langgraph>=1,<2", "beautifulsoup4>=4.12,<5", "sentencepiece>=0.2,<1", "socksio>=1,<2"]
 notebook = ["nbclient>=0.10,<1", "nbformat>=5.10,<6", "ipykernel>=6,<8", "psutil>=5,<8"]
 
 [tool.setuptools.packages.find]

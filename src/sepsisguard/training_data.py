@@ -23,8 +23,9 @@ def file_hash(path):
     return h.hexdigest()
 
 
-def cache_split(data_root, manifest, preprocessor, inventory, split, output):
-    if split not in ('train', 'validation'):
+def cache_split(data_root, manifest, preprocessor, inventory, split, output, *, allow_calibration=False):
+    allowed = ('train', 'validation', 'calibration') if allow_calibration else ('train', 'validation')
+    if split not in allowed:
         raise ValueError('Training cache permits A/train and A/validation only')
     check_split_integrity(manifest)
     if manifest_digest(manifest) != preprocessor.provenance['manifest_sha256']:

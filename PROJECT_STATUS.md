@@ -1,6 +1,8 @@
 # SepsisGuard-UAR progress — 2026-11-04
 
-Current status: predictive training completed in the user's Colab run `training-05ed8fa8a5f01f4f92a8`. All 37 tests passed. The selected LSTM has A/validation AP 0.098821 and AUROC 0.772333; its best weights are from epoch 1. CUDA bfloat16 training and Drive readback are confirmed in the supplied output. Scores are uncalibrated and B remains reserved.
+Current status: agent implementation complete and locally tested; real Qwen GPU execution pending.
+
+Historical training milestone: predictive training completed in the user's Colab run `training-05ed8fa8a5f01f4f92a8`. All 37 tests passed. The selected LSTM has A/validation AP 0.098821 and AUROC 0.772333; its best weights are from epoch 1. CUDA bfloat16 training and Drive readback are confirmed in the supplied output. Scores are uncalibrated and B remains reserved.
 
 ## Completed and observed locally
 
@@ -96,7 +98,7 @@ Verified from the user-supplied console output, with source fingerprint matching
 - Calibration and B raw files were not opened during training. Independent calibration, final B evaluation and retrieval experiments remain pending.
 - Evidence: [TRAINING_COLAB_EVIDENCE.json](reports/verification/TRAINING_COLAB_EVIDENCE.json); interpretation: [TRAINING_RESULTS.md](reports/verification/TRAINING_RESULTS.md).
 
-## Continue from this checkpoint
+## Continue from the predictive checkpoint (historical)
 
 1. Preserve the completed training run and selected `lstm_best.pt` hash above. A routine training rerun is unnecessary; the same unchanged configuration resumes this completed result.
 2. Use the reserved A/calibration data for probability-calibration work and examine operating thresholds on development data. Keep B locked until the model and evaluation protocol are frozen.
@@ -111,3 +113,11 @@ Real-cohort predictive training is verified from the supplied A100 output. Indep
 ## Proposed agent extension (2026-11-04)
 
 The user requested agentic AI with Qwen 3.5/latest at about 27B and permitted consideration of alternatives. Official source checks identify Qwen3.8-27B as a newer verified candidate; it is proposed as the primary local backbone, with Qwen3.5-27B and Gemma 4 31B as comparisons. The user-reported future allocation is 80GB VRAM / 160GB RAM, so BF16, one shared instance and an initial 8k context cap are proposed. Actual agent memory use, compatibility and explanation quality have not been measured. The design and profile are saved under `docs/AGENTIC_DESIGN.md` and `configs/agent_profile.json`; no LLM download, agent execution or model fine-tuning has occurred.
+
+## Implemented evidence agent (2026-11-04; current)
+
+The single notebook now calls `scripts.run_agents` and preserves the completed predictor. It fits reserved A/calibration sigmoid calibration and runs a bounded local Qwen3.8-27B / LangGraph retrieval, drafting, verification and abstention workflow over three A/validation endpoints. B remains locked. Model revision and Transformers version are pinned; text-only tokenizer/native class compatibility passed.
+
+Actual local execution used scripted responses with a tiny synthetic predictor, not Qwen. It verified calibration, graph execution, checkpoint readback/resume and integrity rejection. Live CDC/NIH retrieval produced 19 passages. Real Qwen generation, real-cohort calibration diagnostics and peak GPU memory are pending: local CUDA is unavailable and browser control cannot attach to Colab. Current results and regression counts are in `reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json`.
+
+Open the latest GitHub notebook on A100 80GB/high RAM and Run all with the same Drive. Existing Drive notebook copies retain old code. Review actual private `AGENT_RESULT.json`, report and case traces before making research claims. The same-model verifier is not independent factual ground truth. Controlled comparisons and blinded explanation annotation remain pending.

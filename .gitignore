@@ -36,3 +36,7 @@ patient_file_hashes.csv
 preprocessor.json
 *.bundle
 *-private-checkpoint.*
+
+# Local foundation-model downloads stay outside version control.
+model-cache/
+*.safetensors

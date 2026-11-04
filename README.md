@@ -1,16 +1,16 @@
 # SepsisGuard-UAR
 
-Run preparation and predictive training in one Colab notebook: restore the verified data/preprocessing checkpoint → train a logistic baseline and a 12-hour LSTM → select using A/validation → save verified model checkpoints to private Drive. When preparation is absent, the same workflow performs it first.
+Run the evidence agent in one Colab notebook: restore the verified LSTM and preparation checkpoint → calibrate on reserved A/calibration → retrieve local CDC/NIH passages → draft, verify and return cited research context or abstain. The completed predictor is preserved.
 
 [![Run in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/shakiful/Sepsisguard-Uar/blob/main/notebooks/SepsisGuard_UAR.ipynb)
 
-Select your available **A100 / high-RAM runtime**, then **Runtime → Run all**. Authorize your private Drive mount when prompted. There is no calendar schedule or notebook handoff. The notebook updates a clean dedicated source checkout and reuses earlier downloaded records when available. Every run records the actual GPU, VRAM and system RAM. Data preparation uses CPU; predictive training selects CUDA and tests bfloat16 support before choosing AMP or an FP32 fallback.
+Select your **A100 80GB / high-RAM runtime**, then **Runtime → Run all**. Authorize your private Drive mount when prompted. Open the current GitHub notebook using the badge above; a previously saved Drive copy keeps its old cells. The notebook updates a dedicated source checkout, records the actual allocation and checks GPU capacity before downloading Qwen weights.
 
-The runner automatically imports the completed data milestone `20261021T183143Z-82ed151a` if it is present in the same Drive. Otherwise the preparation runner builds the data reports and deterministic partitions itself. The training entrypoint directly restores completed run `pipeline-20261104T190221Z-22906fa2`, including its exact fitted preprocessing, and does not refit it after a training-source change. Subsequent preparation runs resume a source/configuration-matched checkpoint. Every run re-audits raw files and runs the regression/leakage tests; previously validated EDA and preprocessing are reused only when their hashes and inputs match. An incomplete or changed checkpoint stops with an error instead of silently changing the experiment.
+The agent entrypoint requires preparation `pipeline-20261104T190221Z-22906fa2` and training `training-05ed8fa8a5f01f4f92a8` in the mounted Drive. It verifies the selected weight hash, original manifest, preprocessing provenance and consumed raw files. It does not retrain a missing predictor. Explicit preparation/training commands remain below for new experiments.
 
-All private outputs are under `MyDrive/SepsisGuard-UAR/runs/<run-id>`. The checkpoint marker identifies an immutable snapshot containing `PIPELINE_RESULT.json`, `PIPELINE_REPORT.md`, EDA, the exact patient manifest, fitted preprocessing, source/runtime records and logs. Each snapshot is read back before its completion pointer is replaced, so an interrupted save preserves the previous checkpoint. Cached data archives live in `dataset-archives`; working raw data stays on `/content`. After a Colab reset, open the same notebook and select Run all again.
+Private preparation snapshots remain under `MyDrive/SepsisGuard-UAR/runs/`; model checkpoints under `training/`; agent results, explanations and traces under `agents/`; calibration under `calibration/`. Cached archives live under `dataset-archives`. Base Qwen weights stay on runtime disk. Matching agent cases resume after hash verification.
 
-Predictive training completed on an actual A100: LSTM validation AP 0.098821 / AUROC 0.772333, selected by average precision over the logistic baseline (AP 0.087473 / AUROC 0.775901). See [training results](reports/verification/TRAINING_RESULTS.md). Calibration, independent B evaluation and uncertainty-conditioned retrieval experiments remain pending. Validation metrics are used for selection and are not independent test performance or clinical validation.
+Predictive training completed on an actual A100: LSTM validation AP 0.098821 / AUROC 0.772333, selected over logistic AP 0.087473 / AUROC 0.775901. See [training results](reports/verification/TRAINING_RESULTS.md). The agent/calibration implementation is tested, but real Qwen inference and real calibration results are pending. B remains locked. Validation selection metrics are not independent test performance or clinical validation.
 
 ## Measured results
 
@@ -28,7 +28,7 @@ A is partitioned into 14,235 train / 3,050 validation / 3,051 calibration patien
 
 ## Predictive training
 
-The notebook defaults to:
+The preserved training runner uses:
 
 - A logistic classifier of the current 78 value/mask channels, optimized with AdamW for at most 8 epochs, plus a one-layer 64-unit LSTM over trailing 12-hour windows for at most 12 epochs.
 - A/train-only class weighting, AdamW (learning rate 0.001, weight decay 0.0001), batch size 1,024 and gradient clipping. A/validation average precision chooses the best epoch and architecture; early stopping uses patience 4. The 0.5 reporting threshold is fixed before training.
@@ -82,4 +82,16 @@ See [PROJECT_STATUS.md](PROJECT_STATUS.md), [WORK_START_HERE.md](WORK_START_HERE
 
 ## Agentic research extension
 
-The proposed local agent backbone is Qwen3.8-27B, with Qwen3.5-27B as a same-size comparison and Gemma 4 31B as an alternative to evaluate. The user reports an available 80GB VRAM / 160GB RAM configuration; BF16 inference is proposed with one shared model instance and an initial 8k context cap. The [agent design](docs/AGENTIC_DESIGN.md) and [proposed profile](configs/agent_profile.json) preserve the trained predictor and specify retrieval, verification and abstention. They are design artifacts; the agent layer has not been implemented or run.
+The implemented backbone is official `Qwen/Qwen3.8-27B`, pinned to revision `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0`, using native Transformers 5.22.1, text-only tokenization, BF16 and one shared instance. Planner, writer and verifier run sequentially in LangGraph. The model chooses bounded local searches and evidence-driven retries; arbitrary generated code and network tools are unavailable.
+
+The initial run fits a nonnegative-slope sigmoid calibrator on A/calibration and processes three deterministically selected A/validation endpoints. Only causal observed measurements, numerical predictor outputs and missingness enter prompts. Entropy/missingness route retries; entropy is a heuristic, not epistemic certainty. Exact citation spans, numeric consistency, output schemas and same-model entailment checks govern output or abstention. The verifier does not establish independent factual correctness.
+
+First use downloads roughly 54–56GB of base weights to runtime disk. Preflight requires at least 70 GiB total and 64 GiB free GPU memory. The 20-minute inference budget starts after loading; each case permits at most six model calls and two retrieval attempts. No hosted inference, embedding service or external tracing is configured. Reference snapshots, calibrator, explanations, traces and hash-verified checkpoints persist privately.
+
+```bash
+python -m pip install -e '.[dev,download,agents]'
+python -m scripts.run_agents --data-root data/raw \
+  --storage-root /path/to/private/storage --cases 3 --max-minutes 20
+```
+
+For a CPU functional demo use `python -m scripts.run_agents --demo --cases 2`. It trains a tiny synthetic predictor and uses **scripted responses, not Qwen**. Local execution verified this path, checkpoint readback/resume, citation rejection and abstention. A live CDC/NIH fetch produced 19 searchable passages, and the pinned tokenizer/chat template passed. Real Qwen weights and generation have not run: this host has no CUDA and the connected browser cannot attach to Colab. See [implementation evidence](reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json) and [implementation details](docs/AGENTIC_DESIGN.md).
