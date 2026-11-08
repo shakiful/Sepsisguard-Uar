@@ -135,5 +135,11 @@
     "seconds": 66.7,
     "url": "https://github.com/shakiful/Sepsisguard-Uar/actions/runs/41911796043",
     "runtime": "GitHub Actions clean CPU runner; no Qwen generation"
+  },
+  "subsequent_real_execution": {
+    "date": "2026-11-08",
+    "evidence": "AGENT_COLAB_EVIDENCE.json",
+    "status": "real_qwen_full_graph_completed",
+    "note": "Original 2026-11-04 validation and blockers above are historical; subsequent Colab execution and fixes are recorded separately."
   }
 }

@@ -1,6 +1,6 @@
 # SepsisGuard-UAR evidence agent
 
-Status: implemented and tested; real Qwen GPU execution pending. The single Colab notebook is the entrypoint. No LLM fine-tuning is performed.
+Status: implemented, regression-tested and executed with native Qwen BF16 in Colab on 2026-11-08. See `reports/verification/AGENT_COLAB_EVIDENCE.json` for both real runs. The single Colab notebook is the entrypoint. No LLM fine-tuning is performed.
 
 ## Frozen inputs and calibration
 
@@ -12,11 +12,11 @@ Three deterministic spread-out A/validation endpoints provide the initial run wi
 
 ## Model and execution bounds
 
-Official `Qwen/Qwen3.8-27B` revision `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0` is pinned. Transformers 5.22.1 supplies `Qwen3_5ForConditionalGeneration`; `AutoTokenizer` avoids video processors for text inputs. Native class import and pinned tokenizer/chat template passed locally. Actual weights, GPU operators, peak memory and generated output remain unmeasured.
+Official `Qwen/Qwen3.8-27B` revision `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0` is pinned. Transformers 5.22.1 supplies `Qwen3_5ForConditionalGeneration`; `AutoTokenizer` avoids video processors for text inputs. Native class import and pinned tokenizer/chat template passed locally. Actual weight loading and native GPU generation are verified. Peak allocated memory during model load was 50.96 GiB; generation peak was not recorded. Reference PyTorch kernels ran without optional causal_conv1d/flash-linear-attention acceleration.
 
 The user reports 80GB GPU / about 160GB RAM. Preflight requires CUDA, 70 GiB total and 64 GiB free. BF16 weights need roughly 54–56GB before other allocations. No automatic quantization, CPU offload or smaller-GPU fallback exists. Base weights use runtime `model-cache/`; revision and provenance persist privately. One shared native safetensors model serves all three roles sequentially; remote executable code is disabled.
 
-Inputs plus output must fit 8,192 tokens. Greedy non-thinking caps are 128 planner / 512 writer / 256 verifier tokens, at most 120 seconds per call. The initial inference budget is 20 minutes after loading. No hosted inference, external embedding or tracing is configured. Failed parsing, timeout, unsupported content or insufficient evidence leads to abstention.
+Inputs plus output must fit 8,192 tokens. Greedy non-thinking caps are 128 planner / 512 writer / 256 verifier tokens, a 120-second generation-time limit checked between decoding steps. The initial inference budget is 20 minutes after loading. No hosted inference, external embedding or tracing is configured. Failed parsing, timeout, unsupported content or insufficient evidence leads to abstention.
 
 ## Graph and evidence checks
 
@@ -32,7 +32,7 @@ Passing outputs are `supported_research_context`; other paths are `abstained`. N
 
 Run identities include frozen weights, calibration, source fingerprint, indices, corpus, profile and model/library revisions. Case files are copied and hash-read back before immutable pointers are published. Matching completed cases resume; changed cached bytes are rejected. Private result/report files, role traces, calibrator and snapshots support review.
 
-The CPU demo trains a tiny synthetic predictor and uses scripted role responses. It exercises calibration, graph transitions, persistence, readback and resume; it does not load or generate with Qwen. Live CDC/NIH retrieval and pinned tokenizer checks were separate. See `reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json` for aggregate evidence and blockers.
+The CPU demo trains a tiny synthetic predictor and uses scripted role responses. It exercises calibration, graph transitions, persistence, readback and resume; it does not load or generate with Qwen. The first real Qwen planner-only run produced three deliberate abstentions before retrieval. A follow-up clarified that the planner selects general reference context before evidence sufficiency checks. It produced three supported-context outputs with nine model calls and three retrievals on the same deterministic sample. Both runs, original hashes and private readback evidence are preserved in `reports/verification/AGENT_COLAB_EVIDENCE.json`; the original implementation checks remain in `AGENT_IMPLEMENTATION_VALIDATION.json`. All outputs were general context with identical queries/passages, so patient-specific explanation quality and uncertainty-routing benefit remain unmeasured.
 
 ## Evaluation still required
 

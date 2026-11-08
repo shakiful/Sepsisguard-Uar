@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-08T22:22:27.851368+00:00",
+  "recorded_at": "2026-11-08T22:30:32.034994+00:00",
   "initial_run": {
     "status": "real_qwen_completed_with_planner_abstention",
     "run_id": "agents-b5667526ece3287af39f",
@@ -46,10 +46,97 @@
     "inference_kernels": "Native reference PyTorch kernels; causal_conv1d and flash-linear-attention were not installed",
     "generation_peak_memory_measured": false
   },
-  "followup_status": "Clarified planner prompt to retrieve reference context before judging evidence sufficiency; original outputs preserved. Same deterministic A/validation sample, predictor, calibration, corpus and budgets. Follow-up execution pending.",
   "limitations": [
     "Functional development sample, not independent test performance",
     "Same-model verifier is not independent factual truth",
     "No diagnostic accuracy, clinical benefit or improved predictive AP is established"
+  ],
+  "status": "real_qwen_functional_run_verified",
+  "followup_run": {
+    "status": "real_qwen_full_graph_completed",
+    "run_id": "agents-dc179bf37a3ea479c35b",
+    "source_commit": "cd6c601de5ec7f028ba6a654706159114a76b2cd",
+    "agent_source_fingerprint": "e6d360efba260b5e8ea62fb543f682482b1f75b831ee80aa0aa2812a8a963490",
+    "backend": "qwen_local_transformers",
+    "model_id": "Qwen/Qwen3.8-27B",
+    "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "dtype": "bfloat16",
+    "transformers": "5.22.1",
+    "torch": "2.14.1+cu130",
+    "runtime": {
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "gpu_total_gib": 79.250732421875,
+      "system_ram_gib": 167.05,
+      "loaded_peak_allocated_gib": 50.96391153335571
+    },
+    "real_qwen_generation": true,
+    "backend_calls": 9,
+    "role_calls": {
+      "planner": 3,
+      "writer": 3,
+      "verifier": 3
+    },
+    "input_tokens_total": 9373,
+    "output_tokens_total": 483,
+    "generation_seconds_total": 62.76720074699915,
+    "timing_scope": "Sum of measured generation calls; excludes download, weight load, data/cache work and artifact copies",
+    "cases": 3,
+    "supported_context_cases": 3,
+    "abstained_cases": 0,
+    "retrieval_attempts": 3,
+    "programmatically_accepted_claims": 6,
+    "verifier_supported_claims": 6,
+    "private_artifact_readback": "Runner copied/read-verified all artifacts in private Drive. A separate inspection cell read all three case JSON files and verified their saved SHA256 checksum files.",
+    "calibration": {
+      "fit_split": "A/calibration",
+      "hours": 119051,
+      "positive_hours": 2574,
+      "method": "nonnegative_sigmoid_LBFGSB",
+      "flat": false,
+      "fit_brier": 0.020253091632162237,
+      "fit_log_loss": 0.09061844426859862,
+      "metric_scope": "Calibration-fit diagnostics, not independent evaluation"
+    },
+    "test_B_raw_files_opened_for_calibration_or_inference": false,
+    "frozen_predictor_weights_sha256": "266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc",
+    "inference_kernels": "Native reference PyTorch kernels; causal_conv1d and flash-linear-attention were not installed",
+    "generation_peak_memory_measured": false,
+    "corpus": {
+      "snapshot_version": "2026-11-08",
+      "passages": 19,
+      "text_hashes_match_2026_11_04": true,
+      "default_live_fetch": false
+    },
+    "observed_output_scope": "All three planners chose the same general sepsis query and retrieved the same passages. Outputs were general educational sepsis definitions/context. Patient-specific explanation quality, variable uncertainty routing and retry behavior were not established by this small sample.",
+    "verification_scope": "Exact citation/numeric checks plus same-backbone entailment, not independent clinical/factual certification",
+    "sampling_scope": "Same three deterministic A/validation endpoints as the first development run; no label-based sampling or independent holdout evaluation",
+    "change_from_initial": "Planner prompt explicitly requests reference lookup before evidence sufficiency assessment; writer/verifier prompts, citation guards, predictor, calibration, corpus text and budgets were preserved"
+  },
+  "source_control_checks": [
+    {
+      "commit": "69ae1bc9470e07ebb6a0f4fd774af5c81f1b4f07",
+      "run_id": 42529323876,
+      "passed": 56,
+      "seconds": 65.76
+    },
+    {
+      "commit": "cd6c601de5ec7f028ba6a654706159114a76b2cd",
+      "run_id": 42529952743,
+      "passed": 56,
+      "seconds": 75.17
+    }
+  ],
+  "resolved_blockers": [
+    "Google sign-in completed in the connected browser",
+    "User explicitly approved the Google Drive for desktop OAuth connection; private Drive mount succeeded",
+    "Initial live reference HTTP 403 fixed by bundled government text snapshots with the same earlier source hashes",
+    "Initial deliberate pre-search abstention addressed by clarifying the planning task; first run preserved"
+  ],
+  "remaining_limits": [
+    "Three-case development functional check, not clinical validation or an independent benchmark",
+    "General context only; no demonstrated patient-specific explanation benefit or improved predictive AP",
+    "Optimized causal_conv1d and flash-linear-attention kernels were not installed; native reference kernels ran correctly",
+    "Model-load peak allocation was measured; generation peak memory was not recorded",
+    "No B evaluation or blinded explanation-quality comparison performed"
   ]
 }

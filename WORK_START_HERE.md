@@ -7,7 +7,9 @@ Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuar
 - Preparation: `pipeline-20261104T190221Z-22906fa2`, observed A100 80GB / 167.05 GiB RAM. Cohort 40,336 patients / 1,552,210 hours; 39 retained predictors; causal 12 x 78 windows. Exact original partition preserved.
 - Training: `training-05ed8fa8a5f01f4f92a8`, observed A100 40GB / 83.47 GiB RAM, CUDA BF16. Selected LSTM best epoch 1, validation AP 0.098821 / AUROC 0.772333. Preserve `lstm_best.pt` SHA256 `266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc`.
 - Agent implementation: pinned official Qwen3.8-27B, BF16, one shared native model; LangGraph retrieval, drafting, verification and abstention. Reserved A/calibration supplies sigmoid calibration. The frozen training result remains uncalibrated.
-- Actual agent validation: scripted synthetic end-to-end execution and integrity/resume tests; live CDC/NIH retrieval and pinned tokenizer/chat-template check. **No real Qwen weight load or generation yet.** See `reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json`.
+- Real agent run: `agents-dc179bf37a3ea479c35b`, source `cd6c601de5ec7f028ba6a654706159114a76b2cd`, verified directly in connected Colab on 2026-11-08. Native Qwen3.8-27B BF16; A100 80GB / 167.05 GiB RAM; model-load peak allocation 50.96 GiB. Three cases completed planner/retrieval/writer/verifier with nine model calls and six accepted claims. The first planner-only run `agents-b5667526ece3287af39f` abstained three times and is preserved. See `reports/verification/AGENT_COLAB_EVIDENCE.json`.
+- Calibration: fitted on 119,051 A/calibration hours (2,574 positive), non-flat sigmoid. Fit Brier 0.020253 / log loss 0.090618 are fit diagnostics only. The predictor was not retrained; B was not used.
+- Fixed corpus: 19 bundled CDC/NIH passages, source hashes match the earlier live fetch. Default retrieval needs no website requests; intentional live refresh must be recorded as a new corpus version. Both new source commits passed all 56 tests in CI.
 
 ## Continue directly
 
@@ -15,7 +17,8 @@ Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuar
 2. Mount the same private Drive containing the completed runs above. The runner verifies frozen weights and prepared snapshot, restores/downloads raw data, fits calibration only on A/calibration, and runs three deterministic A/validation endpoints. No predictor retraining is needed.
 3. First load downloads about 54–56GB to runtime disk. A 20-minute inference budget follows loading. One shared model uses an 8K context cap and bounded sequential calls. Reference snapshots, calibration and case checkpoints persist privately.
 4. Review `MyDrive/SepsisGuard-UAR/agents/<run-id>/AGENT_RESULT.json`, `AGENT_REPORT.md`, `backend_calls.json` and case traces. Record supported-context and abstention counts, failures, citations, latency and measured GPU allocation. Workflow completion and the same-model verifier do not prove explanation correctness.
-5. Browser attempts fail `Cannot attach to this target`; local real-model preflight fails because this host has no CUDA. If still blocked, report that and inspect user-supplied execution output. Never claim real inference from scripted tests or tokenizer checks.
+5. Connected browser access and private Drive mount now work. The user explicitly approved the Google Drive for desktop OAuth connection used by this Colab mount. The earlier live reference fetch returned HTTP 403; bundled snapshots fixed this without changing reference text. Local CPU-only checks remain separate from actual Colab GPU results. The configuration profile records the initial declared experiment settings; execution observations belong in the evidence file.
+6. The three outputs were general sepsis context and all queries/passages were identical. Do not treat them as patient-specific explanations or evidence of uncertainty-routing benefit. Next work should evaluate varied causal cases and budget-matched baselines with blinded annotation, while preserving both initial real runs and keeping B locked.
 
 ## Research invariants
 

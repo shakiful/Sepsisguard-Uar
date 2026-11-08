@@ -1,6 +1,6 @@
-# SepsisGuard-UAR progress — 2026-11-04
+# SepsisGuard-UAR progress — 2026-11-08
 
-Current status: agent implementation complete and locally tested; real Qwen GPU execution pending.
+Current status: native Qwen3.8-27B BF16 agent executed in Colab; three-case full-graph functional check and private artifact readback passed. Clinical quality and independent B evaluation remain pending.
 
 Historical training milestone: predictive training completed in the user's Colab run `training-05ed8fa8a5f01f4f92a8`. All 37 tests passed. The selected LSTM has A/validation AP 0.098821 and AUROC 0.772333; its best weights are from epoch 1. CUDA bfloat16 training and Drive readback are confirmed in the supplied output. Scores are uncalibrated and B remains reserved.
 
@@ -121,3 +121,15 @@ The single notebook now calls `scripts.run_agents` and preserves the completed p
 Actual local execution used scripted responses with a tiny synthetic predictor, not Qwen. It verified calibration, graph execution, checkpoint readback/resume and integrity rejection. Live CDC/NIH retrieval produced 19 passages. Real Qwen generation, real-cohort calibration diagnostics and peak GPU memory are pending: local CUDA is unavailable and browser control cannot attach to Colab. Current results and regression counts are in `reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json`.
 
 Open the latest GitHub notebook on A100 80GB/high RAM and Run all with the same Drive. Existing Drive notebook copies retain old code. Review actual private `AGENT_RESULT.json`, report and case traces before making research claims. The same-model verifier is not independent factual ground truth. Controlled comparisons and blinded explanation annotation remain pending.
+
+## Verified real Qwen agent execution (2026-11-08; current)
+
+- Authentication and private Drive mount completed in the connected browser, including the user-approved Google Drive for desktop OAuth connection. A100-SXM4-80GB (79.25 GiB) / 167.05 GiB RAM was directly observed; Torch 2.14.1+cu130, Transformers 5.22.1.
+- Frozen LSTM/preparation restored without retraining. Sigmoid calibration fitted on 119,051 reserved A/calibration hours, 2,574 positive. Non-flat fit; Brier 0.020253 / log loss 0.090618 are calibration-fit diagnostics only. B remained excluded from calibration and inference.
+- Live reference HTTP 403 fixed by bundled CDC/NIH text snapshots: 19 passages, both source SHA256 hashes exactly match 2026-11-04. Offline and corruption tests passed; wheel assets verified.
+- First real native BF16 Qwen run `agents-b5667526ece3287af39f` (source 69ae1bc) generated three valid planner abstentions. This run remains saved.
+- Follow-up `agents-dc179bf37a3ea479c35b` (source cd6c601) clarified reference lookup before evidence sufficiency. Same sample, predictor, calibration, corpus and budgets. Three cases completed planning, local retrieval, drafting and verification: nine Qwen calls, three retrievals, six accepted claims, no abstentions.
+- Generation calls totaled 62.77 seconds and 483 output tokens; this excludes checkpoint download/load and other work. Model-load peak allocated memory was 50.96 GiB. Native reference kernels were used; generation peak memory and optimized-kernel performance were not measured.
+- Runner artifact copy/readback and a separate checksum read of all three saved case files passed. Private outputs are under `MyDrive/SepsisGuard-UAR/agents/agents-dc179bf37a3ea479c35b`. Both source changes passed all 56 tests in CI.
+- Outputs were general educational sepsis context, with identical retrieval queries/passages. This does not establish patient-specific explanation quality, uncertainty-routing benefit, improved AP, clinical validity or independent factual accuracy. Controlled comparisons and blinded annotation remain next research work.
+- Aggregate evidence: [AGENT_COLAB_EVIDENCE.json](reports/verification/AGENT_COLAB_EVIDENCE.json).

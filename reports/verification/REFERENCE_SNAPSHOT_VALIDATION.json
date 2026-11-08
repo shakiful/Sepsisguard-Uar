@@ -49,9 +49,16 @@
     "seconds": 10.77,
     "includes": "Default corpus with network disabled, corrupted bundle rejection, prior graph/calibration/leakage/integrity tests"
   },
-  "real_qwen_execution_completed": false,
+  "real_qwen_execution_completed": true,
   "reuse_policies": [
     "https://www.cdc.gov/other/agencymaterials.html",
     "https://www.nih.gov/about-nih/frequently-asked-questions"
-  ]
+  ],
+  "followup_evidence": "AGENT_COLAB_EVIDENCE.json",
+  "wheel_assets_verified": true,
+  "ci": {
+    "run_id": 42529323876,
+    "passed": 56,
+    "seconds": 65.76
+  }
 }
