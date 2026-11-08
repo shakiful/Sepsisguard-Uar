@@ -1,0 +1,41 @@
+{
+  "status": "live_colab_private_readback_passed",
+  "run_id": "evaluation-50700700b0af7403f6fc",
+  "source_commit": "974357f175579725d3db78952c74ffb625cc4bd8",
+  "protocol_sha256": "50700700b0af7403f6fc66f19d27ea93b82d3e969696c26fb484d4bf65bd7133",
+  "evaluation_files_verified": 12,
+  "case_checksums_verified": 12,
+  "distinct_validation_patients": 12,
+  "blank_clinician_rating_rows": 12,
+  "independent_clinician_ratings_completed": 0,
+  "frozen_weights_verified": {
+    "lstm": "266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc",
+    "logistic": "41c6a8002d87a2bb75ce9afa7d26374a27364847383b8c34221badce33649c3f"
+  },
+  "agent_run_id": "agents-0096b8a80c413c2311c2",
+  "real_qwen_inference": true,
+  "agent_model": {
+    "model_id": "Qwen/Qwen3.8-27B",
+    "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "dtype": "bfloat16",
+    "transformers_version": "5.22.1",
+    "torch_version": "2.14.1+cu130",
+    "hosted_inference": false,
+    "remote_code": false,
+    "hardware": {
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "free_gib": 78.72735595703125,
+      "total_gib": 79.250732421875
+    },
+    "loaded_peak_gib": 50.96434020996094
+  },
+  "backend_calls": 36,
+  "calls_by_role": {
+    "planner": 12,
+    "writer": 12,
+    "verifier": 12
+  },
+  "generation_seconds": 261.9575681790011,
+  "output_tokens": 1972,
+  "export_policy": "Aggregate reports and aggregate plot only; predictions, protocol internals, patient traces and reviewer packet stay private"
+}

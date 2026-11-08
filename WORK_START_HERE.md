@@ -4,6 +4,9 @@ Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuar
 
 ## Current checkpoint
 
+- **Evaluation completed:** `evaluation-50700700b0af7403f6fc`, source `974357f175579725d3db78952c74ffb625cc4bd8`. B=20,000 patients / 761,995 hours. LSTM AUROC 0.7470, AP 0.0540; logistic AP 0.0543, paired AP-difference CI crosses zero. LSTM utility-rule hourly sensitivity 33.5%, PPV 6.8%, timing utility 0.2110. Recall-rule alarms on 99.88% of nonseptic records. B is now consumed for this fixed comparison.
+- **Explanation audit:** `agents-0096b8a80c413c2311c2`, 12 distinct A/validation patients, 36 real Qwen calls, 24 accepted claims. Explicit patient-value grounding 0/12 (0/8 eligible), exact duplicates 75%. All 12 case checksums, 12 evaluation artifacts and both unchanged weight hashes verified in live Colab. Independent clinician ratings are blank/pending. See `reports/verification/EVALUATION_RESULTS.md`.
+
 - Preparation: `pipeline-20261104T190221Z-22906fa2`, observed A100 80GB / 167.05 GiB RAM. Cohort 40,336 patients / 1,552,210 hours; 39 retained predictors; causal 12 x 78 windows. Exact original partition preserved.
 - Training: `training-05ed8fa8a5f01f4f92a8`, observed A100 40GB / 83.47 GiB RAM, CUDA BF16. Selected LSTM best epoch 1, validation AP 0.098821 / AUROC 0.772333. Preserve `lstm_best.pt` SHA256 `266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc`.
 - Agent implementation: pinned official Qwen3.8-27B, BF16, one shared native model; LangGraph retrieval, drafting, verification and abstention. Reserved A/calibration supplies sigmoid calibration. The frozen training result remains uncalibrated.
@@ -22,12 +25,16 @@ Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuar
 
 ## Research invariants
 
-A/train determines preprocessing and predictor fitting; A/validation supports selection and development; A/calibration fits only the predeclared calibration method; B remains locked until final protocol freeze. Original PhysioNet labels are already shifted and must not be shifted again. Filling/windows reset at patient boundaries. Prompts exclude labels, future observations and patient identifiers. B descriptive EDA must not guide features, prompts, thresholds or model selection.
+A/train determines preprocessing and predictor fitting; A/validation supports selection and development; A/calibration fits only the predeclared calibration method; B was predictively scored after the final protocol freeze and is now consumed for this comparison. Original PhysioNet labels are already shifted and must not be shifted again. Filling/windows reset at patient boundaries. Prompts exclude labels, future observations and patient identifiers. B descriptive EDA must not guide features, prompts, thresholds or model selection.
 
 Public GitHub holds source, tests and aggregate evidence. Never commit patient records, manifests, per-file hashes, fitted artifacts, predictions, case traces or weights. The agent uses local CDC/NIH snapshots, no hosted inference or external tracing, and returns cited research context or abstention. No clinical-use claim is established.
 
-Next evaluation: compare budget-matched RAG, uncertainty routing and verification/abstention with fixed predictor/corpus/decoding. Blinded annotations are needed for explanation correctness; same-backbone judgments are not independent truth. A tiny functional run does not establish improved AP, clinical benefit or publication readiness.
+Next development work: improve patient-specific grounding and compare budget-matched RAG, uncertainty routing and verification/abstention with fixed predictor/corpus/decoding on development data. Blinded annotations are needed for explanation correctness; same-backbone judgments are not independent truth. A tiny functional run does not establish improved AP, clinical benefit or publication readiness.
 
 ## Fixed evaluation protocol
 
-See `docs/EVALUATION_PROTOCOL.md` and `configs/evaluation_protocol.json`. Evaluation implementation passed 64 tests locally. Source/configuration are committed before the real run; do not claim measured evaluation results until `EVALUATION_RESULT.json` completes and private readback is verified. Once B is predictively scored it is consumed for this comparison; no B-driven retuning is permitted.
+See `docs/EVALUATION_PROTOCOL.md` and `configs/evaluation_protocol.json`. Evaluation implementation passed 64 tests locally. Source/configuration were committed before the real run; `EVALUATION_RESULT.json` completed and live private readback passed. All 64 tests also passed in CI (81.92 s). Once B is predictively scored it is consumed for this comparison; no B-driven retuning is permitted.
+
+## Immediate continuation
+
+A routine rerun is unnecessary: real results and private review material already exist. Review `evaluations/evaluation-50700700b0af7403f6fc/EVALUATION_REPORT.md` and `independent_review/` in the mounted Drive. Obtain actual blinded clinician annotations before making expert-quality claims. Do not contact reviewers without a user instruction. Preserve these results when changing prompts or the predictor; use a new independent cohort for future predictor evaluation.

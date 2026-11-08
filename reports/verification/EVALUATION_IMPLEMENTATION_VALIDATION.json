@@ -1,5 +1,5 @@
 {
-  "status": "implementation_verified_real_evaluation_pending",
+  "status": "implementation_and_real_evaluation_verified",
   "local_tests": {
     "passed": 64,
     "failed": 0,
@@ -19,5 +19,13 @@
   "synthetic_results_are_not_clinical_or_qwen_evidence": true,
   "independent_clinician_review": "pending",
   "method": "docs/EVALUATION_PROTOCOL.md",
-  "upstream_scoring_commit": "467c49b514542be7a4a0bafe40fa2c3b064dda2e"
+  "upstream_scoring_commit": "467c49b514542be7a4a0bafe40fa2c3b064dda2e",
+  "real_followup": "reports/verification/EVALUATION_RESULTS.md",
+  "ci": {
+    "source_commit": "974357f175579725d3db78952c74ffb625cc4bd8",
+    "run_id": 42533201997,
+    "job_id": 128891737591,
+    "passed": 64,
+    "seconds": 81.92
+  }
 }

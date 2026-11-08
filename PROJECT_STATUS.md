@@ -1,6 +1,6 @@
 # SepsisGuard-UAR progress — 2026-11-08
 
-Current status: native Qwen3.8-27B BF16 agent executed in Colab; three-case full-graph functional check and private artifact readback passed. Clinical quality and independent B evaluation remain pending.
+Current status: frozen B clinical evaluation and 12-patient Qwen explanation audit completed in connected Colab. LSTM AUROC 0.7470 / AP 0.0540; patient-value grounding 0/12. Independent clinician ratings and prospective clinical effectiveness remain unestablished. B is consumed for this fixed comparison.
 
 Historical training milestone: predictive training completed in the user's Colab run `training-05ed8fa8a5f01f4f92a8`. All 37 tests passed. The selected LSTM has A/validation AP 0.098821 and AUROC 0.772333; its best weights are from epoch 1. CUDA bfloat16 training and Drive readback are confirmed in the supplied output. Scores are uncalibrated and B remains reserved.
 
@@ -138,3 +138,15 @@ Open the latest GitHub notebook on A100 80GB/high RAM and Run all with the same 
 ## Frozen evaluation implementation (2026-11-08)
 
 The canonical notebook now invokes `scripts.run_evaluation` for frozen LSTM/logistic clinical performance and 12-patient explanation grounding. An immutable, verified protocol gates B predictive access. A/calibration supplies calibration; A/validation selects thresholds and the outcome-blind explanation sample. Official challenge utility is parity-tested against the pinned BSD-licensed scorer. Whole-patient bootstrap intervals, alarm burden, automated explanation proxies and a private blank blinded-review packet are implemented. All 64 local tests passed, including synthetic end-to-end execution. Real evaluation results are pending execution; independent expert ratings are not fabricated. See `docs/EVALUATION_PROTOCOL.md`.
+
+
+## Completed clinical and explanation evaluation (2026-11-08; current)
+
+- Executed source `974357f175579725d3db78952c74ffb625cc4bd8`; evaluation `evaluation-50700700b0af7403f6fc`; protocol SHA `50700700b0af7403f6fc66f19d27ea93b82d3e969696c26fb484d4bf65bd7133`, saved and read-verified before B prediction access. Frozen predictors/preprocessor unchanged. Calibration used A/calibration; thresholds used A/validation.
+- Observed A100-SXM4-80GB / 167.05 GiB RAM. B: 20,000 patients, 761,995 hours, 10,780 positive hours and 1,142 positive patients. LSTM AUROC 0.74696 (95% patient-bootstrap CI 0.73178–0.76052), AP 0.05401 (0.04898–0.06030); logistic AP 0.05431. Paired AP difference CI includes zero. All intervals use 500 whole-patient resamples.
+- LSTM validation-utility rule: hourly sensitivity 33.52%, PPV 6.77%, normalized timing utility 0.21104, any alarm in 11.79% of nonseptic records. Recall-oriented rule reaches 64.42% B recall with alarms on 99.88% of nonseptic records. No B retuning occurred. B is now consumed and is not a fresh future holdout or hidden Challenge test.
+- Real Qwen run `agents-0096b8a80c413c2311c2`: 12 unique A/validation patients, 36 model calls, 24 citation/numeric-check-passing claims, zero abstentions. Explicit patient-value grounding 0/12 (0/8 with current observations), normalized exact duplicates 75%, 3 distinct queries. Grounded top-five input-ablation coverage 0%; only 21.67% of those features were visible in current generator observations. These are limited automated proxies, not clinician quality grades.
+- Native BF16 generation: 1,972 output tokens / 261.96 s model-call time. Model-load peak allocated memory 50.964 GiB; generation peak not measured. Same pinned model/corpus/prompts and reference kernels.
+- Private randomized, outcome/model-identity-blinded 12-case clinician packet prepared. All 12 rating rows remain blank. No expert ratings fabricated or reviewers contacted.
+- Live Colab readback verified 12 evaluation artifacts, all 12 case checksums, distinct patients, blank ratings and both unchanged weight hashes. Four aggregate export files match recorded Colab SHA256 hashes; protected predictions/traces/review material stay private. An extra inspection-cell import-path issue was corrected after successful evaluation.
+- All 64 tests passed locally (53.00 s) and in CI (81.92 s, run 42533201997, job 128891737591). Full aggregate findings and limitations: [EVALUATION_RESULTS.md](reports/verification/EVALUATION_RESULTS.md).

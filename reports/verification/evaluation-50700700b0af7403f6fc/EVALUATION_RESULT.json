@@ -1,0 +1,992 @@
+{
+  "status": "retrospective_evaluation_complete",
+  "mode": "real",
+  "run_id": "evaluation-50700700b0af7403f6fc",
+  "protocol_sha256": "50700700b0af7403f6fc66f19d27ea93b82d3e969696c26fb484d4bf65bd7133",
+  "source_commit": "974357f175579725d3db78952c74ffb625cc4bd8",
+  "evaluation_source_fingerprint": "799969bb1f05b5bdd2b3be1f0c9b11ae74ac8c80d9dc7f617e39ca7380b5457e",
+  "compute": {
+    "python": "3.13.16",
+    "os": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "runtime": "colab",
+    "cpu_count": 12,
+    "local_disk_free_gb": 182.84,
+    "cuda_available": true,
+    "gpus": [
+      {
+        "name": "NVIDIA A100-SXM4-80GB",
+        "vram_gb": 79.25,
+        "compute_capability": "8.0"
+      }
+    ],
+    "memory_total_gb": 167.05,
+    "memory_available_gb": 162.19,
+    "torch_version": "2.14.1+cu130"
+  },
+  "test_B_used_only_after_protocol_freeze": true,
+  "test_B_is_now_consumed_for_this_frozen_comparison": true,
+  "model_weights_unchanged": true,
+  "clinical": {
+    "split": "test_B",
+    "patients": 20000,
+    "hours": 761995,
+    "positive_hours": 10780,
+    "positive_patients": 1142,
+    "models": {
+      "lstm": {
+        "raw": {
+          "roc_auc": 0.7469634676054846,
+          "average_precision": 0.05400566905816742,
+          "brier": 0.09264287777544243,
+          "log_loss": 0.309005597816482,
+          "ece_10_equal_width": 0.18795653354274003,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.1,
+              "hours": 352186,
+              "mean_risk": 0.0358285371066939,
+              "observed_fraction": 0.005000198758610507
+            },
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "hours": 136219,
+              "mean_risk": 0.14413218067719055,
+              "observed_fraction": 0.010005946307049677
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.30000000000000004,
+              "hours": 81011,
+              "mean_risk": 0.24658456811433327,
+              "observed_fraction": 0.01367715495426547
+            },
+            {
+              "lower": 0.30000000000000004,
+              "upper": 0.4,
+              "hours": 61895,
+              "mean_risk": 0.3495448779056533,
+              "observed_fraction": 0.01803053558445755
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "hours": 49594,
+              "mean_risk": 0.4444116415412132,
+              "observed_fraction": 0.020869460015324436
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6000000000000001,
+              "hours": 24676,
+              "mean_risk": 0.5468403222916737,
+              "observed_fraction": 0.027678716161452423
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.7000000000000001,
+              "hours": 16567,
+              "mean_risk": 0.6460053260601228,
+              "observed_fraction": 0.03452646828031629
+            },
+            {
+              "lower": 0.7000000000000001,
+              "upper": 0.8,
+              "hours": 11849,
+              "mean_risk": 0.7480865399270915,
+              "observed_fraction": 0.06262131825470504
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "hours": 13138,
+              "mean_risk": 0.8561223014344304,
+              "observed_fraction": 0.0837265946110519
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "hours": 14860,
+              "mean_risk": 0.9280471220828552,
+              "observed_fraction": 0.08748317631224764
+            }
+          ],
+          "positive_fraction": 0.014147074455869133,
+          "hours": 761995,
+          "patients": 20000,
+          "operating_points": {
+            "raw_0_5": {
+              "tp": 4397.0,
+              "fp": 76693.0,
+              "fn": 6383.0,
+              "tn": 674522.0,
+              "sensitivity": 0.4078849721706865,
+              "precision": 0.054223702059440125,
+              "specificity": 0.8979080556165678,
+              "f1": 0.09572221617502993,
+              "patient_ever_sepsis_sensitivity": 0.5831873905429071,
+              "detected_by_first_positive_label_fraction": 0.4500875656742557,
+              "nonseptic_patients_with_any_alarm_fraction": 0.22234595397178916,
+              "positive_flags_per_100_nonseptic_hours": 7.690458124624756,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 1.6895856159896565,
+              "normalized_challenge_utility": 0.20893491124260355,
+              "threshold": 0.5,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": 23.0
+            }
+          }
+        },
+        "calibrated": {
+          "roc_auc": 0.7469634676054846,
+          "average_precision": 0.05400566905816742,
+          "brier": 0.013734094242777507,
+          "log_loss": 0.06864134480493271,
+          "ece_10_equal_width": 0.0025619742665000107,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.1,
+              "hours": 743047,
+              "mean_risk": 0.011118540097615216,
+              "observed_fraction": 0.012363955442926221
+            },
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "hours": 18620,
+              "mean_risk": 0.13698148666970367,
+              "observed_fraction": 0.0826530612244898
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.30000000000000004,
+              "hours": 328,
+              "mean_risk": 0.2110187906234352,
+              "observed_fraction": 0.16463414634146342
+            },
+            {
+              "lower": 0.30000000000000004,
+              "upper": 0.4,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6000000000000001,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.7000000000000001,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            },
+            {
+              "lower": 0.7000000000000001,
+              "upper": 0.8,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "hours": 0,
+              "mean_risk": null,
+              "observed_fraction": null
+            }
+          ],
+          "positive_fraction": 0.014147074455869133,
+          "hours": 761995,
+          "patients": 20000,
+          "operating_points": {
+            "calibrated_0_5": {
+              "tp": 0.0,
+              "fp": 0.0,
+              "fn": 10780.0,
+              "tn": 751215.0,
+              "sensitivity": 0.0,
+              "precision": null,
+              "specificity": 1.0,
+              "f1": 0.0,
+              "patient_ever_sepsis_sensitivity": 0.0,
+              "detected_by_first_positive_label_fraction": 0.0,
+              "nonseptic_patients_with_any_alarm_fraction": 0.0,
+              "positive_flags_per_100_nonseptic_hours": 0.0,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 0.0,
+              "normalized_challenge_utility": 0.0,
+              "threshold": 0.5,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": null
+            },
+            "validation_recall_80": {
+              "tp": 6944.0,
+              "fp": 212012.0,
+              "fn": 3836.0,
+              "tn": 539203.0,
+              "sensitivity": 0.6441558441558441,
+              "precision": 0.03171413434662672,
+              "specificity": 0.7177745385808324,
+              "f1": 0.06045199707490337,
+              "patient_ever_sepsis_sensitivity": 0.999124343257443,
+              "detected_by_first_positive_label_fraction": 0.999124343257443,
+              "nonseptic_patients_with_any_alarm_fraction": 0.9987803584685545,
+              "positive_flags_per_100_nonseptic_hours": 25.631884863414964,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 6.275439169878583,
+              "normalized_challenge_utility": 0.06350706686697116,
+              "threshold": 0.013587346803027934,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": 27.0
+            },
+            "validation_utility": {
+              "tp": 3613.0,
+              "fp": 49716.0,
+              "fn": 7167.0,
+              "tn": 701499.0,
+              "sensitivity": 0.3351576994434137,
+              "precision": 0.06774925462693844,
+              "specificity": 0.9338192128751422,
+              "f1": 0.11271428348593801,
+              "patient_ever_sepsis_sensitivity": 0.4500875656742557,
+              "detected_by_first_positive_label_fraction": 0.35376532399299476,
+              "nonseptic_patients_with_any_alarm_fraction": 0.1179340333015166,
+              "positive_flags_per_100_nonseptic_hours": 4.288394339348268,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 0.9311078124077639,
+              "normalized_challenge_utility": 0.21103657601864062,
+              "threshold": 0.03764250411068968,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": 24.0
+            }
+          }
+        },
+        "confidence_intervals_95": {
+          "roc_auc": {
+            "lower": 0.7317815936761218,
+            "upper": 0.7605157373452757,
+            "valid_draws": 500
+          },
+          "average_precision": {
+            "lower": 0.04897973127650699,
+            "upper": 0.06030433319767425,
+            "valid_draws": 500
+          },
+          "brier": {
+            "lower": 0.012973599383994443,
+            "upper": 0.014460036206875157,
+            "valid_draws": 500
+          },
+          "log_loss": {
+            "lower": 0.06516072958675267,
+            "upper": 0.07214780436590917,
+            "valid_draws": 500
+          },
+          "sensitivity_at_validation_recall_80": {
+            "lower": 0.6180839359054873,
+            "upper": 0.6685614252405843,
+            "valid_draws": 500
+          },
+          "precision_at_validation_recall_80": {
+            "lower": 0.02979747562811121,
+            "upper": 0.03356201363377191,
+            "valid_draws": 500
+          },
+          "normalized_utility_at_validation_utility": {
+            "lower": 0.18734501048890212,
+            "upper": 0.23551713465433338,
+            "valid_draws": 500
+          }
+        }
+      },
+      "logistic": {
+        "raw": {
+          "roc_auc": 0.7209636988573254,
+          "average_precision": 0.05431080308479525,
+          "brier": 0.15090471426966415,
+          "log_loss": 0.4895947253028589,
+          "ece_10_equal_width": 0.33181580720357085,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.1,
+              "hours": 19067,
+              "mean_risk": 0.07433221453718943,
+              "observed_fraction": 0.009230607856506005
+            },
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "hours": 140290,
+              "mean_risk": 0.15720111399109768,
+              "observed_fraction": 0.005880675743103571
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.30000000000000004,
+              "hours": 201932,
+              "mean_risk": 0.25030380874882224,
+              "observed_fraction": 0.00654675831468019
+            },
+            {
+              "lower": 0.30000000000000004,
+              "upper": 0.4,
+              "hours": 164094,
+              "mean_risk": 0.3465434516838756,
+              "observed_fraction": 0.00908625543895572
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "hours": 104414,
+              "mean_risk": 0.4458704670241234,
+              "observed_fraction": 0.013666749669584538
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6000000000000001,
+              "hours": 61022,
+              "mean_risk": 0.5450663512946846,
+              "observed_fraction": 0.02102520402477795
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.7000000000000001,
+              "hours": 32872,
+              "mean_risk": 0.644479806696366,
+              "observed_fraction": 0.03534923339011925
+            },
+            {
+              "lower": 0.7000000000000001,
+              "upper": 0.8,
+              "hours": 17251,
+              "mean_risk": 0.7452490799721807,
+              "observed_fraction": 0.061561648600081155
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "hours": 11036,
+              "mean_risk": 0.8481905156217887,
+              "observed_fraction": 0.08689742660384198
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "hours": 10017,
+              "mean_risk": 0.950631833635424,
+              "observed_fraction": 0.10711789957072976
+            }
+          ],
+          "positive_fraction": 0.014147074455869133,
+          "hours": 761995,
+          "patients": 20000,
+          "operating_points": {
+            "raw_0_5": {
+              "tp": 5539.0,
+              "fp": 126659.0,
+              "fn": 5241.0,
+              "tn": 624556.0,
+              "sensitivity": 0.513821892393321,
+              "precision": 0.04189927230366571,
+              "specificity": 0.8313944742849917,
+              "f1": 0.07748045153799886,
+              "patient_ever_sepsis_sensitivity": 0.7697022767075307,
+              "detected_by_first_positive_label_fraction": 0.5735551663747811,
+              "nonseptic_patients_with_any_alarm_fraction": 0.39473963304698273,
+              "positive_flags_per_100_nonseptic_hours": 14.284521322469688,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 3.739404995183925,
+              "normalized_challenge_utility": 0.18009136339945428,
+              "threshold": 0.5,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": 19.0
+            }
+          }
+        },
+        "calibrated": {
+          "roc_auc": 0.7209636988573254,
+          "average_precision": 0.05431080308479525,
+          "brier": 0.01391455294715042,
+          "log_loss": 0.07005369066738747,
+          "ece_10_equal_width": 0.0043959150313058835,
+          "reliability_bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.1,
+              "hours": 752925,
+              "mean_risk": 0.016385830114139216,
+              "observed_fraction": 0.012998638642627089
+            },
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "hours": 6097,
+              "mean_risk": 0.13665188234200168,
+              "observed_fraction": 0.10300147613580449
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.30000000000000004,
+              "hours": 1571,
+              "mean_risk": 0.23887742138728835,
+              "observed_fraction": 0.13876511775938893
+            },
+            {
+              "lower": 0.30000000000000004,
+              "upper": 0.4,
+              "hours": 831,
+              "mean_risk": 0.3464532673323287,
+              "observed_fraction": 0.0914560770156438
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "hours": 338,
+              "mean_risk": 0.44040010572995414,
+              "observed_fraction": 0.13313609467455623
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6000000000000001,
+              "hours": 98,
+              "mean_risk": 0.5368844597776915,
+              "observed_fraction": 0.16326530612244897
+            },
+            {
+              "lower": 0.6000000000000001,
+              "upper": 0.7000000000000001,
+              "hours": 74,
+              "mean_risk": 0.6482453483245695,
+              "observed_fraction": 0.12162162162162163
+            },
+            {
+              "lower": 0.7000000000000001,
+              "upper": 0.8,
+              "hours": 48,
+              "mean_risk": 0.7369998988030056,
+              "observed_fraction": 0.020833333333333332
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "hours": 10,
+              "mean_risk": 0.8202451086377334,
+              "observed_fraction": 0.0
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "hours": 3,
+              "mean_risk": 1.0,
+              "observed_fraction": 0.0
+            }
+          ],
+          "positive_fraction": 0.014147074455869133,
+          "hours": 761995,
+          "patients": 20000,
+          "operating_points": {
+            "calibrated_0_5": {
+              "tp": 26.0,
+              "fp": 207.0,
+              "fn": 10754.0,
+              "tn": 751008.0,
+              "sensitivity": 0.002411873840445269,
+              "precision": 0.11158798283261803,
+              "specificity": 0.9997244463968371,
+              "f1": 0.004721692545173886,
+              "patient_ever_sepsis_sensitivity": 0.009632224168126095,
+              "detected_by_first_positive_label_fraction": 0.002626970227670753,
+              "nonseptic_patients_with_any_alarm_fraction": 0.00042422314137236184,
+              "positive_flags_per_100_nonseptic_hours": 0.02865168620212541,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 0.007918807744306018,
+              "normalized_challenge_utility": 0.0018775485176441731,
+              "threshold": 0.5,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": -7.0
+            },
+            "validation_recall_80": {
+              "tp": 7114.0,
+              "fp": 241864.0,
+              "fn": 3666.0,
+              "tn": 509351.0,
+              "sensitivity": 0.6599257884972171,
+              "precision": 0.02857280562941304,
+              "specificity": 0.6780362479449957,
+              "f1": 0.05477405893177496,
+              "patient_ever_sepsis_sensitivity": 0.8633975481611208,
+              "detected_by_first_positive_label_fraction": 0.6654991243432574,
+              "nonseptic_patients_with_any_alarm_fraction": 0.6389861066921201,
+              "positive_flags_per_100_nonseptic_hours": 29.58927303905124,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 7.088916692702747,
+              "normalized_challenge_utility": 0.011209185394119614,
+              "threshold": 0.017145096794115983,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": 23.0
+            },
+            "validation_utility": {
+              "tp": 5085.0,
+              "fp": 102712.0,
+              "fn": 5695.0,
+              "tn": 648503.0,
+              "sensitivity": 0.4717068645640074,
+              "precision": 0.047171999220757536,
+              "specificity": 0.8632721657581385,
+              "f1": 0.08576705431913441,
+              "patient_ever_sepsis_sensitivity": 0.7276707530647986,
+              "detected_by_first_positive_label_fraction": 0.5402802101576182,
+              "nonseptic_patients_with_any_alarm_fraction": 0.3301516597730406,
+              "positive_flags_per_100_nonseptic_hours": 11.203385218321529,
+              "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 3.0153380107091077,
+              "normalized_challenge_utility": 0.20254345893245856,
+              "threshold": 0.02506127607195644,
+              "positive_label_at_first_hour_patients": 223,
+              "median_hours_before_first_positive_label_among_detected_septic_patients": 21.0
+            }
+          }
+        },
+        "confidence_intervals_95": {
+          "roc_auc": {
+            "lower": 0.7056995369453237,
+            "upper": 0.7356061746726511,
+            "valid_draws": 500
+          },
+          "average_precision": {
+            "lower": 0.048098613749143766,
+            "upper": 0.06245423759386908,
+            "valid_draws": 500
+          },
+          "brier": {
+            "lower": 0.013120272904071516,
+            "upper": 0.014650563520678304,
+            "valid_draws": 500
+          },
+          "log_loss": {
+            "lower": 0.06676333047379332,
+            "upper": 0.07324011429612093,
+            "valid_draws": 500
+          },
+          "sensitivity_at_validation_recall_80": {
+            "lower": 0.6378420614347621,
+            "upper": 0.6820574057798016,
+            "valid_draws": 500
+          },
+          "precision_at_validation_recall_80": {
+            "lower": 0.02681969591072051,
+            "upper": 0.030343579219413986,
+            "valid_draws": 500
+          },
+          "normalized_utility_at_validation_utility": {
+            "lower": 0.17553247868567529,
+            "upper": 0.23104885526834007,
+            "valid_draws": 500
+          }
+        }
+      }
+    },
+    "paired_comparison": {
+      "contrast": "lstm minus logistic",
+      "average_precision_difference": -0.00030513402662783046,
+      "paired_patient_bootstrap_ci95": [
+        -0.00684881217962922,
+        0.005037674387885508
+      ]
+    },
+    "bootstrap_repetitions": 500,
+    "bootstrap_unit": "whole_patient"
+  },
+  "validation_selection_diagnostics": {
+    "lstm": {
+      "roc_auc": 0.7723390821112008,
+      "average_precision": 0.09915456247166733,
+      "brier": 0.020290374907800453,
+      "log_loss": 0.09262879558725093,
+      "ece_10_equal_width": 0.0013830624679523722,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "hours": 113912,
+          "mean_risk": 0.017237730832822637,
+          "observed_fraction": 0.01652152538801882
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "hours": 4521,
+          "mean_risk": 0.12931573532639207,
+          "observed_fraction": 0.1468701614687016
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.30000000000000004,
+          "hours": 66,
+          "mean_risk": 0.21297630042402402,
+          "observed_fraction": 0.25757575757575757
+        },
+        {
+          "lower": 0.30000000000000004,
+          "upper": 0.4,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6000000000000001,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.6000000000000001,
+          "upper": 0.7000000000000001,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.7000000000000001,
+          "upper": 0.8,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        }
+      ],
+      "positive_fraction": 0.021628874505270086,
+      "hours": 118499,
+      "patients": 3050,
+      "operating_points": {
+        "calibrated_0_5": {
+          "tp": 0.0,
+          "fp": 0.0,
+          "fn": 2563.0,
+          "tn": 115936.0,
+          "sensitivity": 0.0,
+          "precision": null,
+          "specificity": 1.0,
+          "f1": 0.0,
+          "patient_ever_sepsis_sensitivity": 0.0,
+          "detected_by_first_positive_label_fraction": 0.0,
+          "nonseptic_patients_with_any_alarm_fraction": 0.0,
+          "positive_flags_per_100_nonseptic_hours": 0.0,
+          "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 0.0,
+          "normalized_challenge_utility": 0.0,
+          "threshold": 0.5,
+          "positive_label_at_first_hour_patients": 25,
+          "median_hours_before_first_positive_label_among_detected_septic_patients": null
+        },
+        "validation_recall_80": {
+          "tp": 2051.0,
+          "fp": 52102.0,
+          "fn": 512.0,
+          "tn": 63834.0,
+          "sensitivity": 0.8002341006632853,
+          "precision": 0.03787417132938157,
+          "specificity": 0.550596881037814,
+          "f1": 0.07232526976514564,
+          "patient_ever_sepsis_sensitivity": 1.0,
+          "detected_by_first_positive_label_fraction": 1.0,
+          "nonseptic_patients_with_any_alarm_fraction": 0.9942487419122933,
+          "positive_flags_per_100_nonseptic_hours": 40.47783428465854,
+          "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 8.700979200497866,
+          "normalized_challenge_utility": 0.21868759460181386,
+          "threshold": 0.013587346803027934,
+          "positive_label_at_first_hour_patients": 25,
+          "median_hours_before_first_positive_label_among_detected_septic_patients": 31.0
+        },
+        "validation_utility": {
+          "tp": 1427.0,
+          "fp": 17533.0,
+          "fn": 1136.0,
+          "tn": 98403.0,
+          "sensitivity": 0.5567694108466641,
+          "precision": 0.07526371308016877,
+          "specificity": 0.8487700110405741,
+          "f1": 0.13260233238860752,
+          "patient_ever_sepsis_sensitivity": 0.7611940298507462,
+          "detected_by_first_positive_label_fraction": 0.6194029850746269,
+          "nonseptic_patients_with_any_alarm_fraction": 0.3231488138030194,
+          "positive_flags_per_100_nonseptic_hours": 10.365717286243546,
+          "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 2.3483308861424166,
+          "normalized_challenge_utility": 0.36760961090830463,
+          "threshold": 0.03764250411068968,
+          "positive_label_at_first_hour_patients": 25,
+          "median_hours_before_first_positive_label_among_detected_septic_patients": 25.0
+        }
+      }
+    },
+    "logistic": {
+      "roc_auc": 0.7758670605085276,
+      "average_precision": 0.08755488553403037,
+      "brier": 0.020624848189653704,
+      "log_loss": 0.09422259084650547,
+      "ece_10_equal_width": 0.0019131618770541613,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "hours": 116919,
+          "mean_risk": 0.01882987721139942,
+          "observed_fraction": 0.019748714922296632
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "hours": 1106,
+          "mean_risk": 0.13449134409768487,
+          "observed_fraction": 0.1717902350813743
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.30000000000000004,
+          "hours": 310,
+          "mean_risk": 0.24599141366721375,
+          "observed_fraction": 0.1032258064516129
+        },
+        {
+          "lower": 0.30000000000000004,
+          "upper": 0.4,
+          "hours": 102,
+          "mean_risk": 0.3429717743376061,
+          "observed_fraction": 0.21568627450980393
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "hours": 40,
+          "mean_risk": 0.4462535935826308,
+          "observed_fraction": 0.125
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6000000000000001,
+          "hours": 19,
+          "mean_risk": 0.5494976524830292,
+          "observed_fraction": 0.15789473684210525
+        },
+        {
+          "lower": 0.6000000000000001,
+          "upper": 0.7000000000000001,
+          "hours": 2,
+          "mean_risk": 0.6247635666874913,
+          "observed_fraction": 0.5
+        },
+        {
+          "lower": 0.7000000000000001,
+          "upper": 0.8,
+          "hours": 1,
+          "mean_risk": 0.7549759724403483,
+          "observed_fraction": 1.0
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "hours": 0,
+          "mean_risk": null,
+          "observed_fraction": null
+        }
+      ],
+      "positive_fraction": 0.021628874505270086,
+      "hours": 118499,
+      "patients": 3050,
+      "operating_points": {
+        "calibrated_0_5": {
+          "tp": 5.0,
+          "fp": 17.0,
+          "fn": 2558.0,
+          "tn": 115919.0,
+          "sensitivity": 0.0019508388607101053,
+          "precision": 0.22727272727272727,
+          "specificity": 0.9998533673751036,
+          "f1": 0.0038684719535783366,
+          "patient_ever_sepsis_sensitivity": 0.007462686567164179,
+          "detected_by_first_positive_label_fraction": 0.0,
+          "nonseptic_patients_with_any_alarm_fraction": 0.0007189072609633358,
+          "positive_flags_per_100_nonseptic_hours": 0.016530693608455937,
+          "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 0.00680675619171715,
+          "normalized_challenge_utility": 0.0019422785840572886,
+          "threshold": 0.5,
+          "positive_label_at_first_hour_patients": 25,
+          "median_hours_before_first_positive_label_among_detected_septic_patients": -7.0
+        },
+        "validation_recall_80": {
+          "tp": 2051.0,
+          "fp": 46848.0,
+          "fn": 512.0,
+          "tn": 69088.0,
+          "sensitivity": 0.8002341006632853,
+          "precision": 0.04194359802858954,
+          "specificity": 0.5959149875793541,
+          "f1": 0.07970930006606816,
+          "patient_ever_sepsis_sensitivity": 0.9328358208955224,
+          "detected_by_first_positive_label_fraction": 0.8059701492537313,
+          "nonseptic_patients_with_any_alarm_fraction": 0.7440690150970525,
+          "positive_flags_per_100_nonseptic_hours": 35.348457297328835,
+          "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 8.721399469073017,
+          "normalized_challenge_utility": 0.28100840763683077,
+          "threshold": 0.017145096794115983,
+          "positive_label_at_first_hour_patients": 25,
+          "median_hours_before_first_positive_label_among_detected_septic_patients": 31.5
+        },
+        "validation_utility": {
+          "tp": 1563.0,
+          "fp": 22137.0,
+          "fn": 1000.0,
+          "tn": 93799.0,
+          "sensitivity": 0.609832227857979,
+          "precision": 0.06594936708860759,
+          "specificity": 0.8090584460391941,
+          "f1": 0.11902676769599817,
+          "patient_ever_sepsis_sensitivity": 0.8507462686567164,
+          "detected_by_first_positive_label_fraction": 0.6902985074626866,
+          "nonseptic_patients_with_any_alarm_fraction": 0.44248741912293316,
+          "positive_flags_per_100_nonseptic_hours": 14.210562140822061,
+          "alarm_episodes_per_100_nonseptic_hours_6h_refractory": 4.1423973395307225,
+          "normalized_challenge_utility": 0.37001742581309865,
+          "threshold": 0.02506127607195644,
+          "positive_label_at_first_hour_patients": 25,
+          "median_hours_before_first_positive_label_among_detected_septic_patients": 32.0
+        }
+      }
+    }
+  },
+  "explanations": {
+    "split": "A/validation",
+    "agent_run_id": "agents-0096b8a80c413c2311c2",
+    "evaluation_sample": {
+      "cases": 12,
+      "output_cases": 12,
+      "abstained_cases": 0,
+      "claims": 24,
+      "claims_passing_rechecked_citation_numeric_checks": 24,
+      "cases_with_exact_or_rounded_observation_value_and_feature": 0,
+      "cases_with_explicit_patient_observation_grounding": 0,
+      "cases_with_available_current_observations": 8,
+      "patient_grounding_fraction_over_all_cases": 0.0,
+      "patient_grounding_fraction_among_returned_outputs": 0.0,
+      "patient_grounding_fraction_among_cases_with_observations": 0.0,
+      "exact_duplicate_output_fraction": 0.75,
+      "mean_pairwise_output_tfidf_cosine": 0.833567584845726,
+      "unique_queries": 3,
+      "queries": 12,
+      "mean_grounded_top5_ablation_feature_coverage": 0.0,
+      "mean_top5_ablation_features_visible_to_generator": 0.21666666666666667,
+      "clinical_expert_ratings": {
+        "status": "pending_independent_review",
+        "completed": 0
+      },
+      "scope": "Automated lexical/numeric grounding, redundancy and ablation-alignment proxies; not clinical relevance, causal fidelity, or independent entailment truth",
+      "grounding_rule": "Feature alias and matching observed value within a local text span (0.05 absolute or 0.5% rounding tolerance), plus explicit patient/observed-context language for grounded-case count",
+      "sampling_limit": "Risk/missingness-stratified development sample, not representative population coverage"
+    },
+    "prior_runs": [
+      {
+        "run_id": "agents-b5667526ece3287af39f",
+        "audit": {
+          "cases": 3,
+          "output_cases": 0,
+          "abstained_cases": 3,
+          "claims": 0,
+          "claims_passing_rechecked_citation_numeric_checks": 0,
+          "cases_with_exact_or_rounded_observation_value_and_feature": 0,
+          "cases_with_explicit_patient_observation_grounding": 0,
+          "cases_with_available_current_observations": 1,
+          "patient_grounding_fraction_over_all_cases": 0.0,
+          "patient_grounding_fraction_among_returned_outputs": null,
+          "patient_grounding_fraction_among_cases_with_observations": 0.0,
+          "exact_duplicate_output_fraction": null,
+          "mean_pairwise_output_tfidf_cosine": null,
+          "unique_queries": 0,
+          "queries": 0,
+          "mean_grounded_top5_ablation_feature_coverage": null,
+          "mean_top5_ablation_features_visible_to_generator": null,
+          "clinical_expert_ratings": {
+            "status": "pending_independent_review",
+            "completed": 0
+          },
+          "scope": "Automated lexical/numeric grounding, redundancy and ablation-alignment proxies; not clinical relevance, causal fidelity, or independent entailment truth",
+          "grounding_rule": "Feature alias and matching observed value within a local text span (0.05 absolute or 0.5% rounding tolerance), plus explicit patient/observed-context language for grounded-case count",
+          "sampling_limit": "Risk/missingness-stratified development sample, not representative population coverage"
+        }
+      },
+      {
+        "run_id": "agents-dc179bf37a3ea479c35b",
+        "audit": {
+          "cases": 3,
+          "output_cases": 3,
+          "abstained_cases": 0,
+          "claims": 6,
+          "claims_passing_rechecked_citation_numeric_checks": 6,
+          "cases_with_exact_or_rounded_observation_value_and_feature": 0,
+          "cases_with_explicit_patient_observation_grounding": 0,
+          "cases_with_available_current_observations": 1,
+          "patient_grounding_fraction_over_all_cases": 0.0,
+          "patient_grounding_fraction_among_returned_outputs": 0.0,
+          "patient_grounding_fraction_among_cases_with_observations": 0.0,
+          "exact_duplicate_output_fraction": 0.0,
+          "mean_pairwise_output_tfidf_cosine": 0.6679727656100384,
+          "unique_queries": 1,
+          "queries": 3,
+          "mean_grounded_top5_ablation_feature_coverage": null,
+          "mean_top5_ablation_features_visible_to_generator": null,
+          "clinical_expert_ratings": {
+            "status": "pending_independent_review",
+            "completed": 0
+          },
+          "scope": "Automated lexical/numeric grounding, redundancy and ablation-alignment proxies; not clinical relevance, causal fidelity, or independent entailment truth",
+          "grounding_rule": "Feature alias and matching observed value within a local text span (0.05 absolute or 0.5% rounding tolerance), plus explicit patient/observed-context language for grounded-case count",
+          "sampling_limit": "Risk/missingness-stratified development sample, not representative population coverage"
+        }
+      }
+    ],
+    "clinical_expert_review": "pending; blank private annotation packet prepared"
+  },
+  "persistent_checkpoint": "/content/drive/MyDrive/SepsisGuard-UAR/evaluations/evaluation-50700700b0af7403f6fc",
+  "completed_at": "2026-11-08T23:15:53.115555+00:00"
+}
