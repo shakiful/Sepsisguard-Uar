@@ -22,7 +22,7 @@ Inputs plus output must fit 8,192 tokens. Greedy non-thinking caps are 128 plann
 
 LangGraph runs plan → local retrieval → draft → verify. The planner can search or abstain; it cannot execute shell, network calls or unrestricted tools. Each case permits six model calls and two retrieval attempts at most. Lower-entropy, lower-missingness cases allow one attempt. Failed citation/entailment checks can trigger one query reformulation within budget.
 
-Local TF-IDF retrieval uses versioned CDC and NIH NIGMS educational text. Source hashes, passage IDs and timestamps persist; cached passages must match snapshot bytes. This is a small reference corpus, not a comprehensive guideline collection. Evidence text is untrusted data and cannot grant tool permissions.
+Local TF-IDF retrieval uses bundled, versioned CDC and NIH NIGMS educational text. Fresh runs install the verified package snapshot without HTTP; existing private snapshots remain pinned. Live refresh is explicit (`refresh=True`) because it changes the research corpus and may be denied from Colab. Source hashes, passage IDs and timestamps persist; cached passages must match snapshot bytes. This is a small reference corpus, not a comprehensive guideline collection. Evidence text is untrusted data and cannot grant tool permissions.
 
 Writers produce at most two structured claims. Programmatic checks require known IDs, exact 3–25-word quoted spans, at most 25 quoted words per source, consistent numbers and bounded schemas; common diagnostic/treatment assertions are rejected. The verifier checks entailment for every claim using the same backbone. It is not independent factual certification, and filters do not prove every unsafe or incorrect paraphrase is caught.
 

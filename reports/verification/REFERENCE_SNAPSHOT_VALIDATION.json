@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-11-08T22:15:00.762525+00:00",
+  "status": "offline_reference_fix_validated",
+  "trigger": {
+    "surface": "Colab",
+    "source_commit": "03277b84864a8d3f529bc2d7e1fe65bb0c6aee97",
+    "failure": "HTTP 403 during live reference fetch after real A/calibration fit; no Qwen weights loaded in that attempt",
+    "runtime": {
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "vram_gib": 79.25,
+      "system_ram_gib": 167.05,
+      "torch": "2.14.1+cu130"
+    },
+    "calibration_endpoints": 119051,
+    "calibration_fit_split": "A/calibration",
+    "predictor_weights_unchanged": true,
+    "test_B_used_for_calibration_or_inference": false
+  },
+  "snapshot_version": "2026-11-08",
+  "sources": [
+    {
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text_file": "cdc.txt",
+      "sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f",
+      "retrieved_at": "2026-11-08T22:12:22.913230+00:00",
+      "final_url": "https://www.cdc.gov/sepsis/about/index.html",
+      "scope": "Agency-authored public educational text; fixed research snapshot, not patient-specific guidance"
+    },
+    {
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text_file": "nigms.txt",
+      "sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb",
+      "retrieved_at": "2026-11-08T22:12:33.985486+00:00",
+      "final_url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis",
+      "scope": "Agency-authored public educational text; fixed research snapshot, not patient-specific guidance"
+    }
+  ],
+  "passages": 19,
+  "both_text_hashes_match_2026_11_04_live_validation": true,
+  "default_runtime_network_requests": false,
+  "refresh_policy": "Explicit live refresh only; corrupt existing/bundled snapshots fail closed",
+  "local_tests": {
+    "command": "python -m pytest -q tests/test_agents.py",
+    "passed": 19,
+    "seconds": 10.77,
+    "includes": "Default corpus with network disabled, corrupted bundle rejection, prior graph/calibration/leakage/integrity tests"
+  },
+  "real_qwen_execution_completed": false,
+  "reuse_policies": [
+    "https://www.cdc.gov/other/agencymaterials.html",
+    "https://www.nih.gov/about-nih/frequently-asked-questions"
+  ]
+}

@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import shutil
 from urllib.parse import urlparse
 from urllib.request import Request,urlopen
 
@@ -13,6 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 SOURCES=[{'source_id':'cdc','url':'https://www.cdc.gov/sepsis/about/index.html','title':'CDC: About Sepsis'},
          {'source_id':'nigms','url':'https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx','title':'NIH NIGMS: Sepsis'}]
 ALLOWED_HOSTS={'www.cdc.gov','www.nigms.nih.gov'}
+BUNDLED_CORPUS=Path(__file__).with_name('reference_snapshots')
 
 
 def normalize(text):
@@ -33,26 +35,44 @@ def extract_agency_text(html):
     return '\n'.join(parts)
 
 
+def read_snapshot(directory):
+    directory=Path(directory)
+    saved=json.loads((directory/'corpus.json').read_text())
+    texts={}
+    for source in saved['sources']:
+        relative=Path(source['text_file']);url=urlparse(source['url'])
+        if relative.name!=str(relative) or relative.suffix!='.txt' or url.scheme!='https' or url.hostname not in ALLOWED_HOSTS:
+            raise ValueError('Unsafe reference snapshot')
+        text=(directory/relative).read_text()
+        if hashlib.sha256(text.encode()).hexdigest()!=source['sha256']:
+            raise ValueError('Reference snapshot changed')
+        texts[source['source_id']]=(normalize(text),source)
+    for passage in saved['passages']:
+        if passage['source_id'] not in texts:raise ValueError('Passage has no source snapshot')
+        text,source=texts[passage['source_id']]
+        if passage['source_sha256']!=source['sha256'] or passage['url']!=source['url'] or normalize(passage['text']) not in text:
+            raise ValueError('Retrieved passage differs from the source snapshot')
+    if not texts or not saved['passages']:raise ValueError('Reference snapshot is empty')
+    return saved
+
+
 def build_corpus(output, *, refresh=False):
+    """Reuse verified private snapshots or install the bundled corpus without HTTP.
+
+    Live website refresh is explicit because it changes the research corpus and
+    may be unavailable from Colab. Never silently substitute synthetic evidence.
+    """
     output=Path(output);output.mkdir(parents=True,exist_ok=True)
     marker=output/'corpus.json'
-    if marker.exists() and not refresh:
-        saved=json.loads(marker.read_text())
-        texts={}
-        for source in saved['sources']:
-            relative=Path(source['text_file'])
-            if relative.name!=str(relative) or relative.suffix!='.txt' or urlparse(source['url']).hostname not in ALLOWED_HOSTS:
-                raise ValueError('Unsafe reference snapshot')
-            text=(output/relative).read_text()
-            if hashlib.sha256(text.encode()).hexdigest()!=source['sha256']:
-                raise ValueError('Reference snapshot changed')
-            texts[source['source_id']]=(normalize(text),source)
-        for passage in saved['passages']:
-            if passage['source_id'] not in texts:raise ValueError('Passage has no source snapshot')
-            text,source=texts[passage['source_id']]
-            if passage['source_sha256']!=source['sha256'] or passage['url']!=source['url'] or normalize(passage['text']) not in text:
-                raise ValueError('Retrieved passage differs from the source snapshot')
-        return saved
+    if not refresh:
+        if marker.exists():return read_snapshot(output)
+        saved=read_snapshot(BUNDLED_CORPUS)
+        # Publish the manifest last, after verifying and copying all source text.
+        for name in [s['text_file'] for s in saved['sources']]+['corpus.json']:
+            partial=output/(name+'.partial')
+            shutil.copyfile(BUNDLED_CORPUS/name,partial)
+            partial.replace(output/name)
+        return read_snapshot(output)
     passages=[];sources=[]
     for source in SOURCES:
         with urlopen(Request(source['url'],headers={'User-Agent':'SepsisGuard-UAR academic research'}),timeout=45) as response:

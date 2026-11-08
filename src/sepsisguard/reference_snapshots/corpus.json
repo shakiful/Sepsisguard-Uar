@@ -1,0 +1,182 @@
+{
+  "snapshot_version": "2026-11-08",
+  "sources": [
+    {
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text_file": "cdc.txt",
+      "sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f",
+      "retrieved_at": "2026-11-08T22:12:22.913230+00:00",
+      "final_url": "https://www.cdc.gov/sepsis/about/index.html",
+      "scope": "Agency-authored public educational text; fixed research snapshot, not patient-specific guidance"
+    },
+    {
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text_file": "nigms.txt",
+      "sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb",
+      "retrieved_at": "2026-11-08T22:12:33.985486+00:00",
+      "final_url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis",
+      "scope": "Agency-authored public educational text; fixed research snapshot, not patient-specific guidance"
+    }
+  ],
+  "passages": [
+    {
+      "passage_id": "cdc:0:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "Sepsis is the body's extreme response to an infection. It is a life-threatening medical emergency. Anyone can get an infection, and almost any infection can lead to sepsis. Sepsis is the body's extreme response to an infection. It is a life-threatening medical emergency. Sepsis happens when an infection you already have triggers a chain reaction throughout your body. Infections that lead to sepsis most often start in the Without fast treatment, sepsis can quickly lead to tissue damage, organ failure, and death. A person with sepsis might have one or more of the following signs or symptoms: Anyone can develop sepsis, but some people are at higher risk for sepsis. Most people who develop sepsis have at least one underlying medical condition or recent hospitalization. Infections put you and your family at risk for sepsis. When germs get into a person's body, they can cause an infection. If that infection doesn't stop, it can cause sepsis. Bacterial infections cause most",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:1:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "medical condition or recent hospitalization. Infections put you and your family at risk for sepsis. When germs get into a person's body, they can cause an infection. If that infection doesn't stop, it can cause sepsis. Bacterial infections cause most cases of sepsis. Sepsis can also be a result of other infections, including viral infections, such as influenza. Fungal infections can also cause sepsis. You can take specific steps to reduce your risk of sepsis such as: If you have cancer , there are additional ways to reduce your risk of infection. At least 1 in 5 adults and 1 in 10 children who develop sepsis die during hospitalization or are discharged to hospice. 1 2 At least 350,000 adults and more than 1,800 children who develop sepsis die during their hospitalization or are discharged to hospice. 1 2 Most cases of sepsis start before a patient goes to the hospital. 3 4 Most people who develop sepsis have at",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:2:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "and more than 1,800 children who develop sepsis die during their hospitalization or are discharged to hospice. 1 2 Most cases of sepsis start before a patient goes to the hospital. 3 4 Most people who develop sepsis have at least one existing medical condition like chronic lung disease or a weakened immune system. 3 4 Nearly a quarter to a third of people with sepsis had a healthcare visit in the week before they were hospitalized. 3 4 Sepsis is diagnosed through a medical assessment performed by a healthcare provider. They diagnose sepsis using physical findings, such as: Healthcare providers also perform tests that check for signs of infection or organ damage. Some of these tests are used to identify the germ that caused the infection that led to sepsis. This testing might include blood cultures looking for bacterial infections, fungal infections, or tests for viral infections, like influenza. Healthcare providers should immediately evaluate and treat people who might",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:3:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "identify the germ that caused the infection that led to sepsis. This testing might include blood cultures looking for bacterial infections, fungal infections, or tests for viral infections, like influenza. Healthcare providers should immediately evaluate and treat people who might have sepsis. Research shows that rapid, effective sepsis treatment includes: Giving appropriate treatment, including antibiotics, as soon as possible Sometimes surgery is required to remove tissue damaged by the infection. Healthcare providers should treat sepsis as soon as possible. Antibiotics are critical tools for treating infections, including those that can lead to sepsis. However, anytime antibiotics are used, they can cause side effects and contribute to the development of antimicrobial resistance . Antimicrobial resistance happens when germs, like bacteria and fungi, develop the ability to defeat the drugs designed to kill them. Infections caused by antimicrobial-resistant germs can be difficult, or impossible to treat. Antibiotic side effects range from minor, such as rash, dizziness, nausea, diarrhea and yeast infections, to",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:4:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "fungi, develop the ability to defeat the drugs designed to kill them. Infections caused by antimicrobial-resistant germs can be difficult, or impossible to treat. Antibiotic side effects range from minor, such as rash, dizziness, nausea, diarrhea and yeast infections, to very severe health problems, such as life-threatening allergic reactions or C. difficile (also called C. diff ) infection, which causes diarrhea that can lead to colon damage or death. However, when antibiotics are needed, the benefits outweigh the risks of side effects or antimicrobial resistance. Antibiotic stewardship is the effort to improve antibiotic use so that antibiotics are prescribed and used when they provide a clear benefit. Improving the way healthcare providers prescribe antibiotics and the way we take antibiotics helps keep us healthy, fights antimicrobial resistance, and ensures that these life-saving drugs will work when they are needed most, such as for treating infections that can lead to sepsis. Conducting research to understand the epidemiology of sepsis. 1 2",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:5:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "helps keep us healthy, fights antimicrobial resistance, and ensures that these life-saving drugs will work when they are needed most, such as for treating infections that can lead to sepsis. Conducting research to understand the epidemiology of sepsis. 1 2 3 Creating tools for hospitals , such as the Hospital Sepsis Program Core Elements , to implement, monitor and optimize sepsis programs to improve survival rates of sepsis patients, and measuring their uptake through the National Healthcare Safety Network . Developing new quality measures that promote optimal care of patients with sepsis. Collaborating with partners, including the CDC Prevention Epicenters , health systems, and other Federal agencies, to integrate sepsis information into their work, helping improve early detection, management, and treatment of sepsis. Expanding tools to raise awareness of the risk of sepsis and promote early recognition and timely treatment of sepsis in various settings through the Get Ahead of Sepsis educational effort and appropriate antibiotic prescribing and use .",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:6:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "treatment of sepsis. Expanding tools to raise awareness of the risk of sepsis and promote early recognition and timely treatment of sepsis in various settings through the Get Ahead of Sepsis educational effort and appropriate antibiotic prescribing and use . Working with partners to prevent infections that can lead to sepsis in healthcare and community settings. This page was last updated on this date. Updates may include minor edits, image changes, or other modifications to page content. The information on this page was last reviewed by subject matter experts to ensure accuracy. Rhee C, Dantes R, Epstein L, Murphy DJ, Seymour CW, Iwashyna TJ, Kadri SS, Angus DC, Danner RL, Fiore AE, Jernigan JA, Martin GS, Septimus E, Warren DK, Karcz A, Chan C, Menchaca JT, Wang R, Gruber S, Klompas M; CDC Prevention Epicenter Program. Incidence and Trends of Sepsis in US Hospitals Using Clinical vs Claims Data, 2009-2014. JAMA. 2017 Oct 3;318(13):1241-1249. doi: 10.1001/jama.2017.13836. PMID: 28903154; PMCID: PMC5710396.",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:7:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "Karcz A, Chan C, Menchaca JT, Wang R, Gruber S, Klompas M; CDC Prevention Epicenter Program. Incidence and Trends of Sepsis in US Hospitals Using Clinical vs Claims Data, 2009-2014. JAMA. 2017 Oct 3;318(13):1241-1249. doi: 10.1001/jama.2017.13836. PMID: 28903154; PMCID: PMC5710396. Rhee C, Balamuth F, Dysart K, Miller E, Li Z, Huang J, Gunturi D, Ostapenko S, Jin R, DelloStritto L, Guy J, Poland R, Sands K, Bennett TD, Scott HF, Alpern ER, Sanchez-Pinto LN, Russell S, DeWitt PE, Rebull MN, Gray C, Daniels L, Otto S, Carter C, Cook LJ, Tsemberis E, Jordan JT, Kapes J, Tunick R, Kadri SS, Badesch BL, Chen HC, Klompas M, Weiss SL. National Estimates of Pediatric Sepsis in US Hospitals Using Clinical Data. JAMA. 2026 Apr 21;335(15):1321-1331. doi: 10.1001/jama.2026.3100. Erratum in: JAMA. 2026 Jun 23;335(24):2170. doi: 10.1001/jama.2026.8941. PMID: 41865411; PMCID: PMC13006895. Magill SS, Sapiano MRP, Gokhale R, Nadle J, Johnston H, Brousseau G, Maloney M, Ray SM, Wilson LE, Perlmutter R, Lynfield R, DeSilva",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:8:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "2026 Apr 21;335(15):1321-1331. doi: 10.1001/jama.2026.3100. Erratum in: JAMA. 2026 Jun 23;335(24):2170. doi: 10.1001/jama.2026.8941. PMID: 41865411; PMCID: PMC13006895. Magill SS, Sapiano MRP, Gokhale R, Nadle J, Johnston H, Brousseau G, Maloney M, Ray SM, Wilson LE, Perlmutter R, Lynfield R, DeSilva M, Sievers M, Irizarry L, Dumyati G, Pierce R, Zhang A, Kainer M, Fiore AE, Dantes R, Epstein L. Epidemiology of Sepsis in US Children and Young Adults. Open Forum Infect Dis. 2023 Apr 20;10(5):ofad218. doi: 10.1093/ofid/ofad218. PMID: 37187509; PMCID: PMC10167985. Fay K, Sapiano MRP, Gokhale R, Dantes R, Thompson N, Katz DE, Ray SM, Wilson LE, Perlmutter R, Nadle J, Godine D, Frank L, Brousseau G, Johnston H, Bamberg W, Dumyati G, Nelson D, Lynfield R, DeSilva M, Kainer M, Zhang A, Ocampo V, Samper M, Pierce R, Irizarry L, Sievers M, Maloney M, Fiore A, Magill SS, Epstein L. Assessment of Health Care Exposures and Outcomes in Adult Patients With Sepsis and Septic Shock. JAMA Netw Open. 2020",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "cdc:9:43aa71b4",
+      "source_id": "cdc",
+      "url": "https://www.cdc.gov/sepsis/about/index.html",
+      "title": "CDC: About Sepsis",
+      "text": "M, Zhang A, Ocampo V, Samper M, Pierce R, Irizarry L, Sievers M, Maloney M, Fiore A, Magill SS, Epstein L. Assessment of Health Care Exposures and Outcomes in Adult Patients With Sepsis and Septic Shock. JAMA Netw Open. 2020 Jul 1;3(7):e206004. doi: 10.1001/jamanetworkopen.2020.6004. PMID: 32633762; PMCID: PMC7341174.",
+      "source_sha256": "43aa71b45d359c9212aed6f2943907418a1d8cbbbe326e79882a9d63db51870f"
+    },
+    {
+      "passage_id": "nigms:0:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "NIGMS-Funded Research Advancing Our Understanding of Sepsis Sepsis is a person’s overwhelming or impaired whole-body immune response to an insult —an infection or an injury to the body, or something else that provokes such a response. Sepsis occurs unpredictably and can progress rapidly. In the worst cases, blood pressure drops, the heart weakens, and the patient spirals toward septic shock . Once this happens, multiple organs —lungs, kidneys, liver—can quickly fail, and the patient can die. Sepsis is a serious condition and a leading cause of death in hospitals. Each year, according to the Centers for Disease Control and Prevention (CDC), at least 1.7 million adults in the U.S. develop sepsis, and at least 350,000 die as a result. It’s also a main reason why people are readmitted to the hospital. Unfortunately, there’s no specific treatment protocol for sepsis other than supportive care for the health problems resulting from sepsis and therapy to fight infectious agents that may be the",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:1:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "also a main reason why people are readmitted to the hospital. Unfortunately, there’s no specific treatment protocol for sepsis other than supportive care for the health problems resulting from sepsis and therapy to fight infectious agents that may be the underlying cause. NIGMS funded the inception of the first FDA-approved AI-based sepsis diagnosis algorithm (the Sepsis ImmunoScore ). The impact of this exciting new development on sepsis care is yet to be tested in the real world. More information about the symptoms, diagnosis, and treatment of sepsis is available from CDC . Bacterial infections cause most cases of sepsis. However, viral infections, such as COVID-19 or influenza; fungal infections; or noninfectious insults, such as traumatic injury , can also cause sepsis. Normally, the body releases chemical or protein immune mediators into the blood to combat the infection or insult. If unchecked, those immune mediators trigger widespread inflammation , blood clots, and leaky blood vessels. As a result, blood flow is",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:2:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "sepsis. Normally, the body releases chemical or protein immune mediators into the blood to combat the infection or insult. If unchecked, those immune mediators trigger widespread inflammation , blood clots, and leaky blood vessels. As a result, blood flow is impaired, depriving organs of nutrients and oxygen and leading to organ damage. Noninfectious insults can lead to sepsis because they can activate the body’s immune responses just like infections do. Sometimes, the cause can’t be determined, particularly when it’s a bacterial agent and the patient has received antibiotics , which kill the bacteria thus making infectious agents no longer detectable. The people at highest risk of sepsis are infants, children, older adults, and vulnerable people who have underlying medical problems, have concurrent injuries or surgeries, or are taking certain medications. There are also unknown biological characteristics in the body that may increase or decrease a person’s susceptibility to sepsis and cause some people to decline more rapidly while others recover",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:3:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "have concurrent injuries or surgeries, or are taking certain medications. There are also unknown biological characteristics in the body that may increase or decrease a person’s susceptibility to sepsis and cause some people to decline more rapidly while others recover quickly. NIGMS funded scientists seek to answer the fundamental and clinical questions that affect multiple organ systems in the body and are key to improving patient care, including: How can clinicians distinguish different kinds of sepsis? Scientists are searching for faster and more accurate tests to diagnose and classify sepsis during its early stages by studying the activity of proteins and other biological chemicals in the blood. These markers can give health care providers information on how severe a case of sepsis a patient has, and whether it might progress, which can help them make decisions about treatment. What patient traits are associated with sepsis? Sepsis is difficult to treat for many reasons, including differences in patient physiology and the",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:4:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "of sepsis a patient has, and whether it might progress, which can help them make decisions about treatment. What patient traits are associated with sepsis? Sepsis is difficult to treat for many reasons, including differences in patient physiology and the many possible underlying causes of the disease. Researchers are looking for molecular markers associated with overall sepsis risk and poor long-term outcomes. With the help of systematic data and sample collection from patients with sepsis, NIGMS scientists are studying why some people develop the disease and respond to certain treatment while others don’t—insight that could lead to improved diagnosis, therapies, and outcomes. How does the body fight sepsis? Some patients with sepsis resolve inflammation and regain control of their immune response. Certain proteins and other mediators produced by the body are involved in this immune resolution, but it’s unclear why this process breaks down in some patients. Researchers are studying the mechanisms of immune resolution to investigate new therapies that",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:5:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "response. Certain proteins and other mediators produced by the body are involved in this immune resolution, but it’s unclear why this process breaks down in some patients. Researchers are studying the mechanisms of immune resolution to investigate new therapies that may be useful for controlling sepsis. How do health care inequities contribute to sepsis outcomes? African American/Black and Latino sepsis patients experience a lower quality of care and higher rates of complications and death when compared to non-Hispanic White patients. NIGMS researchers are developing interventions to address these issues to improve outcomes and drive reductions in inequities. What causes poor health outcomes in some sepsis survivors? Sepsis can cause illness and death in many ways, even after the underlying trauma or infection and widespread inflammation are under control. Researchers are studying why some recovered patients have a suppressed immune system that leaves them highly susceptible to future infections and whether the nervous system has a role in this suppression. Sepsis",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:6:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "or infection and widespread inflammation are under control. Researchers are studying why some recovered patients have a suppressed immune system that leaves them highly susceptible to future infections and whether the nervous system has a role in this suppression. Sepsis can also result in lung injury, muscle wasting, cognitive dysfunction, and impaired blood production. Scientists are increasingly relying on biospecimens and clinical data collected from sepsis patients to study sepsis. For example, they study patients’ genes and measure biomarkers in patient samples to look for indicators of sepsis outcome or treatment response. Additionally, they create artificial replicas of human organs, such as organoids or organ-on-chips , using human cells to test potential drugs as sepsis treatments. Advances in biospecimen processing and analysis have made many previously impossible tests on human cells possible. Scientists also use experimental models to study the contribution of certain genes to sepsis. However, it is very challenging to mimic human sepsis, and animals may offer only",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:7:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "and analysis have made many previously impossible tests on human cells possible. Scientists also use experimental models to study the contribution of certain genes to sepsis. However, it is very challenging to mimic human sepsis, and animals may offer only limited insights for the discovery of treatable molecular targets that can be translatable to humans. Because of these limitations, researchers are searching for new ways to: Better mimic the multiple injury and disease pathways that cause sepsis in humans Model the medical conditions that increase sepsis risk and syndrome progression Develop new therapeutic approaches that sustain the lives of sepsis patients Understand the effects of medical complications on sepsis, such as diabetes , cancer , or kidney or liver disease Learn what happens in the body after injury and the various medical conditions patients may have that affect sepsis risk and severity by studying patient-derived materials directly NIGMS is a part of the National Institutes of Health that supports basic",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    },
+    {
+      "passage_id": "nigms:8:7b7b3a09",
+      "source_id": "nigms",
+      "url": "https://www.nigms.nih.gov/education/fact-sheets/Pages/sepsis.aspx",
+      "title": "NIH NIGMS: Sepsis",
+      "text": "Learn what happens in the body after injury and the various medical conditions patients may have that affect sepsis risk and severity by studying patient-derived materials directly NIGMS is a part of the National Institutes of Health that supports basic research to increase our understanding of biological processes and lay the foundation for advances in disease diagnosis, treatment, and prevention. For more information on the Institute’s research and training programs, visit https://www.nigms.nih.gov .",
+      "source_sha256": "7b7b3a0922d1ad78459a7532bc5dcc60f22e2b99755f2143e63488d415d3d3eb"
+    }
+  ],
+  "retriever": "TF-IDF cosine; local only",
+  "attribution": "Sources: CDC and NIH NIGMS. Agency content is freely available at the linked source pages. Its use does not imply endorsement by CDC, NIH, HHS or the United States Government.",
+  "snapshot_scope": "Extracted paragraph/list text with whitespace normalized; images and logos excluded. Fixed for retrospective research; current clinical guidance is not implied."
+}

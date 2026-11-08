@@ -1,0 +1,39 @@
+Sepsis is the body's extreme response to an infection. It is a life-threatening medical emergency.
+Anyone can get an infection, and almost any infection can lead to sepsis.
+Sepsis is the body's extreme response to an infection. It is a life-threatening medical emergency. Sepsis happens when an infection you already have triggers a chain reaction throughout your body.
+Infections that lead to sepsis most often start in the
+Without fast treatment, sepsis can quickly lead to tissue damage, organ failure, and death.
+A person with sepsis might have one or more of the following signs or symptoms:
+Anyone can develop sepsis, but some people are at higher risk for sepsis. Most people who develop sepsis have at least one underlying medical condition or recent hospitalization.
+Infections put you and your family at risk for sepsis. When germs get into a person's body, they can cause an infection. If that infection doesn't stop, it can cause sepsis.
+Bacterial infections cause most cases of sepsis. Sepsis can also be a result of other infections, including viral infections, such as influenza. Fungal infections can also cause sepsis.
+You can take specific steps to reduce your risk of sepsis such as:
+If you have cancer , there are additional ways to reduce your risk of infection.
+At least 1 in 5 adults and 1 in 10 children who develop sepsis die during hospitalization or are discharged to hospice. 1 2
+At least 350,000 adults and more than 1,800 children who develop sepsis die during their hospitalization or are discharged to hospice. 1 2
+Most cases of sepsis start before a patient goes to the hospital. 3 4
+Most people who develop sepsis have at least one existing medical condition like chronic lung disease or a weakened immune system. 3 4
+Nearly a quarter to a third of people with sepsis had a healthcare visit in the week before they were hospitalized. 3 4
+Sepsis is diagnosed through a medical assessment performed by a healthcare provider.
+They diagnose sepsis using physical findings, such as:
+Healthcare providers also perform tests that check for signs of infection or organ damage. Some of these tests are used to identify the germ that caused the infection that led to sepsis. This testing might include blood cultures looking for bacterial infections, fungal infections, or tests for viral infections, like influenza.
+Healthcare providers should immediately evaluate and treat people who might have sepsis.
+Research shows that rapid, effective sepsis treatment includes:
+Giving appropriate treatment, including antibiotics, as soon as possible
+Sometimes surgery is required to remove tissue damaged by the infection.
+Healthcare providers should treat sepsis as soon as possible.
+Antibiotics are critical tools for treating infections, including those that can lead to sepsis. However, anytime antibiotics are used, they can cause side effects and contribute to the development of antimicrobial resistance . Antimicrobial resistance happens when germs, like bacteria and fungi, develop the ability to defeat the drugs designed to kill them. Infections caused by antimicrobial-resistant germs can be difficult, or impossible to treat.
+Antibiotic side effects range from minor, such as rash, dizziness, nausea, diarrhea and yeast infections, to very severe health problems, such as life-threatening allergic reactions or C. difficile (also called C. diff ) infection, which causes diarrhea that can lead to colon damage or death. However, when antibiotics are needed, the benefits outweigh the risks of side effects or antimicrobial resistance.
+Antibiotic stewardship is the effort to improve antibiotic use so that antibiotics are prescribed and used when they provide a clear benefit. Improving the way healthcare providers prescribe antibiotics and the way we take antibiotics helps keep us healthy, fights antimicrobial resistance, and ensures that these life-saving drugs will work when they are needed most, such as for treating infections that can lead to sepsis.
+Conducting research to understand the epidemiology of sepsis. 1 2 3
+Creating tools for hospitals , such as the Hospital Sepsis Program Core Elements , to implement, monitor and optimize sepsis programs to improve survival rates of sepsis patients, and measuring their uptake through the National Healthcare Safety Network .
+Developing new quality measures that promote optimal care of patients with sepsis.
+Collaborating with partners, including the CDC Prevention Epicenters , health systems, and other Federal agencies, to integrate sepsis information into their work, helping improve early detection, management, and treatment of sepsis.
+Expanding tools to raise awareness of the risk of sepsis and promote early recognition and timely treatment of sepsis in various settings through the Get Ahead of Sepsis educational effort and appropriate antibiotic prescribing and use .
+Working with partners to prevent infections that can lead to sepsis in healthcare and community settings.
+This page was last updated on this date. Updates may include minor edits, image changes, or other modifications to page content.
+The information on this page was last reviewed by subject matter experts to ensure accuracy.
+Rhee C, Dantes R, Epstein L, Murphy DJ, Seymour CW, Iwashyna TJ, Kadri SS, Angus DC, Danner RL, Fiore AE, Jernigan JA, Martin GS, Septimus E, Warren DK, Karcz A, Chan C, Menchaca JT, Wang R, Gruber S, Klompas M; CDC Prevention Epicenter Program. Incidence and Trends of Sepsis in US Hospitals Using Clinical vs Claims Data, 2009-2014. JAMA. 2017 Oct 3;318(13):1241-1249. doi: 10.1001/jama.2017.13836. PMID: 28903154; PMCID: PMC5710396.
+Rhee C, Balamuth F, Dysart K, Miller E, Li Z, Huang J, Gunturi D, Ostapenko S, Jin R, DelloStritto L, Guy J, Poland R, Sands K, Bennett TD, Scott HF, Alpern ER, Sanchez-Pinto LN, Russell S, DeWitt PE, Rebull MN, Gray C, Daniels L, Otto S, Carter C, Cook LJ, Tsemberis E, Jordan JT, Kapes J, Tunick R, Kadri SS, Badesch BL, Chen HC, Klompas M, Weiss SL. National Estimates of Pediatric Sepsis in US Hospitals Using Clinical Data. JAMA. 2026 Apr 21;335(15):1321-1331. doi: 10.1001/jama.2026.3100. Erratum in: JAMA. 2026 Jun 23;335(24):2170. doi: 10.1001/jama.2026.8941. PMID: 41865411; PMCID: PMC13006895.
+Magill SS, Sapiano MRP, Gokhale R, Nadle J, Johnston H, Brousseau G, Maloney M, Ray SM, Wilson LE, Perlmutter R, Lynfield R, DeSilva M, Sievers M, Irizarry L, Dumyati G, Pierce R, Zhang A, Kainer M, Fiore AE, Dantes R, Epstein L. Epidemiology of Sepsis in US Children and Young Adults. Open Forum Infect Dis. 2023 Apr 20;10(5):ofad218. doi: 10.1093/ofid/ofad218. PMID: 37187509; PMCID: PMC10167985.
+Fay K, Sapiano MRP, Gokhale R, Dantes R, Thompson N, Katz DE, Ray SM, Wilson LE, Perlmutter R, Nadle J, Godine D, Frank L, Brousseau G, Johnston H, Bamberg W, Dumyati G, Nelson D, Lynfield R, DeSilva M, Kainer M, Zhang A, Ocampo V, Samper M, Pierce R, Irizarry L, Sievers M, Maloney M, Fiore A, Magill SS, Epstein L. Assessment of Health Care Exposures and Outcomes in Adult Patients With Sepsis and Septic Shock. JAMA Netw Open. 2020 Jul 1;3(7):e206004. doi: 10.1001/jamanetworkopen.2020.6004. PMID: 32633762; PMCID: PMC7341174.

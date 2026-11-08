@@ -26,5 +26,8 @@ notebook = ["nbclient>=0.10,<1", "nbformat>=5.10,<6", "ipykernel>=6,<8", "psutil
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+sepsisguard = ["reference_snapshots/*.txt", "reference_snapshots/*.json", "reference_snapshots/README.md"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

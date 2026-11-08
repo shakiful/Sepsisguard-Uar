@@ -185,3 +185,20 @@ def test_reference_cache_checks_passage_content_and_paths(tmp_path):
     with pytest.raises(ValueError,match='differs'):build_corpus(tmp_path)
     saved['sources'][0]['text_file']='../secret.txt';marker.write_text(json.dumps(saved))
     with pytest.raises(ValueError,match='Unsafe'):build_corpus(tmp_path)
+
+
+def test_fresh_reference_corpus_is_offline_and_verifies_bundled_bytes(tmp_path,monkeypatch):
+    import sepsisguard.evidence as evidence
+    def no_network(*args,**kwargs):raise AssertionError('Default corpus must not fetch live websites')
+    monkeypatch.setattr(evidence,'urlopen',no_network)
+    corpus=evidence.build_corpus(tmp_path/'offline')
+    assert {s['source_id'] for s in corpus['sources']}=={'cdc','nigms'}
+    assert evidence.LocalRetriever(corpus['passages']).search('sepsis infection response')
+    assert evidence.build_corpus(tmp_path/'offline')==corpus
+    copied=tmp_path/'tampered-bundle'
+    shutil.copytree(evidence.BUNDLED_CORPUS,copied)
+    (copied/'cdc.txt').write_text('Unverified replacement reference')
+    monkeypatch.setattr(evidence,'BUNDLED_CORPUS',copied)
+    with pytest.raises(ValueError,match='snapshot changed'):
+        evidence.build_corpus(tmp_path/'new-output')
+    assert not (tmp_path/'new-output/corpus.json').exists()

@@ -84,6 +84,8 @@ See [PROJECT_STATUS.md](PROJECT_STATUS.md), [WORK_START_HERE.md](WORK_START_HERE
 
 The implemented backbone is official `Qwen/Qwen3.8-27B`, pinned to revision `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0`, using native Transformers 5.22.1, text-only tokenization, BF16 and one shared instance. Planner, writer and verifier run sequentially in LangGraph. The model chooses bounded local searches and evidence-driven retries; arbitrary generated code and network tools are unavailable.
 
+Fresh runs install bundled, hash-verified CDC/NIH text snapshots without website requests; existing verified private snapshots remain pinned. An intentional live refresh uses `build_corpus(path, refresh=True)` and creates a new corpus identity.
+
 The initial run fits a nonnegative-slope sigmoid calibrator on A/calibration and processes three deterministically selected A/validation endpoints. Only causal observed measurements, numerical predictor outputs and missingness enter prompts. Entropy/missingness route retries; entropy is a heuristic, not epistemic certainty. Exact citation spans, numeric consistency, output schemas and same-model entailment checks govern output or abstention. The verifier does not establish independent factual correctness.
 
 First use downloads roughly 54–56GB of base weights to runtime disk. Preflight requires at least 70 GiB total and 64 GiB free GPU memory. The 20-minute inference budget starts after loading; each case permits at most six model calls and two retrieval attempts. No hosted inference, embedding service or external tracing is configured. Reference snapshots, calibrator, explanations, traces and hash-verified checkpoints persist privately.
