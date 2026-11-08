@@ -1,4 +1,4 @@
-"""Compact A/train and A/validation cache; no calibration/B file reads."""
+"""Compact causal caches; calibration and frozen-protocol test reads are explicit."""
 from __future__ import annotations
 
 import hashlib
@@ -23,16 +23,22 @@ def file_hash(path):
     return h.hexdigest()
 
 
-def cache_split(data_root, manifest, preprocessor, inventory, split, output, *, allow_calibration=False):
+def cache_split(data_root, manifest, preprocessor, inventory, split, output, *, allow_calibration=False, frozen_test_protocol=None):
     allowed = ('train', 'validation', 'calibration') if allow_calibration else ('train', 'validation')
-    if split not in allowed:
+    test_requested=split=='test_B' and frozen_test_protocol is not None
+    if split not in allowed and not test_requested:
         raise ValueError('Training cache permits A/train and A/validation only')
     check_split_integrity(manifest)
     if manifest_digest(manifest) != preprocessor.provenance['manifest_sha256']:
         raise ValueError('Preprocessing and manifest do not match')
+    protocol_sha=None
+    if test_requested:
+        from .evaluation import read_protocol
+        protocol_sha=read_protocol(frozen_test_protocol,manifest_digest(manifest))['sha256']
+    expected_source='B' if test_requested else 'A'
     rows = manifest.loc[manifest.split.eq(split)].sort_values('patient_id').reset_index(drop=True)
-    if rows.empty or not rows.source.eq('A').all():
-        raise ValueError('Expected A patients only')
+    if rows.empty or not rows.source.eq(expected_source).all():
+        raise ValueError('Unexpected source for the requested split')
     inventory = inventory.set_index('patient_id', verify_integrity=True)
     content = hashlib.sha256()
     for row in rows.itertuples():
@@ -45,6 +51,7 @@ def cache_split(data_root, manifest, preprocessor, inventory, split, output, *, 
         raise ValueError('Training contents differ from the fitted preprocessing input')
     key = {'split': split, 'manifest': manifest_digest(manifest), 'content': content.hexdigest(),
            'preprocessor': hashlib.sha256(json.dumps(preprocessor.__dict__, sort_keys=True).encode()).hexdigest()}
+    if test_requested:key['frozen_protocol_sha256']=protocol_sha
     output = Path(output)
     marker = output / 'cache.json'
     if marker.exists():
@@ -60,7 +67,7 @@ def cache_split(data_root, manifest, preprocessor, inventory, split, output, *, 
     starts = np.lib.format.open_memmap(output / 'starts.npy', mode='w+', dtype=np.int64, shape=(total,))
     offset = 0
     for i, row in enumerate(rows.itertuples()):
-        patient = read_patient(record_path(data_root, row.patient_id), 'A')
+        patient = read_patient(record_path(data_root, row.patient_id), expected_source)
         if len(patient) != row.n_hours:
             raise ValueError('Patient length differs from manifest')
         x, mask = preprocessor.transform(patient)

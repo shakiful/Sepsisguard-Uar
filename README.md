@@ -1,6 +1,6 @@
 # SepsisGuard-UAR
 
-Run the evidence agent in one Colab notebook: restore the verified LSTM and preparation checkpoint → calibrate on reserved A/calibration → retrieve local CDC/NIH passages → draft, verify and return cited research context or abstain. The completed predictor is preserved.
+Run frozen clinical performance and patient-specific explanation evaluation in one Colab notebook: restore completed predictors → calibrate on A/calibration → freeze A/validation thresholds and the protocol → score the public B holdout → audit local Qwen explanations for 12 A/validation patients. Completed predictors are preserved. See [evaluation methods](docs/EVALUATION_PROTOCOL.md).
 
 [![Run in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/shakiful/Sepsisguard-Uar/blob/main/notebooks/SepsisGuard_UAR.ipynb)
 
@@ -8,9 +8,9 @@ Select your **A100 80GB / high-RAM runtime**, then **Runtime → Run all**. Auth
 
 The agent entrypoint requires preparation `pipeline-20261104T190221Z-22906fa2` and training `training-05ed8fa8a5f01f4f92a8` in the mounted Drive. It verifies the selected weight hash, original manifest, preprocessing provenance and consumed raw files. It does not retrain a missing predictor. Explicit preparation/training commands remain below for new experiments.
 
-Private preparation snapshots remain under `MyDrive/SepsisGuard-UAR/runs/`; model checkpoints under `training/`; agent results, explanations and traces under `agents/`; calibration under `calibration/`. Cached archives live under `dataset-archives`. Base Qwen weights stay on runtime disk. Matching agent cases resume after hash verification.
+Private preparation snapshots remain under `MyDrive/SepsisGuard-UAR/runs/`; model checkpoints under `training/`; agent results, explanations and traces under `agents/`; calibration under `calibration/`. Cached archives live under `dataset-archives`. Evaluation protocols, predictions, aggregate reports and blank clinician review material live under `evaluations/`. Base Qwen weights stay on runtime disk. Matching agent cases resume after hash verification.
 
-Predictive training completed on an actual A100: LSTM validation AP 0.098821 / AUROC 0.772333, selected over logistic AP 0.087473 / AUROC 0.775901. See [training results](reports/verification/TRAINING_RESULTS.md). The agent ran in Colab on 2026-11-08 with native Qwen3.8-27B BF16: three A/validation cases completed retrieval, drafting and verification (nine model calls), and all three outputs passed the implemented citation/verifier checks. Reserved A/calibration fitting covered 119,051 hours. Outputs were general sepsis context; this is a functional development check, not a clinical benchmark. See [agent execution evidence](reports/verification/AGENT_COLAB_EVIDENCE.json). B remains locked. Validation selection metrics are not independent test performance or clinical validation.
+Predictive training completed on an actual A100: LSTM validation AP 0.098821 / AUROC 0.772333, selected over logistic AP 0.087473 / AUROC 0.775901. See [training results](reports/verification/TRAINING_RESULTS.md). The agent ran in Colab on 2026-11-08 with native Qwen3.8-27B BF16: three A/validation cases completed retrieval, drafting and verification (nine model calls), and all three outputs passed the implemented citation/verifier checks. Reserved A/calibration fitting covered 119,051 hours. Outputs were general sepsis context; this is a functional development check, not a clinical benchmark. See [agent execution evidence](reports/verification/AGENT_COLAB_EVIDENCE.json). The new evaluation entrypoint freezes its protocol before predictive scoring on B. Validation selection metrics are not independent test performance or clinical validation.
 
 ## Measured results
 
@@ -97,3 +97,14 @@ python -m scripts.run_agents --data-root data/raw \
 ```
 
 For a CPU functional demo use `python -m scripts.run_agents --demo --cases 2`. It trains a tiny synthetic predictor and uses **scripted responses, not Qwen**. Local execution verified this path, checkpoint readback/resume, citation rejection and abstention. A live CDC/NIH fetch produced 19 searchable passages, and the pinned tokenizer/chat template passed. A subsequent real Colab run loaded Qwen with a measured 50.96 GiB peak model-load allocation on A100 80GB / 167.05 GiB RAM. The first planner-only run abstained in all three cases; after clarifying the lookup task, a preserved follow-up completed all three roles on the same sample. Both results and private checksum readback are recorded in [Colab evidence](reports/verification/AGENT_COLAB_EVIDENCE.json). All 56 regression tests passed in CI. Clinical quality, uncertainty-routing benefit, retries on real cases and final B evaluation remain unestablished. See [implementation evidence](reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json) and [implementation details](docs/AGENTIC_DESIGN.md).
+
+## Frozen retrospective evaluation
+
+```bash
+python -m scripts.run_evaluation --data-root data/raw \
+  --storage-root /path/to/private/storage
+```
+
+The protocol compares the selected LSTM and frozen logistic baseline using A/calibration-only calibration and A/validation-only thresholds. A verified frozen protocol gates B prediction access. Reported measures include AUROC, average precision, calibration, official timing utility, alarm burden and 500 whole-patient bootstrap intervals. After scoring, B is consumed for this fixed comparison. Twelve unique, outcome-blind A/validation endpoints support automated patient-grounding and model-input sensitivity checks. Independent clinician ratings remain blank and pending. These checks do not establish prospective clinical effectiveness.
+
+The evaluation software passed 64 tests locally, including utility parity with the official BSD-licensed scorer, grouped-bootstrap metric parity, frozen B gating, output privacy and synthetic end-to-end execution. Synthetic runs use scripted responses and cannot establish clinical or Qwen performance. Actual results must be read from the completed real evaluation evidence.

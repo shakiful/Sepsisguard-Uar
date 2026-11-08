@@ -1,0 +1,23 @@
+{
+  "status": "implementation_verified_real_evaluation_pending",
+  "local_tests": {
+    "passed": 64,
+    "failed": 0,
+    "seconds": 53.0
+  },
+  "checks": [
+    "Official PhysioNet utility golden example and randomized parity",
+    "Patient-file bootstrap weighted AUROC/AP parity against explicitly duplicated sklearn inputs",
+    "Protocol tamper rejection before any B raw-record hashing",
+    "Patient-independent refractory alarm counting",
+    "Outcome-blind 12-patient sampling",
+    "Generic citation-valid outputs correctly fail patient-grounding proxy",
+    "Blank randomized review packet without patient IDs, outcome labels or model identity",
+    "Synthetic end-to-end protocol, metrics, plots and persistent readback",
+    "Notebook JSON and Python syntax"
+  ],
+  "synthetic_results_are_not_clinical_or_qwen_evidence": true,
+  "independent_clinician_review": "pending",
+  "method": "docs/EVALUATION_PROTOCOL.md",
+  "upstream_scoring_commit": "467c49b514542be7a4a0bafe40fa2c3b064dda2e"
+}

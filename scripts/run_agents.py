@@ -40,7 +40,7 @@ def persist_file(path,destination):
     partial.replace(destination)
 
 
-def load_frozen(project,storage,profile,*,demo=False):
+def load_frozen(project,storage,profile,*,demo=False,require_selected=True):
     spec=profile['frozen_predictor'];safe_id(spec['run_id'])
     roots=([Path(storage)/'training'/spec['run_id']] if storage else [])+[Path(project)/'runs'/spec['run_id']]
     for root in roots:
@@ -49,7 +49,7 @@ def load_frozen(project,storage,profile,*,demo=False):
         result=json.loads(result_path.read_text())
         if result['status']!='training_complete' or result['mode']!=('synthetic_demo' if demo else 'real'):
             raise ValueError('Completed real/demo training result required')
-        if result['selected_model']!=spec['architecture'] or file_hash(weights)!=spec['weights_sha256']:
+        if (require_selected and result['selected_model']!=spec['architecture']) or file_hash(weights)!=spec['weights_sha256']:
             raise ValueError('Frozen model hash/selection differs from the reviewed profile')
         if result['models'][spec['architecture']]['best_weights_sha256']!=spec['weights_sha256']:
             raise ValueError('Weights disagree with training evidence')
@@ -103,11 +103,8 @@ class ScriptedDemo:
         return {'decisions':[{'claim_index':i,'supported':True} for i in range(len(payload['claims']))]}
 
 
-def run_agent_cases(project,data_root,storage,profile,*,cases=3,demo=False,max_minutes=20,llm=None):
-    project=Path(project);storage=Path(storage) if storage else None;data_root=Path(data_root)
-    model,pre,manifest,inventory,preparation=load_frozen(project,storage,profile,demo=demo)
-    device=torch.device('cpu' if demo else 'cuda');model=model.to(device)
-    torch.set_num_threads(min(torch.get_num_threads(),4))
+def frozen_calibrator(project,data_root,storage,profile,model,pre,manifest,inventory,device):
+    project=Path(project);storage=Path(storage) if storage else None
     cache=project/'data/processed/agent-calibration'/profile['frozen_predictor']['weights_sha256'][:16]
     calset=cache_split(data_root,manifest,pre,inventory,'calibration',cache,allow_calibration=True)
     provenance={'model_sha256':profile['frozen_predictor']['weights_sha256'],'manifest_sha256':manifest_digest(manifest),
@@ -133,6 +130,15 @@ def run_agent_cases(project,data_root,storage,profile,*,cases=3,demo=False,max_m
         atomic_json(cal_path.with_suffix('.checksum.json'),{'sha256':file_hash(cal_path)})
     if saved_cal is not None:
         persist_file(cal_path,saved_cal);atomic_json(saved_cal.with_suffix('.checksum.json'),{'sha256':file_hash(saved_cal)})
+    return calibrator,cal_path
+
+
+def run_agent_cases(project,data_root,storage,profile,*,cases=3,demo=False,max_minutes=20,llm=None,endpoint_indices=None):
+    project=Path(project);storage=Path(storage) if storage else None;data_root=Path(data_root)
+    model,pre,manifest,inventory,preparation=load_frozen(project,storage,profile,demo=demo)
+    device=torch.device('cpu' if demo else 'cuda');model=model.to(device)
+    torch.set_num_threads(min(torch.get_num_threads(),4))
+    calibrator,cal_path=frozen_calibrator(project,data_root,storage,profile,model,pre,manifest,inventory,device)
     references=project/'data/processed/agent-references'
     if demo:
         corpus={'sources':[{'source_id':'fixture','scope':'Synthetic test fixture, not clinical evidence'}],
@@ -147,7 +153,9 @@ def run_agent_cases(project,data_root,storage,profile,*,cases=3,demo=False,max_m
             for p in references.iterdir():
                 if p.is_file():persist_file(p,saved_refs/p.name)
     total=int(manifest.loc[manifest.split.eq('validation'),'n_hours'].sum())
-    indices=np.unique(np.linspace(0,total-1,min(cases,total),dtype=int)).tolist()
+    indices=np.unique(np.linspace(0,total-1,min(cases,total),dtype=int)).tolist() if endpoint_indices is None else list(endpoint_indices)
+    if not indices or len(set(indices))!=len(indices) or any(type(i) is not int or not 0<=i<total for i in indices):
+        raise ValueError('Evaluation endpoints must be unique valid A/validation indices')
     case_inputs=[make_case(model,pre,manifest,inventory,data_root,i,calibrator,device) for i in indices]
     # Release the predictor GPU allocation before loading the single 27B backbone.
     model=model.cpu();del model

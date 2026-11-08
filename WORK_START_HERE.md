@@ -1,6 +1,6 @@
 # SepsisGuard-UAR — Working handoff
 
-Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuard_UAR.ipynb`. The current notebook executes `scripts.run_agents`; preparation and predictive training are complete. Colab Pro is the main compute environment, private Drive holds protected outputs, and https://github.com/shakiful/Sepsisguard-Uar is canonical source.
+Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuard_UAR.ipynb`. The current notebook executes `scripts.run_evaluation`; preparation and predictive training are complete. Colab Pro is the main compute environment, private Drive holds protected outputs, and https://github.com/shakiful/Sepsisguard-Uar is canonical source.
 
 ## Current checkpoint
 
@@ -14,11 +14,11 @@ Use one Run-all workflow, without calendar-based handoffs: `notebooks/SepsisGuar
 ## Continue directly
 
 1. Open the current GitHub notebook in Colab; old Drive copies retain old code. Choose the user-authorized A100 **80GB** / about **160GB RAM** and Run all. Preflight stops before weights on a smaller allocation. Record actual hardware rather than assuming the requested allocation.
-2. Mount the same private Drive containing the completed runs above. The runner verifies frozen weights and prepared snapshot, restores/downloads raw data, fits calibration only on A/calibration, and runs three deterministic A/validation endpoints. No predictor retraining is needed.
+2. Mount the same private Drive containing the completed runs above. The runner verifies both frozen predictors and the preparation snapshot, calibrates only on A/calibration, selects thresholds only on A/validation, and saves/read-verifies `FROZEN_PROTOCOL.json` before B predictive evaluation. No predictor retraining is needed.
 3. First load downloads about 54–56GB to runtime disk. A 20-minute inference budget follows loading. One shared model uses an 8K context cap and bounded sequential calls. Reference snapshots, calibration and case checkpoints persist privately.
-4. Review `MyDrive/SepsisGuard-UAR/agents/<run-id>/AGENT_RESULT.json`, `AGENT_REPORT.md`, `backend_calls.json` and case traces. Record supported-context and abstention counts, failures, citations, latency and measured GPU allocation. Workflow completion and the same-model verifier do not prove explanation correctness.
+4. Review `MyDrive/SepsisGuard-UAR/evaluations/<evaluation-id>/EVALUATION_RESULT.json` and `EVALUATION_REPORT.md`. The runner scores B with fixed rules and audits 12 unique A/validation patients. Private predictions, input-ablation sensitivity and randomized blank clinician review material persist there. Independent clinical ratings are pending; same-model verification does not prove correctness.
 5. Connected browser access and private Drive mount now work. The user explicitly approved the Google Drive for desktop OAuth connection used by this Colab mount. The earlier live reference fetch returned HTTP 403; bundled snapshots fixed this without changing reference text. Local CPU-only checks remain separate from actual Colab GPU results. The configuration profile records the initial declared experiment settings; execution observations belong in the evidence file.
-6. The three outputs were general sepsis context and all queries/passages were identical. Do not treat them as patient-specific explanations or evidence of uncertainty-routing benefit. Next work should evaluate varied causal cases and budget-matched baselines with blinded annotation, while preserving both initial real runs and keeping B locked.
+6. The three outputs were general sepsis context and all queries/passages were identical. Do not treat them as patient-specific explanations or evidence of uncertainty-routing benefit. The fixed evaluation now audits varied causal cases and prepares blinded annotation, preserving both initial runs. Budget-matched agent comparisons remain future work.
 
 ## Research invariants
 
@@ -27,3 +27,7 @@ A/train determines preprocessing and predictor fitting; A/validation supports se
 Public GitHub holds source, tests and aggregate evidence. Never commit patient records, manifests, per-file hashes, fitted artifacts, predictions, case traces or weights. The agent uses local CDC/NIH snapshots, no hosted inference or external tracing, and returns cited research context or abstention. No clinical-use claim is established.
 
 Next evaluation: compare budget-matched RAG, uncertainty routing and verification/abstention with fixed predictor/corpus/decoding. Blinded annotations are needed for explanation correctness; same-backbone judgments are not independent truth. A tiny functional run does not establish improved AP, clinical benefit or publication readiness.
+
+## Fixed evaluation protocol
+
+See `docs/EVALUATION_PROTOCOL.md` and `configs/evaluation_protocol.json`. Evaluation implementation passed 64 tests locally. Source/configuration are committed before the real run; do not claim measured evaluation results until `EVALUATION_RESULT.json` completes and private readback is verified. Once B is predictively scored it is consumed for this comparison; no B-driven retuning is permitted.
