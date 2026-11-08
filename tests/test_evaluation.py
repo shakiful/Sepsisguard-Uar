@@ -85,57 +85,54 @@ def test_B_cache_requires_a_matching_untampered_frozen_protocol_before_any_byte_
     state=copy.deepcopy(pre.__dict__)
     test=td.cache_split(dataset,manifest,pre,inventory,'test_B',tmp_path/'test',frozen_test_protocol=path)
     assert len(test)==int(manifest.loc[manifest.split.eq('test_B'),'n_hours'].sum()) and len(opened)==80
-    assert pre.__dict__==st…3764 tokens truncated…nd code-cell syntax checks also passed.
-- Browser control was retried against the user's current Colab tab; both DOM methods still returned `Cannot attach to this target`. No actual A100 training job has been started by the assistant and no predictive research metrics are claimed.
-
-## Completed predictive Colab training (2026-11-04)
-
-- Run `training-05ed8fa8a5f01f4f92a8`, source `7df0a07e2e2e2a489245164081aae293d887acb4`; restored preparation `pipeline-20261104T190221Z-22906fa2` with matching cohort and manifest.
-- All 37 tests passed in 74.55 s. Both models trained on CUDA bfloat16 on A100-SXM4-40GB / 83.47 GiB system RAM.
-- Logistic: best epoch 6 of 8, validation AP 0.087473, AUROC 0.775901.
-- LSTM: best epoch 1, early-stopped after epoch 5, validation AP 0.098821, AUROC 0.772333. LSTM was correctly selected by the predeclared average-precision criterion; its later declining AP suggests overfitting.
-- LSTM precision/recall at the predeclared 0.5 threshold: 5.90% / 64.34%. Scores remain uncalibrated and performance is not an independent test result.
-- The output reports verified artifacts under `MyDrive/SepsisGuard-UAR/training/training-05ed8fa8a5f01f4f92a8`. Best LSTM weights hash: `266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc`. No separate connected-Drive readback or private-prediction metric recomputation was performed by the reviewer.
-- Calibration and B raw files were not opened during training. Independent calibration, final B evaluation and retrieval experiments remain pending.
-- Evidence: [TRAINING_COLAB_EVIDENCE.json](reports/verification/TRAINING_COLAB_EVIDENCE.json); interpretation: [TRAINING_RESULTS.md](reports/verification/TRAINING_RESULTS.md).
-
-## Continue from the predictive checkpoint (historical)
-
-1. Preserve the completed training run and selected `lstm_best.pt` hash above. A routine training rerun is unnecessary; the same unchanged configuration resumes this completed result.
-2. Use the reserved A/calibration data for probability-calibration work and examine operating thresholds on development data. Keep B locked until the model and evaluation protocol are frozen.
-3. If comparing revised training settings, fit on A/train, select on A/validation, preserve this baseline and record the new run separately. Do not infer that more epochs will improve the selected LSTM.
-
-## Deliverables
-
-The source ZIP contains shareable source, two Colab notebooks, tests, aggregate verification reports, and a Git history bundle. A separate private checkpoint ZIP contains protected patient summaries, split manifest, per-file hashes, fitted preprocessing state, notebook execution outputs, environment snapshots, and logs. It excludes raw patient files. Original data can be downloaded again from the documented official S3 mirror.
-
-Real-cohort predictive training is verified from the supplied A100 output. Independent test performance and clinical validity have not been established.
-
-## Proposed agent extension (2026-11-04)
-
-The user requested agentic AI with Qwen 3.5/latest at about 27B and permitted consideration of alternatives. Official source checks identify Qwen3.8-27B as a newer verified candidate; it is proposed as the primary local backbone, with Qwen3.5-27B and Gemma 4 31B as comparisons. The user-reported future allocation is 80GB VRAM / 160GB RAM, so BF16, one shared instance and an initial 8k context cap are proposed. Actual agent memory use, compatibility and explanation quality have not been measured. The design and profile are saved under `docs/AGENTIC_DESIGN.md` and `configs/agent_profile.json`; no LLM download, agent execution or model fine-tuning has occurred.
-
-## Implemented evidence agent (2026-11-04; current)
-
-The single notebook now calls `scripts.run_agents` and preserves the completed predictor. It fits reserved A/calibration sigmoid calibration and runs a bounded local Qwen3.8-27B / LangGraph retrieval, drafting, verification and abstention workflow over three A/validation endpoints. B remains locked. Model revision and Transformers version are pinned; text-only tokenizer/native class compatibility passed.
-
-Actual local execution used scripted responses with a tiny synthetic predictor, not Qwen. It verified calibration, graph execution, checkpoint readback/resume and integrity rejection. Live CDC/NIH retrieval produced 19 passages. Real Qwen generation, real-cohort calibration diagnostics and peak GPU memory are pending: local CUDA is unavailable and browser control cannot attach to Colab. Current results and regression counts are in `reports/verification/AGENT_IMPLEMENTATION_VALIDATION.json`.
-
-Open the latest GitHub notebook on A100 80GB/high RAM and Run all with the same Drive. Existing Drive notebook copies retain old code. Review actual private `AGENT_RESULT.json`, report and case traces before making research claims. The same-model verifier is not independent factual ground truth. Controlled comparisons and blinded explanation annotation remain pending.
-
-## Verified real Qwen agent execution (2026-11-08; current)
-
-- Authentication and private Drive mount completed in the connected browser, including the user-approved Google Drive for desktop OAuth connection. A100-SXM4-80GB (79.25 GiB) / 167.05 GiB RAM was directly observed; Torch 2.14.1+cu130, Transformers 5.22.1.
-- Frozen LSTM/preparation restored without retraining. Sigmoid calibration fitted on 119,051 reserved A/calibration hours, 2,574 positive. Non-flat fit; Brier 0.020253 / log loss 0.090618 are calibration-fit diagnostics only. B remained excluded from calibration and inference.
-- Live reference HTTP 403 fixed by bundled CDC/NIH text snapshots: 19 passages, both source SHA256 hashes exactly match 2026-11-04. Offline and corruption tests passed; wheel assets verified.
-- First real native BF16 Qwen run `agents-b5667526ece3287af39f` (source 69ae1bc) generated three valid planner abstentions. This run remains saved.
-- Follow-up `agents-dc179bf37a3ea479c35b` (source cd6c601) clarified reference lookup before evidence sufficiency. Same sample, predictor, calibration, corpus and budgets. Three cases completed planning, local retrieval, drafting and verification: nine Qwen calls, three retrievals, six accepted claims, no abstentions.
-- Generation calls totaled 62.77 seconds and 483 output tokens; this excludes checkpoint download/load and other work. Model-load peak allocated memory was 50.96 GiB. Native reference kernels were used; generation peak memory and optimized-kernel performance were not measured.
-- Runner artifact copy/readback and a separate checksum read of all three saved case files passed. Private outputs are under `MyDrive/SepsisGuard-UAR/agents/agents-dc179bf37a3ea479c35b`. Both source changes passed all 56 tests in CI.
-- Outputs were general educational sepsis context, with identical retrieval queries/passages. This does not establish patient-specific explanation quality, uncertainty-routing benefit, improved AP, clinical validity or independent factual accuracy. Controlled comparisons and blinded annotation remain next research work.
-- Aggregate evidence: [AGENT_COLAB_EVIDENCE.json](reports/verification/AGENT_COLAB_EVIDENCE.json).
+    assert pre.__dict__==state and read_protocol(path)['sha256']==frozen['sha256']
+    with pytest.raises(ValueError):freeze_protocol(path,{**payload,'thresholds':{'changed':.8}})
 
 
-## Frozen evaluation implementation (2026-11-08)
+def test_explanation_audit_separates_generic_citations_from_patient_grounding(tmp_path):
+    p={'source_id':'fixture','passage_id':'fixture:0','text':'Sepsis is a response to infection.','url':'urn:fixture','title':'Fixture'}
+    claim={'text':'Sepsis is a response to infection.','citations':[{'passage_id':'fixture:0','quote':'response to infection'}]}
+    case={'status':'supported_research_context','claims':[claim],'case':{'case_id':'test','observations':{'HR':110.}},'passages':[p],
+          'trace':[{'role':'planner','response':{'action':'search','query':'sepsis infection'}}],'answer':claim['text'],'reason':'checks passed'}
+    generic=audit_cases([case,copy.deepcopy(case)])
+    assert generic['cases_with_explicit_patient_observation_grounding']==0
+    assert generic['claims_passing_rechecked_citation_numeric_checks']==2
+    assert generic['exact_duplicate_output_fraction']==.5
+    personalized=copy.deepcopy(case);personalized['claims'][0]['text']='The recorded heart rate is 110.'
+    assert grounded_features(personalized['claims'][0]['text'],{'HR':110.})==['HR']
+    assert audit_cases([personalized])['cases_with_explicit_patient_observation_grounding']==1
+    write_annotation_pack(tmp_path,[case],{'test':[]})
+    assert 'pending_independent_review'==generic['clinical_expert_ratings']['status']
+    ratings=(tmp_path/'clinician_ratings.csv').read_text();assert 'review_001,,,,,,,' in ratings
+    packet=json.loads((tmp_path/'blinded_cases.json').read_text())
+    assert 'SepsisLabel' not in json.dumps(packet) and 'model_id' not in json.dumps(packet)
 
-The canonical notebook now invokes `scripts.run_evaluation` for frozen LSTM/logistic clinical performance and 12-patient explanation grounding. An immutable, verified protocol gates B predictive access. A/calibration supplies calibration; A/validation selects thresholds and the outcome-blind explanation sample. Official challenge utility is parity-tested against the pinned BSD-licensed scorer. Whole-patient bootstrap intervals, alarm burden, automated explanation proxies and a private blank blinded-review packet are implemented. All 64 local tests passed, including synthetic end-to-end execution. Real evaluation results are pending execution; independent expert ratings are not fabricated. See `docs/EVALUATION_PROTOCOL.md`.
+
+def test_explanation_sampling_uses_unique_patients_and_ignores_outcomes():
+    class Data:
+        channels=4;window=12;values=np.ones((48,4))
+    manifest=pd.DataFrame({'patient_id':[f'A:{i}' for i in range(12)],'split':['validation']*12,'n_hours':[4]*12,'ever_sepsis':[i%2 for i in range(12)]})
+    p=np.linspace(0,1,48);first=sample_validation_endpoints(Data(),manifest,p)
+    changed=manifest.copy();changed['ever_sepsis']=1-changed.ever_sepsis
+    assert first==sample_validation_endpoints(Data(),changed,p) and len(first)==12
+    assert len(set(i//4 for i in first))==12
+
+
+def test_full_synthetic_evaluation_freezes_before_test_and_prepares_blank_review(tmp_path):
+    from scripts.run_agents import create_demo
+    from scripts.run_evaluation import run_evaluation
+    project=Path(__file__).resolve().parents[1];(project/'runs').mkdir(exist_ok=True);before=set((project/'runs').iterdir())
+    try:
+        data,profile=create_demo(project,tmp_path/'private')
+        config=json.loads((project/'configs/evaluation_protocol.json').read_text());config['bootstrap_repetitions']=10
+        result=run_evaluation(project,data,tmp_path/'private',profile,config,demo=True)
+        assert result['mode']=='synthetic_demo' and result['status']=='retrospective_evaluation_complete'
+        assert result['test_B_used_only_after_protocol_freeze'] and not result['test_B_is_now_consumed_for_this_frozen_comparison']
+        assert result['explanations']['evaluation_sample']['cases']==12
+        assert result['explanations']['evaluation_sample']['clinical_expert_ratings']['completed']==0
+        root=Path(result['persistent_checkpoint'])
+        assert (root/'FROZEN_PROTOCOL.json').is_file() and (root/'clinical_performance.svg').is_file()
+        assert (root/'independent_review/clinician_ratings.csv').is_file()
+    finally:
+        for directory in set((project/'runs').iterdir())-before:
+            if directory.is_dir():shutil.rmtree(directory)

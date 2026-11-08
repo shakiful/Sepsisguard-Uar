@@ -133,3 +133,8 @@ Open the latest GitHub notebook on A100 80GB/high RAM and Run all with the same 
 - Runner artifact copy/readback and a separate checksum read of all three saved case files passed. Private outputs are under `MyDrive/SepsisGuard-UAR/agents/agents-dc179bf37a3ea479c35b`. Both source changes passed all 56 tests in CI.
 - Outputs were general educational sepsis context, with identical retrieval queries/passages. This does not establish patient-specific explanation quality, uncertainty-routing benefit, improved AP, clinical validity or independent factual accuracy. Controlled comparisons and blinded annotation remain next research work.
 - Aggregate evidence: [AGENT_COLAB_EVIDENCE.json](reports/verification/AGENT_COLAB_EVIDENCE.json).
+
+
+## Frozen evaluation implementation (2026-11-08)
+
+The canonical notebook now invokes `scripts.run_evaluation` for frozen LSTM/logistic clinical performance and 12-patient explanation grounding. An immutable, verified protocol gates B predictive access. A/calibration supplies calibration; A/validation selects thresholds and the outcome-blind explanation sample. Official challenge utility is parity-tested against the pinned BSD-licensed scorer. Whole-patient bootstrap intervals, alarm burden, automated explanation proxies and a private blank blinded-review packet are implemented. All 64 local tests passed, including synthetic end-to-end execution. Real evaluation results are pending execution; independent expert ratings are not fabricated. See `docs/EVALUATION_PROTOCOL.md`.
