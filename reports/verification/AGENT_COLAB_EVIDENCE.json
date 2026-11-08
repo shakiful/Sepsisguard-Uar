@@ -1,0 +1,55 @@
+{
+  "recorded_at": "2026-11-08T22:22:27.851368+00:00",
+  "initial_run": {
+    "status": "real_qwen_completed_with_planner_abstention",
+    "run_id": "agents-b5667526ece3287af39f",
+    "source_commit": "69ae1bc9470e07ebb6a0f4fd774af5c81f1b4f07",
+    "agent_source_fingerprint": "4e57796cf299133a3ae5d6549dae953b7029154df86feed20ebaba4133c1c685",
+    "backend": "qwen_local_transformers",
+    "model_id": "Qwen/Qwen3.8-27B",
+    "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "dtype": "bfloat16",
+    "transformers": "5.22.1",
+    "torch": "2.14.1+cu130",
+    "runtime": {
+      "gpu": "NVIDIA A100-SXM4-80GB",
+      "gpu_total_gib": 79.250732421875,
+      "system_ram_gib": 167.05,
+      "loaded_peak_allocated_gib": 50.96391153335571
+    },
+    "real_qwen_generation": true,
+    "backend_calls": 3,
+    "input_tokens_total": 617,
+    "output_tokens_total": 24,
+    "generation_seconds_total": 4.318998583999928,
+    "cases": 3,
+    "supported_context_cases": 0,
+    "abstained_cases": 3,
+    "retrieval_attempts": 0,
+    "abstention_reasons": {
+      "Planner found insufficient evidence": 3
+    },
+    "scope": "Real native BF16 model generation and planner abstention verified; retrieval, writer and verifier were not exercised by this run",
+    "private_artifact_readback": "All three saved case checksum files independently read back in the connected Colab session; runner copy/readback passed",
+    "calibration": {
+      "fit_split": "A/calibration",
+      "hours": 119051,
+      "positive_hours": 2574,
+      "method": "nonnegative_sigmoid_LBFGSB",
+      "flat": false,
+      "fit_brier": 0.020253091632162237,
+      "fit_log_loss": 0.09061844426859862,
+      "metric_scope": "Calibration-fit diagnostics, not independent evaluation"
+    },
+    "test_B_raw_files_opened_for_calibration_or_inference": false,
+    "frozen_predictor_weights_sha256": "266d203773981dce01f2b604c29895e4588b0a2568aa16a333d6a6ffa62764bc",
+    "inference_kernels": "Native reference PyTorch kernels; causal_conv1d and flash-linear-attention were not installed",
+    "generation_peak_memory_measured": false
+  },
+  "followup_status": "Clarified planner prompt to retrieve reference context before judging evidence sufficiency; original outputs preserved. Same deterministic A/validation sample, predictor, calibration, corpus and budgets. Follow-up execution pending.",
+  "limitations": [
+    "Functional development sample, not independent test performance",
+    "Same-model verifier is not independent factual truth",
+    "No diagnostic accuracy, clinical benefit or improved predictive AP is established"
+  ]
+}
