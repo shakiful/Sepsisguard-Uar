@@ -29,7 +29,12 @@
     "private_drive_mounted": true
   },
   "pretrained_27B_fine_tuning_result_claimed": false,
-  "source_sha256": "e8a11be5a4e3826d2485d31a15c4d8bdefba2eb379378c0bb3075c5f76982efd",
+  "source_sha256": "7b34f50e4f629f4d7274255f0c78cc3cc50b16969e855f7ea285b1898d725cbd",
   "original_main_commit_preserved": "f9b78d471ae98edc58921e7028210c609569bccd",
-  "branch": "experiment/qwen-prediction-lora-v1"
+  "branch": "experiment/qwen-prediction-lora-v1",
+  "colab_environment_correction": {
+    "observed": "Preinstalled torchao 0.10.0 rejected by PEFT 0.21.0",
+    "action": "Remove unused incompatible optional quantizer from the separate runtime before imports",
+    "real_fine_tuning": "still pending"
+  }
 }

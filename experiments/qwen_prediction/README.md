@@ -39,6 +39,8 @@ python -m experiments.qwen_prediction.run --data-root data/raw \
 
 The 90-minute per-invocation compute budget starts after base-model loading; it bounds training/inference and records an explicit paused status if exhausted. Run all again resumes verified optimizer/prediction checkpoints. A changed source, configuration or runtime identity creates a separate run ID. No inference results or improvement claims are fabricated when execution is incomplete. Input sequences exceeding 2,048 tokens fail explicitly instead of silently dropping features.
 
+Some Colab images include unused `torchao==0.10.0`, which PEFT 0.21 rejects even for ordinary BF16 adapters. The notebook runs `python -m experiments.qwen_prediction.prepare_runtime` after dependency installation. It removes only an installed torchao version below 0.16 from this separate runtime; BF16 LoRA does not need torchao. It does not change Torch, quantize weights, modify private Drive results or alter the earlier notebook.
+
 Private artifacts include `RUN_INPUT.json`, sampled numeric inputs, immutable optimizer checkpoints, portable selected PEFT adapter, calibration mapping, frozen evaluation gate, cached predictions, `QWEN_RESULT.json`, `QWEN_REPORT.md` and aggregate plots. Only aggregate reports and code may be committed publicly. Adapters trained on medical records stay private, along with all per-patient derivatives. Base foundation-model weights stay on runtime disk and can be redownloaded.
 
 ## Validation and sources
