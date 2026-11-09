@@ -1,0 +1,5 @@
+_private/
+*.safetensors
+*.pt
+*.npz
+*.jsonl

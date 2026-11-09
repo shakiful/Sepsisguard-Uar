@@ -1,0 +1,6 @@
+transformers==5.22.1
+peft==0.21.0
+accelerate>=1,<2
+safetensors>=0.5,<1
+sentencepiece>=0.2,<1
+pytest>=7,<10

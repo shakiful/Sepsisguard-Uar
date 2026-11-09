@@ -1,0 +1,35 @@
+{
+  "status": "software_verified_real_fine_tuning_pending",
+  "local_tests": {
+    "passed": 73,
+    "failed": 0,
+    "seconds": 61.63
+  },
+  "new_qwen_tests": 9,
+  "native_compatibility_test": {
+    "model": "tiny randomly initialized native Qwen3.5 topology, not pretrained 27B",
+    "transformers": "5.22.1",
+    "peft": "0.21.0",
+    "torch": "2.11.0+cpu",
+    "checks": [
+      "real adapter gradients through linear and full attention",
+      "frozen base parameters unchanged",
+      "exact optimizer and RNG resume",
+      "corruption and cache mismatch rejection",
+      "past-only inputs and original labels",
+      "weighted metrics and paired bootstrap",
+      "matched old predictions read-only"
+    ]
+  },
+  "notebook_schema_and_code": "passed",
+  "colab_preflight": {
+    "gpu": "A100-SXM4-80GB",
+    "vram_gib": 79.25,
+    "system_ram_gib": 167.05,
+    "private_drive_mounted": true
+  },
+  "pretrained_27B_fine_tuning_result_claimed": false,
+  "source_sha256": "e8a11be5a4e3826d2485d31a15c4d8bdefba2eb379378c0bb3075c5f76982efd",
+  "original_main_commit_preserved": "f9b78d471ae98edc58921e7028210c609569bccd",
+  "branch": "experiment/qwen-prediction-lora-v1"
+}
