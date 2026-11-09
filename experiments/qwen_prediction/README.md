@@ -1,5 +1,7 @@
 # Separate Qwen-only sepsis prediction experiment
 
+**Completed and verified:** [actual pilot results](reports/qwen-lora-a98c78da4169245666a6/RESULTS.md). Two real LoRA epochs and all 1,024 matched B predictions completed. This pilot did not demonstrate improved AP from Qwen fine-tuning; original experiments remain preserved.
+
 This experiment is on branch `experiment/qwen-prediction-lora-v1`, starting from the preserved original result commit `f9b78d471ae98edc58921e7028210c609569bccd`. The original notebooks, predictor code, weights and results are unchanged. The `main` branch remains the first experiment. This folder and a new branch-specific test workflow are the only additions.
 
 Open `SepsisGuard_Qwen_Only_LoRA.ipynb` in Colab, select A100 80GB / high RAM and Run all. Use the same private Drive containing the completed preparation checkpoint. The notebook uses a separate checkout at `/content/sepsisguard-qwen-prediction`, base-weight cache at `/content/sepsisguard-qwen-model-cache`, and private outputs under `MyDrive/SepsisGuard-UAR/experiments/qwen_prediction/<run-id>`. Original raw records may be reused read-only if present. Missing records are restored into the new checkout; new archive copies also use the new experiment namespace.

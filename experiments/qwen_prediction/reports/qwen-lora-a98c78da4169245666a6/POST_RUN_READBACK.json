@@ -1,0 +1,84 @@
+{
+  "all_four_models_metrics_recomputed_on_same_B_hours": true,
+  "all_sampled_prompts_regenerated_from_past_only_raw_history": true,
+  "all_sampled_raw_files_original_sha256_verified": 2138,
+  "best_epoch": 2,
+  "calibration_and_thresholds_recomputed_from_A_only": true,
+  "checked_at": "2026-11-09T22:15:28.024245+00:00",
+  "epochs_completed": 2,
+  "executed_notebook": "https://colab.research.google.com/drive/1KTxQ3rddV9CA_G--sZ4PnkxxiO0eM7q8",
+  "executed_source_commit": "5bb4b1dc52d726596af8144357e4c9235e0e64e9",
+  "frozen_protocol_sha256": "77711c5a94f8008f9439dca77615f9746b273baa3733e7b33308179fc47204b7",
+  "identity_sha256": "a98c78da4169245666a6d1c08dd2a1df2e9236866b3961eca3bdc2890d445b18",
+  "latest_optimizer_checkpoint_verified": true,
+  "local_and_drive_bytes_sha256_verified": 43925644,
+  "local_and_drive_files_sha256_verified": 15,
+  "optimizer_updates": 256,
+  "original_labels_unchanged": true,
+  "original_result_and_prediction_hashes_unchanged": true,
+  "patient_partition_overlap": false,
+  "portable_selected_adapter_present": true,
+  "prediction_lengths": {
+    "qwen_base_calibration": 512,
+    "qwen_base_test_B": 1024,
+    "qwen_base_validation": 256,
+    "qwen_lora_calibration": 512,
+    "qwen_lora_test_B": 1024,
+    "qwen_lora_validation": 256
+  },
+  "public_aggregate_files": {
+    "AGGREGATE_CURVES.svg": "2220c6922ad0114d8aa7c8575ecc1275868419ad2033fdf566be7827c91b609b",
+    "QWEN_REPORT.md": "d03cf97109bfd25f394c68aa507f464b63cd2de6f1c2f08e13e9cc595ef444ef",
+    "QWEN_RESULT.json": "4165a3dd9dd61d49dfb287a3f9fab50d9f09560035b1d77eba857151b3d866db"
+  },
+  "run_id": "qwen-lora-a98c78da4169245666a6",
+  "samples": {
+    "calibration": {
+      "class_counts": [
+        384,
+        128
+      ],
+      "distinct_sampled_patients": 448,
+      "population_hours": 119051,
+      "population_positive_fraction": 0.021620985963998623,
+      "population_positive_hours": 2574,
+      "sample_hours": 512
+    },
+    "test_B": {
+      "class_counts": [
+        768,
+        256
+      ],
+      "distinct_sampled_patients": 972,
+      "population_hours": 761995,
+      "population_positive_fraction": 0.014147074455869133,
+      "population_positive_hours": 10780,
+      "sample_hours": 1024
+    },
+    "train": {
+      "class_counts": [
+        256,
+        256
+      ],
+      "distinct_sampled_patients": 487,
+      "population_hours": 552665,
+      "population_positive_fraction": 0.021711163182036135,
+      "population_positive_hours": 11999,
+      "sample_hours": 512
+    },
+    "validation": {
+      "class_counts": [
+        192,
+        64
+      ],
+      "distinct_sampled_patients": 231,
+      "population_hours": 118499,
+      "population_positive_fraction": 0.021628874505270086,
+      "population_positive_hours": 2563,
+      "sample_hours": 256
+    }
+  },
+  "selected_adapter_changed": true,
+  "source_sha256": "7b34f50e4f629f4d7274255f0c78cc3cc50b16969e855f7ea285b1898d725cbd",
+  "status": "post_run_readback_passed"
+}
