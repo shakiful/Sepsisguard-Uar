@@ -1,5 +1,5 @@
 {
-  "status": "software_verified_real_fine_tuning_pending",
+  "status": "real_fine_tuning_observed_evaluation_unverified_environment_unavailable",
   "local_tests": {
     "passed": 73,
     "failed": 0,
@@ -29,12 +29,55 @@
     "private_drive_mounted": true
   },
   "pretrained_27B_fine_tuning_result_claimed": false,
-  "source_sha256": "7b34f50e4f629f4d7274255f0c78cc3cc50b16969e855f7ea285b1898d725cbd",
   "original_main_commit_preserved": "f9b78d471ae98edc58921e7028210c609569bccd",
   "branch": "experiment/qwen-prediction-lora-v1",
   "colab_environment_correction": {
     "observed": "Preinstalled torchao 0.10.0 rejected by PEFT 0.21.0",
     "action": "Remove unused incompatible optional quantizer from the separate runtime before imports",
-    "real_fine_tuning": "still pending"
+    "real_fine_tuning": "Observed real pretrained 27B LoRA updates through update 252; final completion is unverified"
+  },
+  "historical_pre_helper_source_sha256": "7b34f50e4f629f4d7274255f0c78cc3cc50b16969e855f7ea285b1898d725cbd",
+  "executed_source_commit": "5bb4b1dc52d726596af8144357e4c9235e0e64e9",
+  "github_ci": {
+    "source_commit": "5bb4b1dc52d726596af8144357e4c9235e0e64e9",
+    "passed": 73,
+    "failed": 0,
+    "seconds": 86.53,
+    "run_id": 42561250624,
+    "job_id": 128977928995,
+    "conclusion": "success"
+  },
+  "colab_qwen_tests": {
+    "passed": 9,
+    "failed": 0,
+    "seconds": 12.01
+  },
+  "real_run": {
+    "run_id": "qwen-lora-a98c78da4169245666a6",
+    "model_id": "Qwen/Qwen3.8-27B",
+    "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "trainable_parameters": 5940224,
+    "total_parameters": 27362668784,
+    "train_examples": 512,
+    "planned_epochs": 2,
+    "planned_optimizer_updates": 256,
+    "last_observed_optimizer_updates": 252,
+    "last_observed_completed_epochs": 1,
+    "last_confirmed_completed_drive_checkpoint_step": 240,
+    "last_observed_notebook_elapsed": "53m 4s",
+    "epoch_1_raw_validation": {
+      "roc_auc": 0.5688069661458323,
+      "average_precision": 0.036677524315067496,
+      "brier": 0.31391663686739424,
+      "log_loss": 0.850625308259461,
+      "weighted_positive_fraction": 0.02162887450527009,
+      "sample_hours": 256
+    },
+    "completion_verified": false,
+    "test_comparison_verified": false,
+    "improvement_claimed": false,
+    "blocker": "Browser/exec-server transport disconnected, then the execution environment became unavailable. This is not an observed authentication failure.",
+    "executed_notebook": "https://colab.research.google.com/drive/1KTxQ3rddV9CA_G--sZ4PnkxxiO0eM7q8",
+    "private_checkpoint": "MyDrive/SepsisGuard-UAR/experiments/qwen_prediction/qwen-lora-a98c78da4169245666a6"
   }
 }
